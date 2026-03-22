@@ -8,20 +8,20 @@ interface Props {
   children: string
 }
 
-// One Dark Pro inspired palette
+// GitHub Light inspired palette
 const T = {
-  keyword:  '#c678dd',  // purple
-  string:   '#98c379',  // green
-  number:   '#d19a66',  // orange
-  comment:  '#5c6370',  // gray
-  func:     '#61afef',  // blue
-  variable: '#e06c75',  // red
-  property: '#e5c07b',  // yellow
-  operator: '#56b6c2',  // cyan
-  type:     '#e5c07b',  // yellow
-  punct:    '#abb2bf',  // light gray
-  plain:    '#abb2bf',  // light gray
-  accent:   '#00d4aa',  // teal (ata brand)
+  keyword:  '#cf222e',  // red
+  string:   '#0a3069',  // dark blue
+  number:   '#0550ae',  // blue
+  comment:  '#6e7781',  // gray
+  func:     '#8250df',  // purple
+  variable: '#953800',  // brown
+  property: '#116329',  // green
+  operator: '#cf222e',  // red
+  type:     '#8250df',  // purple
+  punct:    '#24292f',  // dark
+  plain:    '#24292f',  // dark
+  accent:   '#0550ae',  // blue
 } as const
 
 interface Token {

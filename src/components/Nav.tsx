@@ -3,7 +3,7 @@ export function Nav() {
     <nav className="nav">
       <div className="nav-inner">
         <a href="/" className="nav-logo">
-          <span>ata</span>
+          <span>ata-validator</span>
         </a>
         <div className="nav-links">
           <a href="#features">Features</a>
