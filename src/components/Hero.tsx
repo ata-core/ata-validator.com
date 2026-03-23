@@ -20,6 +20,10 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
+            <span className="stat-value">145x</span>
+            <span className="stat-label">Faster Compilation</span>
+          </div>
+          <div className="stat">
             <span className="stat-value">5.9x</span>
             <span className="stat-label">Faster than ajv</span>
           </div>
@@ -34,23 +38,22 @@ export function Hero() {
         </div>
       </div>
       <div>
-        <CodeWindow title="bench.txt">{`=== ata vs ajv — parallel batch (10K items) ===
+        <CodeWindow title="bench.txt">{`=== ata vs ajv ===
 
-ata  countValid (multi-core)   12,498,242 items/sec
-ajv  sequential (single-thread) 2,132,841 items/sec
->>> ata 5.9x FASTER
+Schema Compilation:
+  ata   107,139 ops/sec
+  ajv       891 ops/sec
+  ata is 145x faster
 
-=== Single call ===
+Single Call — isValid(Buffer):
+  ata 1,650,000 ops/sec
+  ajv 1,770,000 ops/sec
+  nearly equal
 
-Schema compilation:  ata 145x faster
-isValid(Buffer):     nearly equal (1.06x)
-
-=== Parallel scaling ===
-
-  500 items:   ata 2.9x faster
- 1000 items:   ata 3.9x faster
- 5000 items:   ata 5.3x faster
-10000 items:   ata 5.9x faster`}</CodeWindow>
+Parallel Batch (10K items):
+  ata  12,498,242 items/sec
+  ajv   2,132,841 items/sec
+  ata is 5.9x faster`}</CodeWindow>
       </div>
     </section>
   )
