@@ -40,15 +40,15 @@ export function Hero() {
       <div>
         <CodeWindow title="bench.txt">{`=== ata vs ajv ===
 
+isValidObject (JS codegen):
+  ata  41,000,000 ops/sec
+  ajv  19,000,000 ops/sec
+  ata is 2.2x faster
+
 Schema Compilation:
   ata   107,139 ops/sec
   ajv       891 ops/sec
   ata is 145x faster
-
-Single Call — isValid(Buffer):
-  ata 1,650,000 ops/sec
-  ajv 1,770,000 ops/sec
-  nearly equal
 
 Parallel Batch (10K items):
   ata  12,498,242 items/sec

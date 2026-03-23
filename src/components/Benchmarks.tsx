@@ -1,5 +1,13 @@
 const cards = [
   {
+    title: 'JS Object Validation — isValidObject()',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '41M ops/s' },
+      { label: 'ajv', width: 46, cls: 'ajv', value: '19M ops/s' },
+    ],
+    speedup: '2.2x faster than ajv (JS codegen)',
+  },
+  {
     title: 'Parallel Batch — 10K items',
     bars: [
       { label: 'ata', width: 100, cls: 'ata', value: '12.5M items/s' },
