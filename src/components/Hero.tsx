@@ -20,7 +20,7 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">137x</span>
+            <span className="stat-value">145x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
@@ -34,18 +34,24 @@ export function Hero() {
         </div>
       </div>
       <div>
-        <CodeWindow title="bench.txt">{`=== ata v0.1.0 Benchmark ===
+        <CodeWindow title="bench.txt">{`=== ata vs ajv — JSON string pipeline ===
 
 Schema Compilation:
-  compile schema          155,000 ops/sec
+  ata compile              107,139 ops/sec
+  ajv compile                  891 ops/sec
+  ata is 145x faster
 
-Validation (pre-compiled):
-  valid document        1,400,000 ops/sec
-  invalid document        730,000 ops/sec
+JSON string → validate:
+  ata validateJSON         966,114 ops/sec
+  ajv JSON.parse+validate  1,773,844 ops/sec
 
-On Demand (large doc):
-  DOM path                 31,000 ops/sec
-  On Demand path           70,000 ops/sec
+isValidJSON (fast path):
+  ata isValidJSON        1,237,880 ops/sec
+  ajv JSON.parse+validate  1,773,721 ops/sec
+
+On Demand (large doc, 5KB):
+  On Demand path            70,000 ops/sec
+  DOM path                  31,000 ops/sec
   Speedup: 2.3x`}</CodeWindow>
       </div>
     </section>
