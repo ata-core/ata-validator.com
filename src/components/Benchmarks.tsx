@@ -1,35 +1,35 @@
 const cards = [
   {
+    title: 'Parallel Batch — 10K items',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '12.5M items/s' },
+      { label: 'ajv', width: 17, cls: 'ajv', value: '2.1M items/s' },
+    ],
+    speedup: '5.9x faster than ajv',
+  },
+  {
+    title: 'Parallel Batch — 5K items',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '11.3M items/s' },
+      { label: 'ajv', width: 19, cls: 'ajv', value: '2.1M items/s' },
+    ],
+    speedup: '5.3x faster than ajv',
+  },
+  {
     title: 'Schema Compilation',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '107,139 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '107K ops/s' },
       { label: 'ajv', width: 0.8, cls: 'ajv', value: '891 ops/s' },
     ],
     speedup: '145x faster than ajv',
   },
   {
-    title: 'JSON String → Validate',
+    title: 'Single Call — isValid(Buffer)',
     bars: [
-      { label: 'ata', width: 54, cls: 'ata', value: '966K ops/s' },
+      { label: 'ata', width: 94, cls: 'ata', value: '1.65M ops/s' },
       { label: 'ajv', width: 100, cls: 'ajv', value: '1.77M ops/s' },
     ],
-    speedup: 'ajv 1.8x (NAPI boundary cost)',
-  },
-  {
-    title: 'isValidJSON — Fast Boolean Check',
-    bars: [
-      { label: 'ata', width: 70, cls: 'ata', value: '1.24M ops/s' },
-      { label: 'ajv', width: 100, cls: 'ajv', value: '1.77M ops/s' },
-    ],
-    speedup: 'ajv 1.4x — nearly equal',
-  },
-  {
-    title: 'C++ Core (no NAPI)',
-    bars: [
-      { label: 'valid', width: 100, cls: 'ata', value: '1.4M ops/s' },
-      { label: 'invalid', width: 52, cls: 'ata', value: '730K ops/s' },
-    ],
-    speedup: 'Native speed, no boundary',
+    speedup: 'Nearly equal (1.06x)',
   },
   {
     title: 'On Demand vs DOM (5KB doc)',
@@ -40,12 +40,12 @@ const cards = [
     speedup: '2.3x faster with On Demand',
   },
   {
-    title: 'Large Doc Scaling (200KB)',
+    title: 'C++ Core (no NAPI overhead)',
     bars: [
-      { label: 'ata', width: 72, cls: 'ata', value: '1,596 ops/s' },
-      { label: 'ajv', width: 100, cls: 'ajv', value: '2,202 ops/s' },
+      { label: 'valid', width: 100, cls: 'ata', value: '1.4M ops/s' },
+      { label: 'invalid', width: 52, cls: 'ata', value: '730K ops/s' },
     ],
-    speedup: 'Gap narrows: ajv 1.38x',
+    speedup: 'Native speed, no boundary',
   },
 ]
 
@@ -54,7 +54,7 @@ export function Benchmarks() {
     <section id="benchmarks" className="benchmarks">
       <h2>Benchmarks</h2>
       <p className="section-desc">
-        Honest comparison on Apple Silicon. JSON string in, validation result out. Pre-compiled schemas, real-world documents.
+        Apple Silicon (12 cores). Multi-core parallel validation vs ajv single-threaded. Pre-compiled schemas, real-world documents.
       </p>
       <div className="bench-grid">
         {cards.map((card) => (

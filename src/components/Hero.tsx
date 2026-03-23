@@ -12,7 +12,7 @@ export function Hero() {
         </h1>
         <p className="hero-desc">
           A native C++ JSON Schema validator built on <strong>simdjson</strong>, <strong>RE2</strong>, and a custom
-          bytecode engine. Validates at millions of operations per second with 98.6% spec compliance.
+          bytecode engine. Multi-core parallel validation at 12.5M ops/sec with 98.6% spec compliance.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">Get Started</a>
@@ -20,11 +20,11 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">145x</span>
-            <span className="stat-label">Faster Compilation</span>
+            <span className="stat-value">5.9x</span>
+            <span className="stat-label">Faster than ajv</span>
           </div>
           <div className="stat">
-            <span className="stat-value">1.4M</span>
+            <span className="stat-value">12.5M</span>
             <span className="stat-label">Validations/sec</span>
           </div>
           <div className="stat">
@@ -34,25 +34,23 @@ export function Hero() {
         </div>
       </div>
       <div>
-        <CodeWindow title="bench.txt">{`=== ata vs ajv — JSON string pipeline ===
+        <CodeWindow title="bench.txt">{`=== ata vs ajv — parallel batch (10K items) ===
 
-Schema Compilation:
-  ata compile              107,139 ops/sec
-  ajv compile                  891 ops/sec
-  ata is 145x faster
+ata  countValid (multi-core)   12,498,242 items/sec
+ajv  sequential (single-thread) 2,132,841 items/sec
+>>> ata 5.9x FASTER
 
-JSON string → validate:
-  ata validateJSON         966,114 ops/sec
-  ajv JSON.parse+validate  1,773,844 ops/sec
+=== Single call ===
 
-isValidJSON (fast path):
-  ata isValidJSON        1,237,880 ops/sec
-  ajv JSON.parse+validate  1,773,721 ops/sec
+Schema compilation:  ata 145x faster
+isValid(Buffer):     nearly equal (1.06x)
 
-On Demand (large doc, 5KB):
-  On Demand path            70,000 ops/sec
-  DOM path                  31,000 ops/sec
-  Speedup: 2.3x`}</CodeWindow>
+=== Parallel scaling ===
+
+  500 items:   ata 2.9x faster
+ 1000 items:   ata 3.9x faster
+ 5000 items:   ata 5.3x faster
+10000 items:   ata 5.9x faster`}</CodeWindow>
       </div>
     </section>
   )
