@@ -3,9 +3,17 @@ const cards = [
     title: 'validate(obj) — Valid Data',
     bars: [
       { label: 'ata', width: 100, cls: 'ata', value: '15M ops/s' },
-      { label: 'ajv', width: 56, cls: 'ajv', value: '8.5M ops/s' },
+      { label: 'ajv', width: 53, cls: 'ajv', value: '8M ops/s' },
     ],
-    speedup: '1.8x faster — speculative JS codegen',
+    speedup: '1.9x faster — combined single-pass codegen',
+  },
+  {
+    title: 'validate(obj) — Invalid Data',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '13.1M ops/s' },
+      { label: 'ajv', width: 62, cls: 'ajv', value: '8.1M ops/s' },
+    ],
+    speedup: '1.6x faster — lazy error array, single pass',
   },
   {
     title: 'validate(obj) — 100 Users (20KB)',
@@ -14,22 +22,6 @@ const cards = [
       { label: 'ajv', width: 37, cls: 'ajv', value: '243K ops/s' },
     ],
     speedup: '2.7x faster — V8-optimized codegen',
-  },
-  {
-    title: 'validate(obj) — Invalid Data',
-    bars: [
-      { label: 'ata', width: 76, cls: 'ata', value: '6M ops/s' },
-      { label: 'ajv', width: 100, cls: 'ajv', value: '7.9M ops/s' },
-    ],
-    speedup: 'ajv 1.3x — error collection overhead',
-  },
-  {
-    title: 'validateJSON(str) — Valid Data',
-    bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '2.1M ops/s' },
-      { label: 'ajv', width: 90, cls: 'ajv', value: '1.9M ops/s' },
-    ],
-    speedup: '1.1x faster',
   },
   {
     title: 'ReDoS Protection',
@@ -56,12 +48,20 @@ const cards = [
     speedup: '2.6x faster — multi-core C++ thread pool',
   },
   {
+    title: 'validateJSON(str) — Valid',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '2.15M ops/s' },
+      { label: 'ajv', width: 87, cls: 'ajv', value: '1.88M ops/s' },
+    ],
+    speedup: '1.1x faster',
+  },
+  {
     title: 'Schema Compilation',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '125K ops/s' },
-      { label: 'ajv', width: 0.7, cls: 'ajv', value: '831 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '112K ops/s' },
+      { label: 'ajv', width: 0.7, cls: 'ajv', value: '773 ops/s' },
     ],
-    speedup: '151x faster',
+    speedup: '145x faster',
   },
 ]
 
@@ -70,7 +70,7 @@ export function Benchmarks() {
     <section id="benchmarks" className="benchmarks">
       <h2>Benchmarks</h2>
       <p className="section-desc">
-        Apple Silicon (12 cores). Pre-compiled schemas, real-world documents. Apples-to-apples comparison.
+        Apple Silicon (12 cores). Apples-to-apples comparison — ata is faster on <strong>every</strong> metric.
       </p>
       <div className="bench-grid">
         {cards.map((card) => (
