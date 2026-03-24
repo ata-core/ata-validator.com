@@ -12,7 +12,7 @@ export function Hero() {
         </h1>
         <p className="hero-desc">
           A native C++ JSON Schema validator built on <strong>simdjson</strong>, <strong>RE2</strong>, and a custom
-          bytecode engine. Multi-core parallel validation at 12.5M ops/sec with 98.6% spec compliance.
+          bytecode engine. Speculative validation with V8-optimized JS codegen — beats ajv on every valid-path benchmark.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">Get Started</a>
@@ -20,40 +20,40 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">145x</span>
+            <span className="stat-value">151x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
+            <span className="stat-value">2.7x</span>
+            <span className="stat-label">Faster validate(obj)</span>
+          </div>
+          <div className="stat">
             <span className="stat-value">5.9x</span>
-            <span className="stat-label">Faster than ajv</span>
+            <span className="stat-label">Faster Parallel Batch</span>
           </div>
           <div className="stat">
-            <span className="stat-value">12.5M</span>
-            <span className="stat-label">Validations/sec</span>
-          </div>
-          <div className="stat">
-            <span className="stat-value">98.6%</span>
+            <span className="stat-value">98.5%</span>
             <span className="stat-label">Spec Compliance</span>
           </div>
         </div>
       </div>
       <div>
-        <CodeWindow title="bench.txt">{`=== ata vs ajv ===
+        <CodeWindow title="bench.txt">{`=== ata vs ajv — valid path ===
 
-isValidObject (JS codegen):
-  ata  41,000,000 ops/sec
-  ajv  19,000,000 ops/sec
-  ata is 2.2x faster
+validate(obj):
+  ata   9,633,524 ops/sec
+  ajv   8,468,685 ops/sec
+  ata is 1.1x faster
+
+validate(obj) 100 users:
+  ata     658,415 ops/sec
+  ajv     243,385 ops/sec
+  ata is 2.7x faster
 
 Schema Compilation:
-  ata   107,139 ops/sec
-  ajv       891 ops/sec
-  ata is 145x faster
-
-Parallel Batch (10K items):
-  ata  12,498,242 items/sec
-  ajv   2,132,841 items/sec
-  ata is 5.9x faster`}</CodeWindow>
+  ata     125,690 ops/sec
+  ajv         831 ops/sec
+  ata is 151x faster`}</CodeWindow>
       </div>
     </section>
   )

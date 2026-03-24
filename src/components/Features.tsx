@@ -8,11 +8,11 @@ const features = [
     bullets: [
       { text: '4+ GB/s', rest: ' JSON parsing throughput' },
       { text: 'ARM NEON', rest: ' and x86 AVX2/SSE support' },
-      { text: '137x faster', rest: ' schema compilation than ajv' },
+      { text: '151x faster', rest: ' schema compilation than ajv' },
     ],
     code: `const { Validator } = require('ata-validator');
 
-// Schema compiled with simdjson — 137x faster
+// Schema compiled with simdjson — 151x faster
 const v = new Validator({
   type: "object",
   properties: {
