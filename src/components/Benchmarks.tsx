@@ -2,10 +2,10 @@ const cards = [
   {
     title: 'validate(obj) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '9.6M ops/s' },
-      { label: 'ajv', width: 88, cls: 'ajv', value: '8.5M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '15M ops/s' },
+      { label: 'ajv', width: 56, cls: 'ajv', value: '8.5M ops/s' },
     ],
-    speedup: '1.1x faster — speculative JS codegen',
+    speedup: '1.8x faster — speculative JS codegen',
   },
   {
     title: 'validate(obj) — 100 Users (20KB)',
@@ -16,20 +16,44 @@ const cards = [
     speedup: '2.7x faster — V8-optimized codegen',
   },
   {
+    title: 'validate(obj) — Invalid Data',
+    bars: [
+      { label: 'ata', width: 76, cls: 'ata', value: '6M ops/s' },
+      { label: 'ajv', width: 100, cls: 'ajv', value: '7.9M ops/s' },
+    ],
+    speedup: 'ajv 1.3x — error collection overhead',
+  },
+  {
     title: 'validateJSON(str) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '1.91M ops/s' },
-      { label: 'ajv', width: 98, cls: 'ajv', value: '1.87M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '2.1M ops/s' },
+      { label: 'ajv', width: 90, cls: 'ajv', value: '1.9M ops/s' },
     ],
-    speedup: '1.02x faster',
+    speedup: '1.1x faster',
+  },
+  {
+    title: 'ReDoS Protection',
+    bars: [
+      { label: 'ata (RE2)', width: 0.04, cls: 'ata', value: '0.3ms' },
+      { label: 'ajv (regex)', width: 100, cls: 'ajv', value: '765ms' },
+    ],
+    speedup: '2391x faster — immune to catastrophic backtracking',
+  },
+  {
+    title: 'Serverless Cold Start (50 schemas)',
+    bars: [
+      { label: 'ata', width: 8, cls: 'ata', value: '7.7ms' },
+      { label: 'ajv', width: 100, cls: 'ajv', value: '96ms' },
+    ],
+    speedup: '12.5x faster — compile + validate in 7.7ms',
   },
   {
     title: 'Parallel Batch — 10K Items',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '12.5M items/s' },
-      { label: 'ajv', width: 17, cls: 'ajv', value: '2.1M items/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '13.4M items/s' },
+      { label: 'ajv', width: 38, cls: 'ajv', value: '5.1M items/s' },
     ],
-    speedup: '5.9x faster — multi-core C++ thread pool',
+    speedup: '2.6x faster — multi-core C++ thread pool',
   },
   {
     title: 'Schema Compilation',
@@ -39,14 +63,6 @@ const cards = [
     ],
     speedup: '151x faster',
   },
-  {
-    title: 'isValidObject(obj) — Boolean Check',
-    bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '10.4M ops/s' },
-      { label: 'ajv', width: 90, cls: 'ajv', value: '9.3M ops/s' },
-    ],
-    speedup: '1.1x faster — pure V8 JIT, no NAPI',
-  },
 ]
 
 export function Benchmarks() {
@@ -54,7 +70,7 @@ export function Benchmarks() {
     <section id="benchmarks" className="benchmarks">
       <h2>Benchmarks</h2>
       <p className="section-desc">
-        Apple Silicon (12 cores). Valid data path — the production common case. Pre-compiled schemas, real-world documents. Apples-to-apples comparison.
+        Apple Silicon (12 cores). Pre-compiled schemas, real-world documents. Apples-to-apples comparison.
       </p>
       <div className="bench-grid">
         {cards.map((card) => (
