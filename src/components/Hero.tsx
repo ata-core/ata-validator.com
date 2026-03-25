@@ -1,4 +1,4 @@
-import { CodeWindow } from './CodeWindow'
+import { CodeWindow } from "./CodeWindow";
 
 export function Hero() {
   return (
@@ -7,16 +7,24 @@ export function Hero() {
       <div>
         <div className="hero-badge">Faster than ajv on every benchmark</div>
         <h1>
-          Ultra-fast JSON Schema{' '}
-          <span className="accent">Validator</span>
+          Ultra-fast JSON Schema <span className="accent">Validator</span>
         </h1>
         <p className="hero-desc">
-          Native C++ validator built on <strong>simdjson</strong> and <strong>RE2</strong>.
-          Hybrid JS codegen with V8 TurboFan optimizations — 9.5x faster than ajv on validate(obj).
+          Native C++ validator built on <strong>simdjson</strong> and{" "}
+          <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
+          optimizations, 9.5x faster than ajv on validate(obj).
         </p>
         <div className="hero-buttons">
-          <a href="#quickstart" className="btn btn-primary">Get Started</a>
-          <a href="https://github.com/mertcanaltin/ata-validator" target="_blank" className="btn btn-secondary">View on GitHub</a>
+          <a href="#quickstart" className="btn btn-primary">
+            Get Started
+          </a>
+          <a
+            href="https://github.com/mertcanaltin/ata-validator"
+            target="_blank"
+            className="btn btn-secondary"
+          >
+            View on GitHub
+          </a>
         </div>
         <div className="hero-stats">
           <div className="stat">
@@ -56,5 +64,5 @@ Schema Compilation:
   ata is 138x faster`}</CodeWindow>
       </div>
     </section>
-  )
+  );
 }
