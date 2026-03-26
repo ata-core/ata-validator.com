@@ -5,7 +5,7 @@ export function Hero() {
     <section className="hero">
       <div className="hero-glow" />
       <div>
-        <div className="hero-badge">Faster than ajv on every benchmark</div>
+        <div className="hero-badge">Powered by simdjson & RE2</div>
         <h1>
           Ultra-fast JSON Schema <span className="accent">Validator</span>
         </h1>
