@@ -56,6 +56,14 @@ const cards = [
     speedup: '1.6x faster',
   },
   {
+    title: 'Fastify Startup — 500 Routes',
+    bars: [
+      { label: 'ata standalone', width: 60, cls: 'ata', value: '46ms' },
+      { label: 'ajv standalone', width: 100, cls: 'ajv', value: '77ms' },
+    ],
+    speedup: '1.7x faster — pre-compiled compact bundle',
+  },
+  {
     title: 'Schema Compilation',
     bars: [
       { label: 'ata', width: 100, cls: 'ata', value: '113K ops/s' },
