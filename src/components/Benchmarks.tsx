@@ -2,18 +2,18 @@ const cards = [
   {
     title: 'validate(obj) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '76M ops/s' },
-      { label: 'ajv', width: 11, cls: 'ajv', value: '8M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '68M ops/s' },
+      { label: 'ajv', width: 12, cls: 'ajv', value: '8M ops/s' },
     ],
-    speedup: '9.5x faster — hybrid validator, V8 machine code speed',
+    speedup: '8.5x faster — hybrid validator, V8 machine code speed',
   },
   {
     title: 'validate(obj) — Invalid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '34M ops/s' },
-      { label: 'ajv', width: 24, cls: 'ajv', value: '8M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '17M ops/s' },
+      { label: 'ajv', width: 47, cls: 'ajv', value: '8M ops/s' },
     ],
-    speedup: '4.3x faster — single-pass error collection',
+    speedup: '2.1x faster — single-pass error collection',
   },
   {
     title: 'validate(obj) — 100 Users (20KB)',
@@ -50,10 +50,10 @@ const cards = [
   {
     title: 'validateJSON(str) — Valid',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '2.15M ops/s' },
-      { label: 'ajv', width: 87, cls: 'ajv', value: '1.88M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '3.0M ops/s' },
+      { label: 'ajv', width: 63, cls: 'ajv', value: '1.9M ops/s' },
     ],
-    speedup: '1.1x faster',
+    speedup: '1.6x faster',
   },
   {
     title: 'Schema Compilation',

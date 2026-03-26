@@ -12,7 +12,7 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 9.5x faster than ajv on validate(obj).
+          optimizations, 8.5x faster than ajv on validate(obj).
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -28,7 +28,7 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">9.5x</span>
+            <span className="stat-value">8.5x</span>
             <span className="stat-label">Faster validate(obj)</span>
           </div>
           <div className="stat">
@@ -49,14 +49,14 @@ export function Hero() {
         <CodeWindow title="bench.txt">{`=== ata vs ajv (isolated) ===
 
 validate(obj) valid:
-  ata  76,357,411 ops/sec
+  ata  67,651,943 ops/sec
   ajv   8,000,000 ops/sec
-  ata is 9.5x faster
+  ata is 8.5x faster
 
 validate(obj) invalid:
-  ata  34,352,669 ops/sec
+  ata  16,860,818 ops/sec
   ajv   8,000,000 ops/sec
-  ata is 4.3x faster
+  ata is 2.1x faster
 
 Schema Compilation:
   ata     113,000 ops/sec
