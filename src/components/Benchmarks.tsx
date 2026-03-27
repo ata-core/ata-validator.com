@@ -1,27 +1,27 @@
 const cards = [
   {
+    title: 'Constructor Cold Start',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '1.47M ops/s' },
+      { label: 'ajv', width: 0.06, cls: 'ajv', value: '851 ops/s' },
+    ],
+    speedup: '1,722x faster — lazy compilation, near-zero constructor',
+  },
+  {
+    title: 'First Validation (construct + validate)',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '19.3K ops/s' },
+      { label: 'ajv', width: 4.5, cls: 'ajv', value: '861 ops/s' },
+    ],
+    speedup: '22x faster — compile on first use, not on startup',
+  },
+  {
     title: 'validate(obj) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '68M ops/s' },
-      { label: 'ajv', width: 12, cls: 'ajv', value: '8M ops/s' },
-    ],
-    speedup: '8.5x faster — hybrid validator, V8 machine code speed',
-  },
-  {
-    title: 'validate(obj) — Invalid Data',
-    bars: [
       { label: 'ata', width: 100, cls: 'ata', value: '17M ops/s' },
-      { label: 'ajv', width: 47, cls: 'ajv', value: '8M ops/s' },
+      { label: 'ajv', width: 55, cls: 'ajv', value: '9.4M ops/s' },
     ],
-    speedup: '2.1x faster — single-pass error collection',
-  },
-  {
-    title: 'validate(obj) — 100 Users (20KB)',
-    bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '658K ops/s' },
-      { label: 'ajv', width: 37, cls: 'ajv', value: '243K ops/s' },
-    ],
-    speedup: '2.7x faster — V8-optimized codegen',
+    speedup: '1.8x faster — hybrid validator, V8 machine code speed',
   },
   {
     title: 'ReDoS Protection',
@@ -34,10 +34,10 @@ const cards = [
   {
     title: 'Serverless Cold Start (50 schemas)',
     bars: [
-      { label: 'ata', width: 8, cls: 'ata', value: '7.7ms' },
-      { label: 'ajv', width: 100, cls: 'ajv', value: '96ms' },
+      { label: 'ata', width: 0.4, cls: 'ata', value: '0.1ms' },
+      { label: 'ajv', width: 100, cls: 'ajv', value: '23ms' },
     ],
-    speedup: '12.5x faster — compile + validate in 7.7ms',
+    speedup: '242x faster — lazy init, only compile what you use',
   },
   {
     title: 'Parallel Batch — 10K Items',
@@ -50,26 +50,26 @@ const cards = [
   {
     title: 'validateJSON(str) — Valid',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '3.0M ops/s' },
-      { label: 'ajv', width: 63, cls: 'ajv', value: '1.9M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '2.1M ops/s' },
+      { label: 'ajv', width: 87, cls: 'ajv', value: '1.8M ops/s' },
     ],
-    speedup: '1.6x faster',
+    speedup: '1.1x faster',
   },
   {
-    title: 'Fastify Startup — 500 Routes',
+    title: 'Fastify Startup — 5 Routes',
     bars: [
-      { label: 'ata standalone', width: 60, cls: 'ata', value: '46ms' },
-      { label: 'ajv standalone', width: 100, cls: 'ajv', value: '77ms' },
+      { label: 'ata', width: 8, cls: 'ata', value: '0.5ms' },
+      { label: 'ajv', width: 100, cls: 'ajv', value: '6.0ms' },
     ],
-    speedup: '1.7x faster — pre-compiled compact bundle',
+    speedup: '12x faster — lazy compilation, no build step needed',
   },
   {
     title: 'Schema Compilation',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '113K ops/s' },
-      { label: 'ajv', width: 0.7, cls: 'ajv', value: '818 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '137K ops/s' },
+      { label: 'ajv', width: 0.6, cls: 'ajv', value: '814 ops/s' },
     ],
-    speedup: '138x faster',
+    speedup: '169x faster',
   },
 ]
 

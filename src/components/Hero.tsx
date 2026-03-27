@@ -12,7 +12,7 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations — 68M validations per second.
+          optimizations — 1,722x faster cold start than ajv.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -28,11 +28,11 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">8.5x</span>
-            <span className="stat-label">Faster validate(obj)</span>
+            <span className="stat-value">1,722x</span>
+            <span className="stat-label">Faster Cold Start</span>
           </div>
           <div className="stat">
-            <span className="stat-value">138x</span>
+            <span className="stat-value">169x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
@@ -49,19 +49,19 @@ export function Hero() {
         <CodeWindow title="bench.txt">{`=== ata vs ajv (isolated) ===
 
 validate(obj) valid:
-  ata  67,651,943 ops/sec
-  ajv   8,000,000 ops/sec
-  ata is 8.5x faster
+  ata  17,055,036 ops/sec
+  ajv   9,363,584 ops/sec
+  ata is 1.8x faster
 
-validate(obj) invalid:
-  ata  16,860,818 ops/sec
-  ajv   8,000,000 ops/sec
-  ata is 2.1x faster
+Constructor Cold Start:
+  ata   1,465,729 ops/sec
+  ajv         851 ops/sec
+  ata is 1,722x faster
 
 Schema Compilation:
-  ata     113,000 ops/sec
-  ajv         818 ops/sec
-  ata is 138x faster`}</CodeWindow>
+  ata     137,421 ops/sec
+  ajv         814 ops/sec
+  ata is 169x faster`}</CodeWindow>
       </div>
     </section>
   );
