@@ -26,7 +26,7 @@ console.log(result.valid); // true`}</CodeWindow>
           <h4>C / C++</h4>
           <CodeWindow title="CMakeLists.txt">{`FetchContent_Declare(ata
   GIT_REPOSITORY https://github.com/
-    mertcanaltin/ata-validator.git
+    ata-core/ata-validator.git
 )
 FetchContent_MakeAvailable(ata)
 target_link_libraries(myapp ata::ata)`}</CodeWindow>

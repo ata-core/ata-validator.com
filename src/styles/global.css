@@ -675,7 +675,7 @@ code {
   max-width: 1080px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
 }
 
@@ -697,6 +697,18 @@ code {
 }
 
 .footer-col a:hover { color: var(--text); }
+
+.footer-cta {
+  max-width: 1080px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.footer-cta p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
 
 .footer-bottom {
   max-width: 1080px;
