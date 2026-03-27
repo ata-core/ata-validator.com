@@ -12,18 +12,18 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations — 1,722x faster cold start than ajv.
+          optimizations, 1,722x faster cold start than ajv.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
             Get Started
           </a>
           <a
-            href="https://github.com/mertcanaltin/ata-validator"
+            href="https://github.com/ata-core/ata-validator"
             target="_blank"
             className="btn btn-secondary"
           >
-            View on GitHub
+            Star on GitHub
           </a>
         </div>
         <div className="hero-stats">
