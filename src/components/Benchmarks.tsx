@@ -48,6 +48,14 @@ const cards = [
     speedup: '2391x faster — immune to catastrophic backtracking',
   },
   {
+    title: 'vs typebox 1.x — Boolean Check (with email)',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '87.5M ops/s' },
+      { label: 'typebox', width: 21, cls: 'ajv', value: '18.0M ops/s' },
+    ],
+    speedup: '4.9x faster — hand-written format parsers, optimized codegen',
+  },
+  {
     title: 'Cold Start (50 schemas, 3 used)',
     bars: [
       { label: 'ata', width: 5, cls: 'ata', value: '0.8ms' },
