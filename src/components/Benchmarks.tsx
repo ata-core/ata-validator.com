@@ -1,43 +1,43 @@
 const cards = [
   {
-    title: 'Constructor Cold Start',
+    title: 'Schema Compilation',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '1.28M ops/s' },
-      { label: 'ajv', width: 0.06, cls: 'ajv', value: '812 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '1.6M ops/s' },
+      { label: 'ajv', width: 0.05, cls: 'ajv', value: '763 ops/s' },
     ],
-    speedup: '1,580x faster -- new Validator() only, no compilation yet',
+    speedup: '2,083x faster -- lazy compilation + schema cache',
   },
   {
     title: 'First Validation (construct + validate)',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '396K ops/s' },
-      { label: 'ajv', width: 0.2, cls: 'ajv', value: '880 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '629K ops/s' },
+      { label: 'ajv', width: 0.1, cls: 'ajv', value: '827 ops/s' },
     ],
-    speedup: '450x faster -- schema compilation cache',
+    speedup: '761x faster -- schema compilation cache',
   },
   {
     title: 'isValidObject (boolean check)',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '39.5M ops/s' },
-      { label: 'ajv', width: 45, cls: 'ajv', value: '17.6M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '35.5M ops/s' },
+      { label: 'ajv', width: 26, cls: 'ajv', value: '9.1M ops/s' },
     ],
-    speedup: '2.2x faster -- direct property access, no destructuring',
+    speedup: '3.9x faster -- direct property access, optimized codegen',
   },
   {
     title: 'validate(obj) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '25.5M ops/s' },
-      { label: 'ajv', width: 76, cls: 'ajv', value: '19.3M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '17.7M ops/s' },
+      { label: 'ajv', width: 54, cls: 'ajv', value: '9.5M ops/s' },
     ],
-    speedup: '1.3x faster -- hybrid codegen',
+    speedup: '1.9x faster -- hybrid codegen',
   },
   {
     title: 'validate(obj) — Invalid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '17.7M ops/s' },
-      { label: 'ajv', width: 76, cls: 'ajv', value: '13.5M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '9.0M ops/s' },
+      { label: 'ajv', width: 58, cls: 'ajv', value: '5.2M ops/s' },
     ],
-    speedup: '1.3x faster -- single-pass error collection',
+    speedup: '1.7x faster -- single-pass error collection',
   },
   {
     title: 'ReDoS Protection',
@@ -79,14 +79,6 @@ const cards = [
     ],
     speedup: '12x faster — lazy compilation, no build step needed',
   },
-  {
-    title: 'Schema Compilation',
-    bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '142K ops/s' },
-      { label: 'ajv', width: 0.6, cls: 'ajv', value: '827 ops/s' },
-    ],
-    speedup: '171x faster',
-  },
 ]
 
 export function Benchmarks() {
@@ -94,7 +86,7 @@ export function Benchmarks() {
     <section id="benchmarks" className="benchmarks">
       <h2>Benchmarks</h2>
       <p className="section-desc">
-        Apple Silicon. Isolated single-schema benchmarks. ata is faster on <strong>every</strong> metric.
+        Apple Silicon. Process-isolated benchmarks with <a href="https://github.com/evanwashere/mitata" target="_blank">mitata</a>.
       </p>
       <div className="bench-grid">
         {cards.map((card) => (
