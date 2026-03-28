@@ -12,7 +12,7 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 1,722x faster cold start than ajv.
+          optimizations, 1,580x faster cold start, 450x faster first validation.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -28,40 +28,40 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">1,722x</span>
+            <span className="stat-value">1,580x</span>
             <span className="stat-label">Faster Cold Start</span>
           </div>
           <div className="stat">
-            <span className="stat-value">169x</span>
-            <span className="stat-label">Faster Compilation</span>
+            <span className="stat-value">450x</span>
+            <span className="stat-label">Faster First Validation</span>
           </div>
           <div className="stat">
             <span className="stat-value">2391x</span>
             <span className="stat-label">ReDoS Immune</span>
           </div>
           <div className="stat">
-            <span className="stat-value">98.4%</span>
+            <span className="stat-value">98.6%</span>
             <span className="stat-label">Spec Compliance</span>
           </div>
         </div>
       </div>
       <div>
-        <CodeWindow title="bench.txt">{`=== ata vs ajv (isolated) ===
+        <CodeWindow title="bench.txt">{`=== ata vs ajv ===
 
-validate(obj) valid:
-  ata  17,055,036 ops/sec
-  ajv   9,363,584 ops/sec
-  ata is 1.8x faster
+First Validation (cached):
+  ata     396,432 ops/sec
+  ajv         880 ops/sec
+  ata is 450x faster
 
 Constructor Cold Start:
-  ata   1,465,729 ops/sec
-  ajv         851 ops/sec
-  ata is 1,722x faster
+  ata   1,282,839 ops/sec
+  ajv         812 ops/sec
+  ata is 1,580x faster
 
-Schema Compilation:
-  ata     137,421 ops/sec
-  ajv         814 ops/sec
-  ata is 169x faster`}</CodeWindow>
+isValidObject (hot path):
+  ata  39,465,246 ops/sec
+  ajv  17,593,915 ops/sec
+  ata is 2.2x faster`}</CodeWindow>
       </div>
     </section>
   );

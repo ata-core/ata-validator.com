@@ -2,34 +2,42 @@ const cards = [
   {
     title: 'Constructor Cold Start',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '1.47M ops/s' },
-      { label: 'ajv', width: 0.06, cls: 'ajv', value: '851 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '1.28M ops/s' },
+      { label: 'ajv', width: 0.06, cls: 'ajv', value: '812 ops/s' },
     ],
-    speedup: '1,722x faster — lazy compilation, near-zero constructor',
+    speedup: '1,580x faster -- lazy compilation, near-zero constructor',
   },
   {
     title: 'First Validation (construct + validate)',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '19.3K ops/s' },
-      { label: 'ajv', width: 4.5, cls: 'ajv', value: '861 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '396K ops/s' },
+      { label: 'ajv', width: 0.2, cls: 'ajv', value: '880 ops/s' },
     ],
-    speedup: '22x faster — compile on first use, not on startup',
+    speedup: '450x faster -- schema compilation cache',
+  },
+  {
+    title: 'isValidObject (boolean check)',
+    bars: [
+      { label: 'ata', width: 100, cls: 'ata', value: '39.5M ops/s' },
+      { label: 'ajv', width: 45, cls: 'ajv', value: '17.6M ops/s' },
+    ],
+    speedup: '2.2x faster -- direct property access, no destructuring',
   },
   {
     title: 'validate(obj) — Valid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '14.6M ops/s' },
-      { label: 'ajv', width: 57, cls: 'ajv', value: '8.3M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '25.5M ops/s' },
+      { label: 'ajv', width: 76, cls: 'ajv', value: '19.3M ops/s' },
     ],
-    speedup: '1.8x faster — combined single-pass validator',
+    speedup: '1.3x faster -- hybrid codegen',
   },
   {
     title: 'validate(obj) — Invalid Data',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '12.9M ops/s' },
-      { label: 'ajv', width: 62, cls: 'ajv', value: '8.0M ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '17.7M ops/s' },
+      { label: 'ajv', width: 76, cls: 'ajv', value: '13.5M ops/s' },
     ],
-    speedup: '1.6x faster — single-pass error collection, no double validation',
+    speedup: '1.3x faster -- single-pass error collection',
   },
   {
     title: 'ReDoS Protection',
@@ -74,10 +82,10 @@ const cards = [
   {
     title: 'Schema Compilation',
     bars: [
-      { label: 'ata', width: 100, cls: 'ata', value: '137K ops/s' },
-      { label: 'ajv', width: 0.6, cls: 'ajv', value: '814 ops/s' },
+      { label: 'ata', width: 100, cls: 'ata', value: '142K ops/s' },
+      { label: 'ajv', width: 0.6, cls: 'ajv', value: '827 ops/s' },
     ],
-    speedup: '169x faster',
+    speedup: '171x faster',
   },
 ]
 
