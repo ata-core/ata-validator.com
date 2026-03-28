@@ -48,12 +48,12 @@ const cards = [
     speedup: '2391x faster — immune to catastrophic backtracking',
   },
   {
-    title: 'Serverless Cold Start (50 schemas)',
+    title: 'Cold Start (50 schemas, 3 used)',
     bars: [
-      { label: 'ata', width: 0.4, cls: 'ata', value: '0.1ms' },
-      { label: 'ajv', width: 100, cls: 'ajv', value: '23ms' },
+      { label: 'ata', width: 5, cls: 'ata', value: '0.8ms' },
+      { label: 'ajv', width: 100, cls: 'ajv', value: '15.9ms' },
     ],
-    speedup: '242x faster — lazy init, only compile what you use',
+    speedup: '20x faster — only compiles schemas that get requests',
   },
   {
     title: 'Parallel Batch — 10K Items',
