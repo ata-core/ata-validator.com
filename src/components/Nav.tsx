@@ -3,7 +3,7 @@ export function Nav() {
     <nav className="nav">
       <div className="nav-inner">
         <a href="/" className="nav-logo">
-          <span>ata-validator</span>
+          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.03em' }}>ata</span>
         </a>
         <div className="nav-links">
           <a href="#features">Features</a>

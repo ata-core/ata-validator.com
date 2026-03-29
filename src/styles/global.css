@@ -13,7 +13,7 @@
   --red: #ff5f57;
   --yellow: #febc2e;
   --dot-green: #28c840;
-  --font: 'Inter', -apple-system, sans-serif;
+  --font: 'IBM Plex Mono', 'Inter', -apple-system, monospace;
   --mono: 'JetBrains Mono', monospace;
 }
 
