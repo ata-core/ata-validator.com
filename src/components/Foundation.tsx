@@ -1,4 +1,4 @@
-const tabs = ['simdjson', 'RE2', 'Codegen', 'On Demand', 'Draft 2020-12']
+const tabs = ['simdjson', 'RE2', 'Codegen', 'On Demand', 'Draft 7 + 2020-12']
 
 export function Foundation() {
   return (
