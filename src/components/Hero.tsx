@@ -2,25 +2,23 @@ import { useState } from "react";
 
 const heroTabs = [
   {
-    name: "Simple",
-    title: "validate(obj) — Simple Schema",
+    name: "Validation",
+    title: "validate(obj) — Valid Data",
     entries: [
-      { label: "ata", value: "12 ns", time: 12, highlight: true },
-      { label: "ajv", value: "37 ns", time: 37 },
-      { label: "typebox", value: "47 ns", time: 47 },
-      { label: "valibot", value: "304 ns", time: 304 },
+      { label: "ata", value: "28 ns", time: 28, highlight: true },
+      { label: "ajv", value: "102 ns", time: 102 },
       { label: "zod", value: "430 ns", time: 430 },
+      { label: "valibot", value: "304 ns", time: 304 },
     ],
   },
   {
-    name: "Complex",
-    title: "validate(obj) — Nested + Array + Pattern",
+    name: "Invalid",
+    title: "validate(obj) — Invalid Data",
     entries: [
-      { label: "ata", value: "26 ns", time: 26, highlight: true },
-      { label: "ajv", value: "51 ns", time: 51 },
-      { label: "typebox", value: "72 ns", time: 72 },
-      { label: "zod", value: "471 ns", time: 471 },
-      { label: "valibot", value: "683 ns", time: 683 },
+      { label: "ata", value: "103 ns", time: 103, highlight: true },
+      { label: "ajv", value: "179 ns", time: 179 },
+      { label: "zod", value: "9,490 ns", time: 9490 },
+      { label: "valibot", value: "836 ns", time: 836 },
     ],
   },
   {
@@ -28,16 +26,14 @@ const heroTabs = [
     title: "First Validation (compile + validate)",
     entries: [
       { label: "ata", value: "1.6 us", time: 1.6, highlight: true },
-      { label: "typebox", value: "55 us", time: 55 },
-      { label: "ajv", value: "1,290 us", time: 1290 },
+      { label: "ajv", value: "1,200 us", time: 1200 },
     ],
   },
   {
     name: "Compilation",
     title: "Schema Compilation",
     entries: [
-      { label: "ata", value: "618 ns", time: 618, highlight: true },
-      { label: "typebox", value: "54,000 ns", time: 54000 },
+      { label: "ata", value: "617 ns", time: 617, highlight: true },
       { label: "ajv", value: "1,280,000 ns", time: 1280000 },
     ],
   },
@@ -67,8 +63,8 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 793x faster first validation, 2,067x faster
-          compilation.
+          optimizations, 3.6x faster validation, 2,074x faster
+          compilation, 731x faster cold start.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -84,12 +80,12 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">2,067x</span>
-            <span className="stat-label">Faster Compilation</span>
+            <span className="stat-value">3.6x</span>
+            <span className="stat-label">Faster Validation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">793x</span>
-            <span className="stat-label">Faster First Validation</span>
+            <span className="stat-value">2,074x</span>
+            <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
             <span className="stat-value">2391x</span>
