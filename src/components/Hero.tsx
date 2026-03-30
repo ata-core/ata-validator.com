@@ -75,8 +75,8 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 4.4x faster validation on complex schemas, 2,140x faster
-          compilation, 829x faster cold start. Full ajv feature parity with Draft 7 support.
+          optimizations, 5.9x faster validation on complex schemas, 1,969x faster
+          compilation, 719x faster cold start. Full ajv feature parity with Draft 7 support.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -92,16 +92,16 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">4.4x</span>
+            <span className="stat-value">5.9x</span>
             <span className="stat-label">Faster Validation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">2,140x</span>
+            <span className="stat-value">1,969x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">5.8x</span>
-            <span className="stat-label">Complex Schemas</span>
+            <span className="stat-value">3.6x</span>
+            <span className="stat-label">Simple Schemas</span>
           </div>
           <div className="stat">
             <span className="stat-value">98.4%</span>
