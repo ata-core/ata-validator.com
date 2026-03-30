@@ -56,6 +56,22 @@ const cards = [
     speedup: '5.0x faster -- hand-written format parsers, optimized codegen',
   },
   {
+    title: 'vs Zod — validate (valid)',
+    bars: [
+      { label: 'ata', width: 4, cls: 'ata', value: '12ns' },
+      { label: 'zod', width: 100, cls: 'ajv', value: '275ns' },
+    ],
+    speedup: '22x faster -- different categories, same validation job',
+  },
+  {
+    title: 'vs Valibot — validate (valid)',
+    bars: [
+      { label: 'ata', width: 4, cls: 'ata', value: '12ns' },
+      { label: 'valibot', width: 100, cls: 'ajv', value: '329ns' },
+    ],
+    speedup: '27x faster -- schema-builder DSL vs JSON Schema validator',
+  },
+  {
     title: 'Cold Start (50 schemas, 3 used)',
     bars: [
       { label: 'ata', width: 5, cls: 'ata', value: '0.8ms' },
