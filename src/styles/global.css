@@ -901,15 +901,17 @@ code {
   .stat-value { font-size: 1.2rem; }
   .stat-label { font-size: 0.7rem; }
 
-  .hero-chart { border-radius: 12px; }
-  .hero-chart-body { padding: 16px 14px 14px; }
-  .hero-chart-title { font-size: 0.95rem; }
-  .hero-chart-tabs { padding: 0 8px; overflow-x: auto; }
-  .hero-chart-tab { padding: 10px 10px; font-size: 0.7rem; white-space: nowrap; }
-  .hero-chart-row { grid-template-columns: 60px 1fr auto; gap: 8px; }
-  .hero-chart-label { font-size: 0.7rem; }
-  .hero-chart-value { font-size: 0.7rem; min-width: 60px; }
-  .hero-chart-bar-wrap { height: 24px; }
+  .hero-chart { border-radius: 12px; max-width: 100%; overflow: hidden; }
+  .hero-chart-body { padding: 14px 12px 12px; }
+  .hero-chart-title { font-size: 0.85rem; margin-bottom: 14px; }
+  .hero-chart-tabs { padding: 0 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .hero-chart-tab { padding: 8px 8px; font-size: 0.65rem; white-space: nowrap; }
+  .hero-chart-row { grid-template-columns: 52px 1fr 40px; gap: 6px; }
+  .hero-chart-label { font-size: 0.65rem; }
+  .hero-chart-label strong { font-size: 0.65rem; }
+  .hero-chart-value { font-size: 0.6rem; min-width: auto; }
+  .hero-chart-bar-wrap { height: 20px; }
+  .hero-chart-bars { gap: 8px; }
 
   .nav-links { gap: 16px; }
   .nav-links a { font-size: 0.75rem; }
