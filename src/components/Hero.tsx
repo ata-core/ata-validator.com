@@ -2,6 +2,15 @@ import { useState } from "react";
 
 const heroTabs = [
   {
+    name: "Cold Start",
+    title: "First Validation (compile + validate)",
+    entries: [
+      { label: "ata", value: "1.3 us", time: 1.3, highlight: true },
+      { label: "typebox", value: "52.9 us", time: 52.9 },
+      { label: "ajv", value: "1,070 us", time: 1070 },
+    ],
+  },
+  {
     name: "Validation",
     title: "validate(obj) — Valid Data",
     entries: [
@@ -13,17 +22,6 @@ const heroTabs = [
     ],
   },
   {
-    name: "Invalid",
-    title: "isValidObject(obj) — Invalid Data",
-    entries: [
-      { label: "ata", value: "2.0 ns", time: 2.0, highlight: true },
-      { label: "typebox", value: "2.7 ns", time: 2.7 },
-      { label: "ajv", value: "104 ns", time: 104 },
-      { label: "valibot", value: "838 ns", time: 838 },
-      { label: "zod", value: "11,670 ns", time: 11670 },
-    ],
-  },
-  {
     name: "Complex",
     title: "Complex Schema — patternProperties + dependentSchemas",
     entries: [
@@ -32,12 +30,14 @@ const heroTabs = [
     ],
   },
   {
-    name: "Cold Start",
-    title: "First Validation (compile + validate)",
+    name: "Invalid",
+    title: "isValidObject(obj) — Invalid Data",
     entries: [
-      { label: "ata", value: "1.3 us", time: 1.3, highlight: true },
-      { label: "typebox", value: "52.9 us", time: 52.9 },
-      { label: "ajv", value: "1,070 us", time: 1070 },
+      { label: "ata", value: "2.0 ns", time: 2.0, highlight: true },
+      { label: "typebox", value: "2.7 ns", time: 2.7 },
+      { label: "ajv", value: "104 ns", time: 104 },
+      { label: "valibot", value: "838 ns", time: 838 },
+      { label: "zod", value: "11,670 ns", time: 11670 },
     ],
   },
   {
