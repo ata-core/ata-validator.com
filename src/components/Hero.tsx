@@ -5,9 +5,9 @@ const heroTabs = [
     name: "Cold Start",
     title: "First Validation (compile + validate)",
     entries: [
-      { label: "ata", value: "2.0 us", time: 2.0, highlight: true },
-      { label: "typebox", value: "55 us", time: 55 },
-      { label: "ajv", value: "1,160 us", time: 1160 },
+      { label: "ata", value: "2.1 us", time: 2.1, highlight: true },
+      { label: "typebox", value: "54 us", time: 54 },
+      { label: "ajv", value: "1,110 us", time: 1110 },
     ],
   },
   {
@@ -15,10 +15,10 @@ const heroTabs = [
     title: "validate(obj) — Valid Data",
     entries: [
       { label: "ata", value: "9 ns", time: 9, highlight: true },
-      { label: "ajv", value: "39 ns", time: 39 },
+      { label: "ajv", value: "38 ns", time: 38 },
       { label: "typebox", value: "50 ns", time: 50 },
-      { label: "valibot", value: "322 ns", time: 322 },
-      { label: "zod", value: "339 ns", time: 339 },
+      { label: "valibot", value: "326 ns", time: 326 },
+      { label: "zod", value: "334 ns", time: 334 },
     ],
   },
   {
@@ -43,9 +43,9 @@ const heroTabs = [
     name: "Compilation",
     title: "Schema Compilation",
     entries: [
-      { label: "ata", value: "556 ns", time: 556, highlight: true },
-      { label: "typebox", value: "54,000 ns", time: 54000 },
-      { label: "ajv", value: "1,240,000 ns", time: 1240000 },
+      { label: "ata", value: "584 ns", time: 584, highlight: true },
+      { label: "typebox", value: "52,000 ns", time: 52000 },
+      { label: "ajv", value: "1,200,000 ns", time: 1200000 },
     ],
   },
   {
@@ -75,8 +75,8 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 6.8x faster validation on complex schemas, 2,075x faster
-          compilation, 460x faster cold start. Full unevaluatedProperties support with Draft 7 compatibility.
+          optimizations, 6.8x faster validation on complex schemas, 2,051x faster
+          compilation, 534x faster cold start. Works without native addon. Full unevaluatedProperties support with Draft 7 compatibility.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -96,11 +96,11 @@ export function Hero() {
             <span className="stat-label">Faster Validation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">2,075x</span>
+            <span className="stat-value">2,051x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">3.8x</span>
+            <span className="stat-value">4.3x</span>
             <span className="stat-label">Simple Schemas</span>
           </div>
           <div className="stat">

@@ -23,10 +23,10 @@ const tabs: BenchTab[] = [
     link: 'https://github.com/ata-core/ata-validator/blob/master/benchmark/bench_all_mitata.mjs',
     entries: [
       { label: 'ata', value: '9 ns', time: 9, highlight: true },
-      { label: 'ajv', value: '39 ns', time: 39 },
+      { label: 'ajv', value: '38 ns', time: 38 },
       { label: 'typebox', value: '50 ns', time: 50 },
-      { label: 'valibot', value: '322 ns', time: 322 },
-      { label: 'zod', value: '339 ns', time: 339 },
+      { label: 'valibot', value: '326 ns', time: 326 },
+      { label: 'zod', value: '334 ns', time: 334 },
     ],
   },
   {
@@ -36,8 +36,8 @@ const tabs: BenchTab[] = [
     link: 'https://github.com/ata-core/ata-validator/blob/master/benchmark/bench_complex_mitata.mjs',
     entries: [
       { label: 'ata (valid)', value: '17 ns', time: 17, highlight: true },
-      { label: 'ata (invalid)', value: '58 ns', time: 58, highlight: true },
-      { label: 'ajv (valid)', value: '116 ns', time: 116 },
+      { label: 'ata (invalid)', value: '59 ns', time: 59, highlight: true },
+      { label: 'ajv (valid)', value: '115 ns', time: 115 },
       { label: 'ajv (invalid)', value: '194 ns', time: 194 },
     ],
   },
@@ -59,9 +59,9 @@ const tabs: BenchTab[] = [
     subtitle: 'Time per cold start, mitata (lower is better)',
     link: 'https://github.com/ata-core/ata-validator/blob/master/benchmark/bench_all_mitata.mjs',
     entries: [
-      { label: 'ata', value: '2.0 us', time: 2.0, highlight: true },
-      { label: 'typebox', value: '55 us', time: 55 },
-      { label: 'ajv', value: '1,160 us', time: 1160 },
+      { label: 'ata', value: '2.1 us', time: 2.1, highlight: true },
+      { label: 'typebox', value: '54 us', time: 54 },
+      { label: 'ajv', value: '1,110 us', time: 1110 },
     ],
   },
   {
@@ -70,9 +70,9 @@ const tabs: BenchTab[] = [
     subtitle: 'Time per compilation, mitata (lower is better)',
     link: 'https://github.com/ata-core/ata-validator/blob/master/benchmark/bench_all_mitata.mjs',
     entries: [
-      { label: 'ata', value: '556 ns', time: 556, highlight: true },
-      { label: 'typebox', value: '54,000 ns', time: 54000 },
-      { label: 'ajv', value: '1,240,000 ns', time: 1240000 },
+      { label: 'ata', value: '584 ns', time: 584, highlight: true },
+      { label: 'typebox', value: '52,000 ns', time: 52000 },
+      { label: 'ajv', value: '1,200,000 ns', time: 1200000 },
     ],
   },
   {
