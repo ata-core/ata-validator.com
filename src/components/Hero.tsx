@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const heroTabs = [
   {
-    name: "Cold Start",
+    name: "Cold",
     title: "First Validation (compile + validate)",
     entries: [
       { label: "ata", value: "2.1 us", time: 2.1, highlight: true },
@@ -11,7 +11,7 @@ const heroTabs = [
     ],
   },
   {
-    name: "Validation",
+    name: "Valid",
     title: "validate(obj) — Valid Data",
     entries: [
       { label: "ata", value: "9 ns", time: 9, highlight: true },
@@ -30,7 +30,7 @@ const heroTabs = [
     ],
   },
   {
-    name: "Unevaluated",
+    name: "Uneval",
     title: "unevaluatedProperties — anyOf + bitmask tracking",
     entries: [
       { label: "ata (valid)", value: "6.7 ns", time: 6.7, highlight: true },
@@ -40,7 +40,7 @@ const heroTabs = [
     ],
   },
   {
-    name: "Compilation",
+    name: "Compile",
     title: "Schema Compilation",
     entries: [
       { label: "ata", value: "584 ns", time: 584, highlight: true },
@@ -49,7 +49,7 @@ const heroTabs = [
     ],
   },
   {
-    name: "$dynamicRef",
+    name: "Dynamic",
     title: "$dynamicRef Cross-Schema Override",
     entries: [
       { label: "ata", value: "1.9 ns", time: 1.9, highlight: true },
