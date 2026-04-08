@@ -49,6 +49,14 @@ const heroTabs = [
     ],
   },
   {
+    name: "$dynamicRef",
+    title: "$dynamicRef Cross-Schema Override",
+    entries: [
+      { label: "ata", value: "1.9 ns", time: 1.9, highlight: true },
+      { label: "ajv", value: "179 ns", time: 179 },
+    ],
+  },
+  {
     name: "Security",
     title: "ReDoS Pattern: ^(a+)+$",
     entries: [
@@ -75,8 +83,8 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and{" "}
           <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations, 6.8x faster validation on complex schemas, 2,051x faster
-          compilation, 534x faster cold start. Works without native addon. Full unevaluatedProperties support with Draft 7 compatibility.
+          optimizations. Up to 94x faster on $dynamicRef, 5.3x on normal schemas, 2,051x faster
+          compilation. Full $dynamicRef/$anchor support, Draft 2020-12 + Draft 7 compatible.
         </p>
         <div className="hero-buttons">
           <a href="#quickstart" className="btn btn-primary">
@@ -92,19 +100,19 @@ export function Hero() {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-value">6.8x</span>
-            <span className="stat-label">Faster Validation</span>
+            <span className="stat-value">94x</span>
+            <span className="stat-label">$dynamicRef Override</span>
+          </div>
+          <div className="stat">
+            <span className="stat-value">5.3x</span>
+            <span className="stat-label">Normal Validation</span>
           </div>
           <div className="stat">
             <span className="stat-value">2,051x</span>
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">4.3x</span>
-            <span className="stat-label">Simple Schemas</span>
-          </div>
-          <div className="stat">
-            <span className="stat-value">96.9%</span>
+            <span className="stat-value">94.2%</span>
             <span className="stat-label">Spec Compliance</span>
           </div>
         </div>

@@ -76,6 +76,18 @@ const tabs: BenchTab[] = [
     ],
   },
   {
+    name: '$dynamicRef',
+    title: '$dynamicRef / $dynamicAnchor — Draft 2020-12',
+    subtitle: 'Time per validation in nanoseconds, mitata (lower is better)',
+    link: 'https://github.com/ata-core/ata-validator/blob/master/benchmark/bench_dynamicref_vs_ajv.mjs',
+    entries: [
+      { label: 'ata (override)', value: '1.9 ns', time: 1.9, highlight: true },
+      { label: 'ata (tree)', value: '19 ns', time: 19, highlight: true },
+      { label: 'ajv (tree)', value: '50 ns', time: 50 },
+      { label: 'ajv (override)', value: '179 ns', time: 179 },
+    ],
+  },
+  {
     name: 'Security',
     title: 'ReDoS Pattern: ^(a+)+$',
     subtitle: 'Execution time in milliseconds (lower is better)',

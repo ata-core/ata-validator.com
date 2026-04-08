@@ -6,7 +6,8 @@ const keywords = [
   'pattern', 'minLength', 'maxLength', 'uniqueItems',
   'dependentRequired', 'dependentSchemas', 'propertyNames',
   'unevaluatedProperties', 'unevaluatedItems',
-  '$id', 'definitions', 'dependencies',
+  '$id', '$anchor', '$dynamicRef', '$dynamicAnchor',
+  'definitions', 'dependencies',
 ]
 
 export function Compliance() {
@@ -14,13 +15,17 @@ export function Compliance() {
     <section className="compliance">
       <div className="compliance-inner">
         <div className="compliance-text">
-          <h2>96.9% Spec Compliance</h2>
+          <h2>94.2% Spec Compliance</h2>
           <p>
             Tested against the official{' '}
             <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank">
               JSON Schema Test Suite
             </a>{' '}
-            for Draft 2020-12 and Draft 7.
+            and{' '}
+            <a href="https://github.com/ExodusMovement/schemasafe" target="_blank">
+              @exodus/schemasafe
+            </a>{' '}
+            test suite for Draft 2020-12.
           </p>
           <div className="compliance-score">
             <div className="score-ring">
@@ -28,15 +33,15 @@ export function Compliance() {
                 <circle cx="60" cy="60" r="54" fill="none" stroke="#1a2332" strokeWidth="8" />
                 <circle
                   cx="60" cy="60" r="54" fill="none" stroke="#00d4aa" strokeWidth="8"
-                  strokeDasharray="339.3" strokeDashoffset="10.5" strokeLinecap="round"
+                  strokeDasharray="339.3" strokeDashoffset="19.7" strokeLinecap="round"
                   transform="rotate(-90 60 60)"
                 />
               </svg>
-              <span className="score-text">96.9%</span>
+              <span className="score-text">94.2%</span>
             </div>
             <div className="score-details">
-              <div><strong>1,109</strong> tests passed</div>
-              <div><strong>52</strong> test files</div>
+              <div><strong>1,156</strong> tests passed</div>
+              <div><strong>$dynamicRef</strong> 42/42 (100%)</div>
               <div><strong>Draft 7 + 2020-12</strong></div>
             </div>
           </div>
