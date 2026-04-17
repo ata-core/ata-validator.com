@@ -39,10 +39,28 @@ export default function Docs() {
         </aside>
 
         <main className="docs-content">
-          {/* Content sections added in later tasks */}
-          <section id="quick-start">
+          <section id="quick-start" className="quick-start">
             <h1>Quick start</h1>
-            <p>Content coming in next task.</p>
+            <p>Install and validate your first schema.</p>
+
+            <h3>Install</h3>
+            <pre className="docs-code">{`npm install ata-validator`}</pre>
+
+            <h3>Validate</h3>
+            <pre className="docs-code">{`import { Validator } from 'ata-validator'
+
+const v = new Validator({
+  type: 'object',
+  required: ['id'],
+  properties: { id: { type: 'integer' } }
+})
+
+const result = v.validate({ id: 42 })
+// { valid: true, errors: [] }`}</pre>
+
+            <p className="quick-note">
+              Works without a native addon. Install takes care of prebuilt binaries when available, falls back to pure JS otherwise.
+            </p>
           </section>
         </main>
       </div>
