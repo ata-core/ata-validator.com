@@ -285,6 +285,45 @@ app.post('/users', {
               </tbody>
             </table>
           </section>
+
+          <section id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Does it work without a native addon?</h3>
+            <p>
+              Yes. If the native binary cannot load, ata falls back to a pure-JS validator.
+              Feature parity is preserved; only raw throughput differs.
+            </p>
+
+            <h3>How does it differ from Ajv?</h3>
+            <p>
+              ata is native-first (simdjson + RE2 + V8 codegen) and built with Fastify and
+              Node.js core integration as explicit goals. Ajv is the long-standing default
+              in the ecosystem and remains the correct choice in many cases. The two
+              coexist; ata targets the pipelines where native parsing and linear-time regex
+              matter.
+            </p>
+
+            <h3>Which Node.js versions are supported?</h3>
+            <p>Node.js 18 and later. Tested on 18, 20, 22, and 24.</p>
+
+            <h3>Is it cross-platform?</h3>
+            <p>Linux x64/arm64, macOS x64/arm64, Windows x64. Pure-JS fallback runs anywhere.</p>
+
+            <h3>Can I skip RE2?</h3>
+            <p>
+              Yes, build with <code>ATA_NO_RE2=1</code>. Useful when the RE2 dependency is
+              undesirable (Node.js core vendoring, for example). The JS regex engine is used
+              for pattern keywords, at the cost of linear-time guarantees.
+            </p>
+
+            <h3>Is it production-ready?</h3>
+            <p>
+              ata is pre-1.0. The core validation paths are backed by the JSON Schema Test
+              Suite, schemasafe tests, and OSS-Fuzz, and are in use in the projects described
+              under Integrations. API surface may still change before 1.0.
+            </p>
+          </section>
         </main>
       </div>
     </>
