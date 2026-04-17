@@ -186,6 +186,60 @@ if (errors) { /* handle */ }`}</pre>
               interface, so any library expecting that shape can consume ata schemas directly.
             </p>
           </section>
+
+          <section id="integrations">
+            <h2>Integrations</h2>
+
+            <h3>Fastify</h3>
+            <p>
+              Replace Fastify's default validator with ata via <code>setValidatorCompiler</code>.
+              Every route with a body/query/params schema goes through ata.
+            </p>
+            <pre className="docs-code">{`import Fastify from 'fastify'
+import { Validator } from 'ata-validator'
+
+const app = Fastify()
+
+app.setValidatorCompiler(({ schema }) => {
+  const v = new Validator(schema)
+  return (data) => {
+    const r = v.validate(data)
+    if (r.valid) return { value: data }
+    const error = new Error(r.errors.map(e => e.message).join(', '))
+    error.validation = r.errors
+    return { error }
+  }
+})
+
+app.post('/users', {
+  schema: {
+    body: {
+      type: 'object',
+      required: ['id', 'name'],
+      properties: {
+        id: { type: 'integer', minimum: 1 },
+        name: { type: 'string', minLength: 1 },
+      },
+    },
+  },
+}, async (req) => ({ ok: true, user: req.body }))`}</pre>
+
+            <h3>Node.js core</h3>
+            <p>
+              An integration to validate <code>node.config.json</code> against its JSON Schema
+              is in progress at{' '}
+              <a href="https://github.com/nodejs/node/pull/62603" target="_blank" rel="noreferrer">nodejs/node#62603</a>.
+              The path being explored: vendored <code>deps/ata/</code>, built with{' '}
+              <code>ATA_NO_RE2</code>, no new external dependencies (simdjson is already in core).
+            </p>
+
+            <h3>Standard Schema V1</h3>
+            <p>
+              ata-validator ships a Standard Schema V1 shape. Any tooling that accepts the
+              Standard Schema interface (form libraries, ORMs, RPC layers) can consume an ata
+              schema without adapters.
+            </p>
+          </section>
         </main>
       </div>
     </>
