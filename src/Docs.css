@@ -180,11 +180,16 @@
   padding: 10px 12px;
   text-align: left;
   vertical-align: top;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .docs-table th {
   background: var(--bg-subtle);
   font-weight: 600;
+}
+.docs-table td:first-child,
+.docs-table th:first-child {
+  white-space: nowrap;
+  width: 1%;
 }
 
 @media (max-width: 640px) {
