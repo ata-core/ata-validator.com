@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { DocsCode } from './components/DocsCode'
 import './Docs.css'
 
 export default function Docs() {
@@ -44,10 +45,10 @@ export default function Docs() {
             <p>Install and validate your first schema.</p>
 
             <h3>Install</h3>
-            <pre className="docs-code">{`npm install ata-validator`}</pre>
+            <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
 
             <h3>Validate</h3>
-            <pre className="docs-code">{`import { Validator } from 'ata-validator'
+            <DocsCode lang="js">{`import { Validator } from 'ata-validator'
 
 const v = new Validator({
   type: 'object',
@@ -56,7 +57,7 @@ const v = new Validator({
 })
 
 const result = v.validate({ id: 42 })
-// { valid: true, errors: [] }`}</pre>
+// { valid: true, errors: [] }`}</DocsCode>
 
             <p className="quick-note">
               Works without a native addon. Install takes care of prebuilt binaries when available, falls back to pure JS otherwise.
@@ -81,7 +82,7 @@ const result = v.validate({ id: 42 })
           <section id="how">
             <h2>How it works</h2>
             <p>Two phases: compile once, validate many times.</p>
-            <pre className="docs-code">{`Schema  ──compile──▶  Validator  ──validate(input)──▶  { valid, errors }`}</pre>
+            <DocsCode lang="plain">{`Schema  ──compile──▶  Validator  ──validate(input)──▶  { valid, errors }`}</DocsCode>
             <p>Where the speed comes from:</p>
             <ul>
               <li><strong>V8 codegen.</strong> Compiled validators are plain functions that V8 JITs like any other hot code.</li>
@@ -130,7 +131,7 @@ const result = v.validate({ id: 42 })
             <h2>Installation</h2>
 
             <h3>From npm</h3>
-            <pre className="docs-code">{`npm install ata-validator`}</pre>
+            <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
             <p>
               The install script downloads a prebuilt binary for your platform when available.
               Linux x64/arm64, macOS x64/arm64, and Windows x64 are covered.
@@ -148,7 +149,7 @@ const result = v.validate({ id: 42 })
               example), build with the <code>ATA_NO_RE2</code> flag. The JS regex engine is used for
               pattern keywords instead, at the cost of linear-time guarantees.
             </p>
-            <pre className="docs-code">{`ATA_NO_RE2=1 npm install ata-validator`}</pre>
+            <DocsCode lang="shell">{`ATA_NO_RE2=1 npm install ata-validator`}</DocsCode>
           </section>
 
           <section id="api">
@@ -156,17 +157,17 @@ const result = v.validate({ id: 42 })
 
             <h3>Validator</h3>
             <p>Compiles a schema once, validates many times. Preferred for HTTP pipelines.</p>
-            <pre className="docs-code">{`import { Validator } from 'ata-validator'
+            <DocsCode lang="js">{`import { Validator } from 'ata-validator'
 
 const v = new Validator(schema)
 const result = v.validate(data)
-// result: { valid: boolean, errors: Error[] }`}</pre>
+// result: { valid: boolean, errors: Error[] }`}</DocsCode>
 
             <h3>validate (one-shot)</h3>
             <p>Compiles and validates in a single call. Convenient, but allocates on every run.</p>
-            <pre className="docs-code">{`import { validate } from 'ata-validator'
+            <DocsCode lang="js">{`import { validate } from 'ata-validator'
 
-const result = validate(schema, data)`}</pre>
+const result = validate(schema, data)`}</DocsCode>
 
             <h3>fastValidate</h3>
             <p>
@@ -174,10 +175,10 @@ const result = validate(schema, data)`}</pre>
               validation success, an array of errors on failure, keeping the hot path
               allocation-free.
             </p>
-            <pre className="docs-code">{`import { fastValidate } from 'ata-validator'
+            <DocsCode lang="js">{`import { fastValidate } from 'ata-validator'
 
 const errors = fastValidate(schema, data)
-if (errors) { /* handle */ }`}</pre>
+if (errors) { /* handle */ }`}</DocsCode>
 
             <h3>Standard Schema V1</h3>
             <p>
@@ -195,7 +196,7 @@ if (errors) { /* handle */ }`}</pre>
               Replace Fastify's default validator with ata via <code>setValidatorCompiler</code>.
               Every route with a body/query/params schema goes through ata.
             </p>
-            <pre className="docs-code">{`import Fastify from 'fastify'
+            <DocsCode lang="js">{`import Fastify from 'fastify'
 import { Validator } from 'ata-validator'
 
 const app = Fastify()
@@ -222,7 +223,7 @@ app.post('/users', {
       },
     },
   },
-}, async (req) => ({ ok: true, user: req.body }))`}</pre>
+}, async (req) => ({ ok: true, user: req.body }))`}</DocsCode>
 
             <h3>Node.js core</h3>
             <p>
