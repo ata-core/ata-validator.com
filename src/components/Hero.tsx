@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const heroTabs = [
   {
@@ -97,6 +98,9 @@ export function Hero() {
           >
             Star on GitHub
           </a>
+          <Link to="/docs" className="btn btn-secondary">
+            Docs
+          </Link>
         </div>
       </div>
       <div>
