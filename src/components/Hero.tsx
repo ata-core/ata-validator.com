@@ -155,7 +155,7 @@ export function Hero() {
             <span className="stat-label">Faster Compilation</span>
           </div>
           <div className="stat">
-            <span className="stat-value">95.3%</span>
+            <span className="stat-value">98.5%</span>
             <span className="stat-label">Spec Compliance</span>
           </div>
         </div>
