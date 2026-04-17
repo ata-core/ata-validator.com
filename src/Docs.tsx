@@ -150,6 +150,42 @@ const result = v.validate({ id: 42 })
             </p>
             <pre className="docs-code">{`ATA_NO_RE2=1 npm install ata-validator`}</pre>
           </section>
+
+          <section id="api">
+            <h2>API reference</h2>
+
+            <h3>Validator</h3>
+            <p>Compiles a schema once, validates many times. Preferred for HTTP pipelines.</p>
+            <pre className="docs-code">{`import { Validator } from 'ata-validator'
+
+const v = new Validator(schema)
+const result = v.validate(data)
+// result: { valid: boolean, errors: Error[] }`}</pre>
+
+            <h3>validate (one-shot)</h3>
+            <p>Compiles and validates in a single call. Convenient, but allocates on every run.</p>
+            <pre className="docs-code">{`import { validate } from 'ata-validator'
+
+const result = validate(schema, data)`}</pre>
+
+            <h3>fastValidate</h3>
+            <p>
+              Uses a precompiled fast path for supported schemas. Returns <code>null</code> on
+              validation success, an array of errors on failure, keeping the hot path
+              allocation-free.
+            </p>
+            <pre className="docs-code">{`import { fastValidate } from 'ata-validator'
+
+const errors = fastValidate(schema, data)
+if (errors) { /* handle */ }`}</pre>
+
+            <h3>Standard Schema V1</h3>
+            <p>
+              A <code>Validator</code> instance is compatible with the{' '}
+              <a href="https://standardschema.dev/" target="_blank" rel="noreferrer">Standard Schema V1</a>{' '}
+              interface, so any library expecting that shape can consume ata schemas directly.
+            </p>
+          </section>
         </main>
       </div>
     </>
