@@ -7,20 +7,20 @@ interface Props {
   children: string
 }
 
-// VS Code Dark+ inspired palette (works on #1a1a1a bg)
+// GitHub Light IDE palette
 const T = {
-  keyword:  '#c586c0',
-  string:   '#ce9178',
-  number:   '#b5cea8',
-  comment:  '#6a9955',
-  func:     '#dcdcaa',
-  variable: '#9cdcfe',
-  property: '#9cdcfe',
-  type:     '#4ec9b0',
-  punct:    '#d4d4d4',
-  operator: '#d4d4d4',
-  plain:    '#d4d4d4',
-  accent:   '#569cd6',
+  keyword:  '#cf222e',
+  string:   '#0a3069',
+  number:   '#0550ae',
+  comment:  '#6e7781',
+  func:     '#8250df',
+  variable: '#953800',
+  property: '#116329',
+  type:     '#8250df',
+  punct:    '#24292f',
+  operator: '#cf222e',
+  plain:    '#24292f',
+  accent:   '#0550ae',
 } as const
 
 interface Token { text: string; color: string }
@@ -105,9 +105,12 @@ export function DocsCode({ lang = 'js', children }: Props) {
   return (
     <pre className="docs-code">
       <code>
-        {tokens.map((t, i) => (
-          <span key={i} style={{ color: t.color }}>{t.text}</span>
-        ))}
+        {tokens.map((t, i) => {
+          const cls = t.color === T.comment ? 'tk-cm' : undefined
+          return (
+            <span key={i} className={cls} style={{ color: t.color }}>{t.text}</span>
+          )
+        })}
       </code>
     </pre>
   )

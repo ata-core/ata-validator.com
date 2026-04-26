@@ -198,11 +198,12 @@
 }
 
 .docs-code {
-  background: #1a1a1a;
-  color: #e5e7eb;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  color: var(--text);
   padding: 14px 16px;
-  border-radius: 6px;
-  font-family: var(--mono);
+  border-radius: 10px;
+  font-family: var(--font-code);
   font-size: 13px;
   overflow-x: auto;
   line-height: 1.6;

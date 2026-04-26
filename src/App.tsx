@@ -1,8 +1,8 @@
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { Foundation } from './components/Foundation'
+import { Ecosystem } from './components/Ecosystem'
 import { Features } from './components/Features'
-import { Benchmarks } from './components/Benchmarks'
 import { Compliance } from './components/Compliance'
 import { QuickStart } from './components/QuickStart'
 import { Architecture } from './components/Architecture'
@@ -14,16 +14,22 @@ export default function App() {
       <Nav />
       <Hero />
       <Foundation />
+      <Ecosystem />
       <Features />
-      <Benchmarks />
       <Compliance />
       <QuickStart />
       <Architecture />
       <section className="opensource">
-        <h2>Free & open source</h2>
+        <div className="section-kicker">Free &amp; open source</div>
+        <h2 className="section-title-xl gradient-text">MIT licensed</h2>
         <p>ata-validator is MIT licensed and open to contributions.</p>
-        <a href="https://github.com/mertcanaltin/ata-validator" target="_blank" className="btn btn-primary">
-          Star on GitHub
+        <a
+          href="https://github.com/mertcanaltin/ata-validator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-gradient"
+        >
+          ★ Star on GitHub
         </a>
       </section>
       <Footer />

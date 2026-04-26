@@ -1,179 +1,85 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { BenchCard } from './BenchCard'
 
-const heroTabs = [
-  {
-    name: "Cold",
-    title: "First Validation (compile + validate)",
-    entries: [
-      { label: "ata", value: "2.1 us", time: 2.1, highlight: true },
-      { label: "typebox", value: "54 us", time: 54 },
-      { label: "ajv", value: "1,110 us", time: 1110 },
-    ],
-  },
-  {
-    name: "Valid",
-    title: "validate(obj) — Valid Data",
-    entries: [
-      { label: "ata", value: "9 ns", time: 9, highlight: true },
-      { label: "ajv", value: "38 ns", time: 38 },
-      { label: "typebox", value: "50 ns", time: 50 },
-      { label: "valibot", value: "326 ns", time: 326 },
-      { label: "zod", value: "334 ns", time: 334 },
-    ],
-  },
-  {
-    name: "Complex",
-    title: "Complex Schema — patternProperties + dependentSchemas",
-    entries: [
-      { label: "ata", value: "17 ns", time: 17, highlight: true },
-      { label: "ajv", value: "116 ns", time: 116 },
-    ],
-  },
-  {
-    name: "Uneval",
-    title: "unevaluatedProperties — anyOf + bitmask tracking",
-    entries: [
-      { label: "ata (valid)", value: "6.7 ns", time: 6.7, highlight: true },
-      { label: "ata (invalid)", value: "7.1 ns", time: 7.1, highlight: true },
-      { label: "ajv (valid)", value: "23.2 ns", time: 23.2 },
-      { label: "ajv (invalid)", value: "42.4 ns", time: 42.4 },
-    ],
-  },
-  {
-    name: "Compile",
-    title: "Schema Compilation",
-    entries: [
-      { label: "ata", value: "453 ns", time: 453, highlight: true },
-      { label: "typebox", value: "52,000 ns", time: 52000 },
-      { label: "ajv", value: "1,200,000 ns", time: 1200000 },
-    ],
-  },
-  {
-    name: "Dynamic",
-    title: "$dynamicRef Cross-Schema Override",
-    entries: [
-      { label: "ata", value: "2.6 ns", time: 2.6, highlight: true },
-      { label: "ajv", value: "183 ns", time: 183 },
-    ],
-  },
-  {
-    name: "Security",
-    title: "ReDoS Pattern: ^(a+)+$",
-    entries: [
-      { label: "ata (RE2)", value: "0.3 ms", time: 0.3, highlight: true },
-      { label: "ajv (regex)", value: "765 ms", time: 765 },
-    ],
-  },
-  {
-    name: "Bundle",
-    title: "Browser bundle size (gzipped, 10-field schema)",
-    entries: [
-      { label: "ata compile (abort-early)", value: "0.5 KB", time: 0.5, highlight: true },
-      { label: "ata compile (standard)", value: "1.1 KB", time: 1.1, highlight: true },
-      { label: "ajv (runtime)", value: "30 KB", time: 30 },
-      { label: "ata (runtime)", value: "27 KB", time: 27 },
-    ],
-  },
-];
+const INSTALL_CMD = 'npm install ata-validator'
 
 export function Hero() {
-  const [active, setActive] = useState(0);
-  const tab = heroTabs[active];
-  const maxSqrt = Math.max(...tab.entries.map((e) => Math.sqrt(e.time)));
-  const barWidth = (time: number) => Math.max((Math.sqrt(time) / maxSqrt) * 100, 4);
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(INSTALL_CMD)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1600)
+    } catch {
+      /* clipboard unavailable; ignore silently */
+    }
+  }
 
   return (
-    <section className="hero">
-      <div className="hero-glow" />
-      <div>
-        <div className="hero-badge">Powered by simdjson & RE2</div>
-        <h1>
-          Ultra-fast JSON Schema <span className="accent">Validator</span>
+    <section id="benchmarks" className="hero">
+      <div className="hero-grid" aria-hidden />
+
+      <div className="hero-content">
+        <div className="hero-badge badge-ocean">Powered by simdjson &amp; RE2</div>
+
+        <h1 className="hero-title">
+          <span className="gradient-text">
+            Ultra-fast<br />
+            JSON Schema<br />
+            validator
+          </span>
         </h1>
+
         <p className="hero-desc">
-          Native C++ validator built on <strong>simdjson</strong> and{" "}
-          <strong>RE2</strong>. Hybrid JS codegen with V8 TurboFan
-          optimizations. Up to 70x faster on $dynamicRef, 3.1x on normal schemas, 2,729x faster
-          compilation. Full $dynamicRef/$anchor support, Draft 2020-12 + Draft 7 compatible.
+          Native C++ validator built on <strong>simdjson</strong> and <strong>RE2</strong>,
+          with hybrid JS codegen and V8 TurboFan optimizations.
+          Up to <strong>70x</strong> faster on $dynamicRef, <strong>2,729x</strong> faster compilation.
         </p>
+
         <div className="hero-buttons">
-          <a href="#quickstart" className="btn btn-primary">
-            Get Started
-          </a>
+          <a href="#quickstart" className="btn-gradient">Get Started</a>
           <a
             href="https://github.com/ata-core/ata-validator"
             target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-secondary"
           >
-            Star on GitHub
+            ★ Star on GitHub
           </a>
-          <Link to="/docs" className="btn btn-secondary btn-mobile-only">
-            Docs
-          </Link>
+          <Link to="/docs" className="btn btn-secondary btn-mobile-only">Docs</Link>
+        </div>
+
+        <div className="hero-install-block">
+          <div className="hero-install-label">Install ata-validator</div>
+          <div className="hero-install">
+            <span className="hero-install-prompt" aria-hidden>$</span>
+            <code className="hero-install-cmd">{INSTALL_CMD}</code>
+            <button
+              type="button"
+              className="hero-install-copy"
+              onClick={handleCopy}
+              aria-label={copied ? 'Copied' : 'Copy install command'}
+            >
+              {copied ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
-      <div>
-        <div className="hero-chart">
-          <div className="hero-chart-tabs">
-            {heroTabs.map((t, i) => (
-              <button
-                key={t.name}
-                className={`hero-chart-tab ${i === active ? "active" : ""}`}
-                onClick={() => setActive(i)}
-              >
-                {t.name}
-              </button>
-            ))}
-          </div>
-          <div className="hero-chart-body">
-            <h3 className="hero-chart-title">{tab.title}</h3>
-            <div className="hero-chart-bars">
-              {tab.entries.map((entry) => (
-                <div key={entry.label} className="hero-chart-row">
-                  <div className="hero-chart-label">
-                    <strong>{entry.label}</strong>
-                  </div>
-                  <div className="hero-chart-bar-wrap">
-                    <div
-                      className={`hero-chart-bar ${entry.highlight ? "highlight" : ""}`}
-                      style={{
-                        width: `${barWidth(entry.time)}%`,
-                      }}
-                    />
-                  </div>
-                  <div className="hero-chart-value">{entry.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <a
-            href="https://github.com/ata-core/ata-validator/tree/master/benchmark"
-            target="_blank"
-            className="hero-chart-link"
-          >
-            View benchmark →
-          </a>
-        </div>
-        <div className="hero-stats">
-          <div className="stat">
-            <span className="stat-value">70x</span>
-            <span className="stat-label">$dynamicRef Override</span>
-          </div>
-          <div className="stat">
-            <span className="stat-value">3.1x</span>
-            <span className="stat-label">Normal Validation</span>
-          </div>
-          <div className="stat">
-            <span className="stat-value">2,729x</span>
-            <span className="stat-label">Faster Compilation</span>
-          </div>
-          <div className="stat">
-            <span className="stat-value">98.5%</span>
-            <span className="stat-label">Spec Compliance</span>
-          </div>
-        </div>
+
+      <div className="hero-card">
+        <BenchCard />
       </div>
     </section>
-  );
+  )
 }

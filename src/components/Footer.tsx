@@ -28,8 +28,13 @@ export function Footer() {
       </div>
       <div className="footer-cta">
         <p>Free & open source. MIT licensed.</p>
-        <a href="https://github.com/ata-core/ata-validator" target="_blank" className="btn btn-primary">
-          Star on GitHub
+        <a
+          href="https://github.com/ata-core/ata-validator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-gradient"
+        >
+          ★ Star on GitHub
         </a>
       </div>
       <div className="footer-bottom">

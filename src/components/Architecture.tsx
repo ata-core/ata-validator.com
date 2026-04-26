@@ -8,7 +8,10 @@ const steps = [
 export function Architecture() {
   return (
     <section className="architecture">
-      <h2>How it works</h2>
+      <div className="arch-header">
+        <div className="section-kicker">Pipeline</div>
+        <h2 className="section-title-xl gradient-text">How it works</h2>
+      </div>
       <div className="arch-flow">
         {steps.map((s, i) => (
           <div key={s.n} style={{ display: 'contents' }}>

@@ -8,19 +8,19 @@ interface Props {
   children: string
 }
 
-// GitHub Light inspired palette
+// GitHub Light IDE palette, works on #f8fafc surface
 const T = {
   keyword:  '#cf222e',  // red
   string:   '#0a3069',  // dark blue
   number:   '#0550ae',  // blue
-  comment:  '#6e7781',  // gray
+  comment:  '#6e7781',  // gray (italic via .tk-cm)
   func:     '#8250df',  // purple
   variable: '#953800',  // brown
   property: '#116329',  // green
   operator: '#cf222e',  // red
   type:     '#8250df',  // purple
-  punct:    '#24292f',  // dark
-  plain:    '#24292f',  // dark
+  punct:    '#24292f',  // near-black
+  plain:    '#24292f',  // near-black
   accent:   '#0550ae',  // blue
 } as const
 
@@ -232,9 +232,12 @@ export function CodeWindow({ title, lang, children }: Props) {
       </div>
       <pre className="code-body">
         <code>
-          {tokens.map((t, i) => (
-            <span key={i} style={{ color: t.color }}>{t.text}</span>
-          ))}
+          {tokens.map((t, i) => {
+            const cls = t.color === T.comment ? 'tk-cm' : undefined
+            return (
+              <span key={i} className={cls} style={{ color: t.color }}>{t.text}</span>
+            )
+          })}
         </code>
       </pre>
     </div>
