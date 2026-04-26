@@ -45,10 +45,10 @@ const tabs: Tab[] = [
     title: 'Complex Schema (patternProperties + dependentSchemas)',
     link: `${FILE_BASE}/bench_complex_mitata.mjs`,
     entries: [
-      { label: 'ata (valid)', value: '17 ns', time: 17, highlight: true },
-      { label: 'ata (invalid)', value: '59 ns', time: 59, highlight: true },
-      { label: 'ajv (valid)', value: '115 ns', time: 115 },
-      { label: 'ajv (invalid)', value: '194 ns', time: 194 },
+      { label: 'ata (valid)', value: '23 ns', time: 23, highlight: true },
+      { label: 'ata (invalid)', value: '61 ns', time: 61, highlight: true },
+      { label: 'ajv (valid)', value: '113 ns', time: 113 },
+      { label: 'ajv (invalid)', value: '186 ns', time: 186 },
     ],
   },
   {
@@ -56,10 +56,10 @@ const tabs: Tab[] = [
     title: 'unevaluatedProperties (three-tier hybrid codegen)',
     link: `${FILE_BASE}/bench_unevaluated_mitata.mjs`,
     entries: [
-      { label: 'ata (static)', value: '3.3 ns', time: 3.3, highlight: true },
-      { label: 'ata (anyOf)', value: '6.7 ns', time: 6.7, highlight: true },
-      { label: 'ajv (static)', value: '8.7 ns', time: 8.7 },
-      { label: 'ajv (anyOf)', value: '23.2 ns', time: 23.2 },
+      { label: 'ata (static)', value: '3.2 ns', time: 3.2, highlight: true },
+      { label: 'ata (anyOf)', value: '6.5 ns', time: 6.5, highlight: true },
+      { label: 'ajv (static)', value: '8.8 ns', time: 8.8 },
+      { label: 'ajv (anyOf)', value: '21.9 ns', time: 21.9 },
     ],
   },
   {
@@ -78,9 +78,9 @@ const tabs: Tab[] = [
     link: `${FILE_BASE}/bench_dynamicref_vs_ajv.mjs`,
     entries: [
       { label: 'ata (override)', value: '2.6 ns', time: 2.6, highlight: true },
-      { label: 'ata (tree)', value: '19 ns', time: 19, highlight: true },
-      { label: 'ajv (tree)', value: '50 ns', time: 50 },
-      { label: 'ajv (override)', value: '183 ns', time: 183 },
+      { label: 'ata (tree)', value: '23 ns', time: 23, highlight: true },
+      { label: 'ajv (tree)', value: '55 ns', time: 55 },
+      { label: 'ajv (override)', value: '187 ns', time: 187 },
     ],
   },
   {
