@@ -33,11 +33,11 @@ const tabs: Tab[] = [
     title: 'validate(obj), valid data',
     link: `${FILE_BASE}/bench_all_mitata.mjs`,
     entries: [
-      { label: 'ata', value: '9 ns', time: 9, highlight: true },
+      { label: 'ata', value: '7 ns', time: 7, highlight: true },
       { label: 'ajv', value: '38 ns', time: 38 },
       { label: 'typebox', value: '50 ns', time: 50 },
-      { label: 'valibot', value: '326 ns', time: 326 },
-      { label: 'zod', value: '334 ns', time: 334 },
+      { label: 'valibot', value: '337 ns', time: 337 },
+      { label: 'zod', value: '342 ns', time: 342 },
     ],
   },
   {
@@ -45,10 +45,10 @@ const tabs: Tab[] = [
     title: 'Complex Schema (patternProperties + dependentSchemas)',
     link: `${FILE_BASE}/bench_complex_mitata.mjs`,
     entries: [
-      { label: 'ata (valid)', value: '23 ns', time: 23, highlight: true },
-      { label: 'ata (invalid)', value: '61 ns', time: 61, highlight: true },
-      { label: 'ajv (valid)', value: '113 ns', time: 113 },
-      { label: 'ajv (invalid)', value: '186 ns', time: 186 },
+      { label: 'ata (valid)', value: '19 ns', time: 19, highlight: true },
+      { label: 'ata (invalid)', value: '62 ns', time: 62, highlight: true },
+      { label: 'ajv (valid)', value: '116 ns', time: 116 },
+      { label: 'ajv (invalid)', value: '195 ns', time: 195 },
     ],
   },
   {
@@ -56,10 +56,10 @@ const tabs: Tab[] = [
     title: 'unevaluatedProperties (three-tier hybrid codegen)',
     link: `${FILE_BASE}/bench_unevaluated_mitata.mjs`,
     entries: [
-      { label: 'ata (static)', value: '3.2 ns', time: 3.2, highlight: true },
-      { label: 'ata (anyOf)', value: '6.5 ns', time: 6.5, highlight: true },
-      { label: 'ajv (static)', value: '8.8 ns', time: 8.8 },
-      { label: 'ajv (anyOf)', value: '21.9 ns', time: 21.9 },
+      { label: 'ata (static)', value: '3.3 ns', time: 3.3, highlight: true },
+      { label: 'ata (anyOf)', value: '6.7 ns', time: 6.7, highlight: true },
+      { label: 'ajv (static)', value: '8.5 ns', time: 8.5 },
+      { label: 'ajv (anyOf)', value: '22.9 ns', time: 22.9 },
     ],
   },
   {
@@ -67,8 +67,8 @@ const tabs: Tab[] = [
     title: 'Schema Compilation',
     link: `${FILE_BASE}/bench_all_mitata.mjs`,
     entries: [
-      { label: 'ata', value: '453 ns', time: 453, highlight: true },
-      { label: 'typebox', value: '52,000 ns', time: 52000 },
+      { label: 'ata', value: '9 ns', time: 9, highlight: true },
+      { label: 'typebox', value: '53,000 ns', time: 53000 },
       { label: 'ajv', value: '1,200,000 ns', time: 1200000 },
     ],
   },
@@ -78,8 +78,8 @@ const tabs: Tab[] = [
     link: `${FILE_BASE}/bench_dynamicref_vs_ajv.mjs`,
     entries: [
       { label: 'ata (override)', value: '2.6 ns', time: 2.6, highlight: true },
-      { label: 'ata (tree)', value: '23 ns', time: 23, highlight: true },
-      { label: 'ajv (tree)', value: '55 ns', time: 55 },
+      { label: 'ata (tree)', value: '22 ns', time: 22, highlight: true },
+      { label: 'ajv (tree)', value: '54 ns', time: 54 },
       { label: 'ajv (override)', value: '187 ns', time: 187 },
     ],
   },

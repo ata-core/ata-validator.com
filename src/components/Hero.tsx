@@ -35,7 +35,7 @@ export function Hero() {
         <p className="hero-desc">
           Native C++ validator built on <strong>simdjson</strong> and <strong>RE2</strong>,
           with hybrid JS codegen and V8 TurboFan optimizations.
-          Up to <strong>70x</strong> faster on $dynamicRef, <strong>2,729x</strong> faster compilation.
+          Up to <strong>71x</strong> faster on $dynamicRef, <strong>159,000x</strong> faster compilation.
         </p>
 
         <div className="hero-buttons">

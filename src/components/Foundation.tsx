@@ -1,7 +1,7 @@
 const features = [
   {
     title: 'Native speed',
-    desc: 'simdjson + RE2 + JS codegen.\nUp to 70x faster than ajv.',
+    desc: 'simdjson + RE2 + JS codegen.\nUp to 71x faster than ajv.',
   },
   {
     title: 'Tiny bundle',
