@@ -7,6 +7,7 @@ import { Compliance } from "./components/Compliance";
 import { QuickStart } from "./components/QuickStart";
 import { Architecture } from "./components/Architecture";
 import { Benchmarks } from "./components/Benchmarks";
+import { Integrations } from "./components/Integrations";
 import { Footer } from "./components/Footer";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
       <Benchmarks />
       <Foundation />
       <Ecosystem />
+      <Integrations />
       <Features />
       <Compliance />
       <QuickStart />
