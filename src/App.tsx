@@ -15,10 +15,10 @@ export default function App() {
     <>
       <Nav />
       <Hero />
+      <Integrations />
       <Benchmarks />
       <Foundation />
       <Ecosystem />
-      <Integrations />
       <Features />
       <Compliance />
       <QuickStart />
