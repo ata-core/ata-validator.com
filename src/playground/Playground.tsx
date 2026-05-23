@@ -15,10 +15,21 @@ function useDebounced<T>(value: T, ms: number): T {
   return v
 }
 
+function WinDots() {
+  return (
+    <>
+      <span className="pg-dot pg-dot--red" />
+      <span className="pg-dot pg-dot--yellow" />
+      <span className="pg-dot pg-dot--green" />
+    </>
+  )
+}
+
 export default function Playground() {
   const initial = decodeState(window.location.hash.replace(/^#/, '')) ?? presets[0]
   const [schema, setSchema] = useState(initial.schema)
   const [data, setData] = useState(initial.data)
+  const [copied, setCopied] = useState(false)
 
   const dSchema = useDebounced(schema, 300)
   const dData = useDebounced(data, 300)
@@ -34,39 +45,92 @@ export default function Playground() {
     const url = `${window.location.origin}/playground#${hash}`
     window.history.replaceState(null, '', `#${hash}`)
     navigator.clipboard?.writeText(url)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
   }
 
   return (
     <div className="pg">
       <header className="pg-top">
         <a className="pg-home" href="/">ata</a>
-        <select className="pg-preset" onChange={e => loadPreset(e.target.value)} defaultValue={presets[0].name}>
+        <span className="pg-sep">/</span>
+        <span className="pg-sep">playground</span>
+        <select
+          className="pg-preset"
+          onChange={e => loadPreset(e.target.value)}
+          defaultValue={presets[0].name}
+        >
           {presets.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
         </select>
-        <button className="pg-share" onClick={copyLink}>Copy link</button>
+        <button
+          className={`pg-share${copied ? ' pg-share--copied' : ''}`}
+          onClick={copyLink}
+        >
+          {copied ? 'Copied!' : 'Copy link'}
+        </button>
       </header>
 
+      {/* Editor row */}
       <div className="pg-grid">
         <div className="pg-col">
-          <label className="pg-label">schema.json</label>
-          <textarea className="pg-editor" value={schema} onChange={e => setSchema(e.target.value)} spellCheck={false} />
-          {result.schemaParseError && <div className="pg-parse-err">invalid JSON: {result.schemaParseError}</div>}
+          <div className="pg-window">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">schema.json</span>
+            </div>
+            <textarea
+              className="pg-editor"
+              value={schema}
+              onChange={e => setSchema(e.target.value)}
+              spellCheck={false}
+            />
+            {result.schemaParseError && (
+              <div className="pg-parse-err">invalid JSON: {result.schemaParseError}</div>
+            )}
+          </div>
         </div>
         <div className="pg-col">
-          <label className="pg-label">data.json</label>
-          <textarea className="pg-editor" value={data} onChange={e => setData(e.target.value)} spellCheck={false} />
-          {result.dataParseError && <div className="pg-parse-err">invalid JSON: {result.dataParseError}</div>}
+          <div className="pg-window">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">data.json</span>
+            </div>
+            <textarea
+              className="pg-editor"
+              value={data}
+              onChange={e => setData(e.target.value)}
+              spellCheck={false}
+            />
+            {result.dataParseError && (
+              <div className="pg-parse-err">invalid JSON: {result.dataParseError}</div>
+            )}
+          </div>
         </div>
       </div>
 
+      {/* Output row */}
       <div className="pg-grid pg-out">
         <div className="pg-col">
-          <div className="pg-out-head">ajv</div>
-          <AjvPanel errors={result.ajvErrors} valid={result.ajvValid} />
+          <div className="pg-window">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">ajv</span>
+            </div>
+            <div className="pg-out-body">
+              <AjvPanel errors={result.ajvErrors} valid={result.ajvValid} />
+            </div>
+          </div>
         </div>
         <div className="pg-col">
-          <div className="pg-out-head">ata</div>
-          <ErrorFrame errors={result.ataErrors} valid={result.ataValid} />
+          <div className="pg-window pg-window--hero">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">ata</span>
+            </div>
+            <div className="pg-out-body">
+              <ErrorFrame errors={result.ataErrors} valid={result.ataValid} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
