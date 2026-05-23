@@ -13,6 +13,7 @@ export function Nav() {
           <a href="/#features">Features</a>
           <a href="/#benchmarks">Benchmarks</a>
           <a href="/#quickstart">Quick Start</a>
+          <Link to="/playground">Playground</Link>
           <Link to="/docs">Docs</Link>
           <a
             href="https://github.com/ata-core/ata-validator"

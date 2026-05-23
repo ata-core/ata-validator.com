@@ -16,6 +16,7 @@ export function Footer() {
         </div>
         <div className="footer-col">
           <h5>Resources</h5>
+          <a href="/playground">Playground</a>
           <a href="https://json-schema.org/" target="_blank">JSON Schema</a>
           <a href="https://simdjson.org/" target="_blank">simdjson</a>
           <a href="https://github.com/google/re2" target="_blank">RE2</a>
