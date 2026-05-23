@@ -1,0 +1,17 @@
+.pg { max-width: 1100px; margin: 0 auto; padding: 1.5rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.pg-top { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+.pg-home { font-weight: 700; text-decoration: none; color: inherit; }
+.pg-preset, .pg-share { font: inherit; padding: 0.35rem 0.6rem; }
+.pg-share { margin-left: auto; cursor: pointer; }
+.pg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pg-col { display: flex; flex-direction: column; min-width: 0; }
+.pg-label, .pg-out-head { font-size: 0.75rem; opacity: 0.6; margin-bottom: 0.35rem; text-transform: lowercase; }
+.pg-editor { width: 100%; height: 240px; resize: vertical; font: inherit; font-size: 0.85rem; padding: 0.6rem; tab-size: 2; white-space: pre; overflow: auto; }
+.pg-parse-err { color: #c00; font-size: 0.8rem; margin-top: 0.35rem; }
+.pg-out { margin-top: 1.25rem; align-items: start; }
+.pg-ajv-body { font-size: 0.8rem; white-space: pre-wrap; word-break: break-word; overflow: auto; max-height: 360px; }
+.pg-frames { font-size: 0.85rem; line-height: 1.5; }
+.pg-frame { margin-bottom: 1rem; }
+.sc-block { margin: 0.25rem 0; white-space: pre; overflow-x: auto; }
+.pg-ok { color: #2a8; }
+@media (max-width: 760px) { .pg-grid { grid-template-columns: 1fr; } }

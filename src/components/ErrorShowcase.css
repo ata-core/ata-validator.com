@@ -77,3 +77,6 @@
   .showcase-body { font-size: 10px; }
   .showcase-after .showcase-body { font-size: 10.5px; }
 }
+
+.pg-try-cta { display: inline-block; margin-top: 1rem; font-weight: 600; text-decoration: none; }
+.pg-try-cta:hover { text-decoration: underline; }

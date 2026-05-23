@@ -91,6 +91,7 @@ export function Hero() {
 
       <div className="hero-card">
         <ErrorShowcase />
+        <a className="pg-try-cta" href="/playground">Try it live &rarr;</a>
       </div>
     </section>
   )
