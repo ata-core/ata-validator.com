@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import './Playground.css'
-import { runValidators } from './runValidators'
+import { runValidators, gzipSize } from './runValidators'
 import { ErrorFrame } from './ErrorFrame'
 import { AjvPanel } from './AjvPanel'
 import { presets } from './presets'
@@ -13,6 +13,23 @@ function useDebounced<T>(value: T, ms: number): T {
     return () => clearTimeout(t)
   }, [value, ms])
   return v
+}
+
+function formatBytes(n: number): string {
+  if (n < 1024) return `${n} B`
+  return `${(n / 1024).toFixed(1)} KB`
+}
+
+const codeStyle: React.CSSProperties = {
+  margin: 0,
+  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  fontSize: '12px',
+  lineHeight: 1.5,
+  whiteSpace: 'pre-wrap',
+  wordBreak: 'break-word',
+  overflowY: 'auto',
+  maxHeight: '320px',
+  color: '#c9d1d9',
 }
 
 function WinDots() {
@@ -34,6 +51,14 @@ export default function Playground() {
   const dSchema = useDebounced(schema, 300)
   const dData = useDebounced(data, 300)
   const result = useMemo(() => runValidators(dSchema, dData), [dSchema, dData])
+
+  const [gzipBytes, setGzipBytes] = useState<number | null>(null)
+  useEffect(() => {
+    let cancelled = false
+    if (!result.compiledCode) { setGzipBytes(null); return }
+    gzipSize(result.compiledCode).then(n => { if (!cancelled) setGzipBytes(n) })
+    return () => { cancelled = true }
+  }, [result.compiledCode])
 
   function loadPreset(name: string) {
     const p = presets.find(x => x.name === name)
@@ -129,6 +154,43 @@ export default function Playground() {
             </div>
             <div className="pg-out-body">
               <ErrorFrame errors={result.ataErrors} valid={result.ataValid} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Generated output row: inferred type + compiled zero-dependency validator */}
+      <div className="pg-grid pg-out">
+        <div className="pg-col">
+          <div className="pg-window">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">inferred type</span>
+            </div>
+            <div className="pg-out-body">
+              {result.compileError
+                ? <div className="pg-parse-err">{result.compileError}</div>
+                : <pre style={codeStyle}>{result.tsType || '// the TypeScript type appears here'}</pre>}
+            </div>
+          </div>
+        </div>
+        <div className="pg-col">
+          <div className="pg-window">
+            <div className="pg-win-head">
+              <WinDots />
+              <span className="pg-win-label">compiled validator</span>
+              {result.compiledCode && (
+                <span style={{ marginLeft: 'auto', fontSize: '11px', color: '#8b949e' }}>
+                  {formatBytes(result.compiledBytes)}
+                  {gzipBytes != null && ` · ${formatBytes(gzipBytes)} gzip`}
+                  {' · 0 deps'}
+                </span>
+              )}
+            </div>
+            <div className="pg-out-body">
+              {result.compileError
+                ? <div className="pg-parse-err">{result.compileError}</div>
+                : <pre style={codeStyle}>{result.compiledCode || '// the zero-dependency validator appears here'}</pre>}
             </div>
           </div>
         </div>

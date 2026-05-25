@@ -39,4 +39,8 @@ export interface RunResult {
   ataErrors: AtaError[]
   ajvValid: boolean
   ajvErrors: AjvError[]
+  tsType: string
+  compiledCode: string
+  compiledBytes: number
+  compileError: string | null
 }
