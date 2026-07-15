@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v0.15.0'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.0.0'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,7 +24,7 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          v0.15 → compiler-grade error messages
+          1.0 is out → a stability commitment
         </a>
 
         <h1 className="hero-title">
@@ -47,7 +47,7 @@ export function Hero() {
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See v0.15 release →
+            See the 1.0 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

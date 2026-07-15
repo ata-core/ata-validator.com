@@ -25,7 +25,7 @@ export function ErrorShowcase() {
           <span className="showcase-dot showcase-dot--red" />
           <span className="showcase-dot showcase-dot--yellow" />
           <span className="showcase-dot showcase-dot--green" />
-          <span className="showcase-label">ata-validator v0.15</span>
+          <span className="showcase-label">ata-validator 1.0</span>
         </div>
         <pre className="showcase-body">
 <span className="sc-err">error[ATA3001]:</span> <span className="sc-fg">value does not match format "email"</span>{`\n`}
