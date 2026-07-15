@@ -45,6 +45,28 @@ export function Hero() {
           Fastify and RJSF. MIT licensed.
         </p>
 
+        <p className="hero-proof">
+          <a
+            href="https://github.com/rjsf-team/react-jsonschema-form/blob/main/packages/docs/docs/api-reference/validator-ata.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ships in react-jsonschema-form
+          </a>
+          <span aria-hidden> · </span>
+          <a href="https://fastify.dev/docs/latest/Guides/Ecosystem/" target="_blank" rel="noopener noreferrer">
+            listed in the Fastify docs
+          </a>
+          <span aria-hidden> · </span>
+          <a
+            href="https://github.com/ata-core/ata-validator/blob/master/docs/STABILITY.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            1.0 stable
+          </a>
+        </p>
+
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
             See the 1.0 release →
