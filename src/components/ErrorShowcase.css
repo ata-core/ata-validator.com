@@ -80,3 +80,35 @@
 
 .pg-try-cta { display: inline-block; margin-top: 1rem; font-weight: 600; text-decoration: none; }
 .pg-try-cta:hover { text-decoration: underline; }
+
+/* Terminal entrance: lines are visible by default; the animation only runs
+   when JS arms .showcase-animate AND the user allows motion. */
+.sc-line {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .showcase-animate .sc-line {
+    opacity: 0;
+    transform: translateY(3px);
+    animation: sc-line-in 180ms ease-out forwards;
+    animation-delay: calc(var(--i) * 40ms);
+  }
+  .showcase-animate .sc-line--help {
+    animation: sc-line-in 180ms ease-out forwards, sc-help-pulse 600ms ease-out 1;
+    animation-delay: calc(var(--i) * 40ms), calc(var(--i) * 40ms + 300ms);
+  }
+}
+
+@keyframes sc-line-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sc-help-pulse {
+  0% { background: rgba(63, 185, 80, 0); }
+  30% { background: rgba(63, 185, 80, 0.16); }
+  100% { background: rgba(63, 185, 80, 0); }
+}
