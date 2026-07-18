@@ -63,13 +63,13 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            1.0 stable
+            1.x stable
           </a>
         </p>
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See the 1.0 release →
+            See the 1.2 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

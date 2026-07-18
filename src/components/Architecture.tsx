@@ -1,8 +1,8 @@
 const steps = [
-  { n: '1', title: 'Compile', desc: 'Schema is parsed with simdjson and compiled into a bytecode plan + regex cache' },
-  { n: '2', title: 'Route', desc: 'Eligible schemas use On Demand API, others use DOM. Decided at compile time.' },
-  { n: '3', title: 'Execute', desc: 'Bytecode executor validates in a tight loop. Falls back to tree walker only for errors.' },
-  { n: '4', title: 'Result', desc: 'Returns valid/invalid with detailed error paths. Reuse compiled schema millions of times.' },
+  { n: '1', title: 'Classify', desc: 'Trivial shapes run on a tiny fast-path interpreter with zero compile cost.' },
+  { n: '2', title: 'Compile', desc: 'Hot schemas become specialized JS functions that V8 JITs like any other code.' },
+  { n: '3', title: 'Accelerate', desc: 'When the native package is installed, simdjson parsing and parallel buffer APIs kick in.' },
+  { n: '4', title: 'Fall back', desc: 'Shapes codegen cannot represent run on the interpreted engine, in every runtime.' },
 ]
 
 export function Architecture() {

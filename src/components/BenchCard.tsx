@@ -20,7 +20,7 @@ const REPO_ROOT = 'https://github.com/ata-core/ata-validator/tree/master/benchma
 const tabs: Tab[] = [
   {
     name: 'Cold',
-    title: 'First validation (construct + validate, lazy compile)',
+    title: 'First validation, trivial schema (tier-0 fast path; ajv and typebox compile up front)',
     link: `${FILE_BASE}/bench_all_mitata.mjs`,
     entries: [
       { label: 'ata', value: '16 ns', time: 16, highlight: true },

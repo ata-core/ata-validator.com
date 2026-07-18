@@ -60,7 +60,7 @@ const result = v.validate({ id: 42 })
 // { valid: true, errors: [] }`}</DocsCode>
 
             <p className="quick-note">
-              Works without a native addon. Install takes care of prebuilt binaries when available, falls back to pure JS otherwise.
+              Works without a native addon. npm installs a per-platform native package where one fits; everywhere else ata runs pure JS with the same results.
             </p>
           </section>
 
@@ -133,14 +133,19 @@ const result = v.validate({ id: 42 })
             <h3>From npm</h3>
             <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
             <p>
-              The install script downloads a prebuilt binary for your platform when available.
-              Linux x64/arm64, macOS x64/arm64, and Windows x64 are covered.
+              There is no install script. The native engine ships as per-platform optional
+              packages (Linux x64/arm64 gnu and musl, macOS arm64, Windows x64) that npm
+              resolves automatically, the same pattern Vite uses for esbuild. Install with{' '}
+              <code>--omit=optional</code> or set <code>ATA_NO_NATIVE=1</code> for a guaranteed
+              zero-binary setup.
             </p>
 
             <h3>Without a native addon</h3>
             <p>
-              If no prebuilt is available and a native build fails, ata automatically falls
-              back to a pure-JS validator. Every feature works; only raw throughput differs.
+              Typical schemas compile to specialized JS; shapes the compiler cannot represent
+              fall back to an interpreted engine, so every schema validates in every runtime.
+              The pure-JS setup passes 99.5% of the official draft 2020-12 suite. Only the
+              buffer and parallel APIs need the native engine and say so with a clear error.
             </p>
 
             <h3>Building without RE2</h3>

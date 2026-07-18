@@ -1,11 +1,11 @@
 const features = [
   {
     title: 'Native speed',
-    desc: 'simdjson + RE2 + JS codegen.\nUp to 71x faster than ajv.',
+    desc: 'simdjson + RE2 + JS codegen.\n5x faster steady-state than ajv.',
   },
   {
     title: 'Tiny bundle',
-    desc: '0.5KB compile mode.\nBrowser-ready, zero deps.',
+    desc: '~1 KB compiled validators.\nBrowser-ready, zero deps.',
   },
   {
     title: 'TypeScript types',
@@ -13,11 +13,11 @@ const features = [
   },
   {
     title: 'ReDoS-safe',
-    desc: 'RE2 engine, no backtrack.\n2,000x safer on attack patterns.',
+    desc: 'Linear-time regex everywhere.\nNo catastrophic backtracking.',
   },
   {
     title: 'Spec-compliant',
-    desc: '99.5% Draft 2020-12.\nFull $dynamicRef + $anchor.',
+    desc: '99.5% Draft 2020-12.\nEvery schema, every runtime.',
   },
 ]
 

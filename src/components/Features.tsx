@@ -8,12 +8,12 @@ const features = [
     bullets: [
       { text: "4+ GB/s", rest: " JSON parsing throughput" },
       { text: "ARM NEON", rest: " and x86 AVX2/SSE support" },
-      { text: "43,000x faster", rest: " cold start (construct + first validate vs ajv)" },
+      { text: "24x faster", rest: " Fastify boot: 10 routes cold in 0.5 ms vs 12.6 ms" },
     ],
     code: `const { Validator } = require('ata-validator');
 
 // Constructor defers codegen to first validate() — lazy compile.
-// Cold-start (construct + 1 validate): 28 ns vs ajv's 1.21 ms.
+// Schema compile: 6 µs vs ajv's 1.5 ms (246x faster).
 // Steady-state validate(obj): ~5x faster than ajv.
 const v = new Validator({
   type: "object",
@@ -32,7 +32,7 @@ const result = v.validate({ name: "Mert", age: 26 });
   {
     label: "REGEX ENGINE",
     title: "RE2: Linear-time regex, ReDoS-safe",
-    desc: "Replaced std::regex with Google's RE2 engine. Linear-time guarantees mean no catastrophic backtracking, ever.",
+    desc: "Google's RE2 in the native engine, a linear-time safe-regex engine in pure JS. Either way, no catastrophic backtracking, ever.",
     bullets: [
       { text: "10-100x faster", rest: " than std::regex" },
       { text: "Immune", rest: " to ReDoS attacks" },
@@ -67,7 +67,7 @@ const fmt = new Validator({
     bullets: [
       { text: "Schema \u2192 bytecode", rest: " at compile time" },
       { text: "Zero-allocation", rest: " validation loop" },
-      { text: "Tree walker fallback", rest: " only for error details" },
+      { text: "Interpreted fallback", rest: " for shapes codegen can't represent, in every runtime" },
     ],
     code: `// Internal bytecode generated from schema
 EXPECT_OBJECT
@@ -147,7 +147,7 @@ export function Features() {
     <section id="features" className="features">
       <div className="features-header">
         <div className="section-kicker">Internals</div>
-        <h2 className="section-title-xl gradient-text">Four engines, one validator</h2>
+        <h2 className="section-title-xl gradient-text">One validator, layered engines</h2>
       </div>
       {features.map((f) => (
         <div

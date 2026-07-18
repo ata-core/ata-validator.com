@@ -45,15 +45,17 @@ export function Ecosystem() {
           <div className="section-kicker">Your code,</div>
           <h2 className="section-title-xl gradient-text">Your runtime</h2>
           <p>
-            <strong>ata compile</strong> emits a 0.5 KB pure-JS bundle with zero
-            runtime dependencies. Drop it into any JavaScript environment
-            (Node, Bun, Deno, Cloudflare Workers, the browser) and validate at
-            native speed.
+            <strong>ata build</strong> emits ~1 KB pure-JS modules with zero
+            runtime dependencies. The full runtime is pure JS too: schemas the
+            compiler cannot represent run on an interpreted engine, so every
+            schema validates in Node, Bun, Deno, Cloudflare Workers, and the
+            browser. 99.5% of the official draft 2020-12 suite passes without
+            any native code.
           </p>
           <p>
-            For server‑side native performance, <strong>ata-validator</strong> wraps
-            the C++ engine for Node.js, and the C library can be linked into any
-            native application via CMake.
+            On servers, per-platform native packages add simdjson parsing and
+            parallel buffer APIs on top, and the C library can be linked into
+            any native application via CMake.
           </p>
         </div>
       </div>
