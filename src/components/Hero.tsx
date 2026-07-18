@@ -30,7 +30,7 @@ export function Hero() {
         <h1 className="hero-title">
           <span className="gradient-text">
             JSON Schema validation,<br />
-            finally readable.
+            <span className="hero-title-accent">finally readable.</span>
           </span>
         </h1>
 

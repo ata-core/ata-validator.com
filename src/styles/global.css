@@ -1464,3 +1464,110 @@ code {
   inherits: true;
   initial-value: 0deg;
 }
+
+/* ---------- brand refresh ---------- */
+
+/* Headlines: restrained dark-to-teal sweep instead of flat navy */
+@supports (-webkit-background-clip: text) {
+  .gradient-text {
+    background: linear-gradient(105deg, #0a1929 0%, #16467a 60%, #0d9488 115%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .hero-title-accent {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .bench-stat-value {
+    background: linear-gradient(105deg, #0a1929 10%, #16467a 70%, #0d9488 130%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .orbit-center-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* Kickers: brand-colored small caps */
+.section-kicker {
+  color: var(--brand-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* Hero badge: brand tint */
+.badge-ocean {
+  background: var(--bg-tint);
+  border-color: var(--brand-tint);
+  color: #0f766e;
+}
+.badge-ocean:hover { color: #115e59; border-color: var(--brand-soft); }
+
+/* Primary CTA carries the brand gradient */
+.btn-gradient {
+  background: var(--gradient);
+}
+.btn-gradient:hover {
+  background: var(--gradient);
+  filter: brightness(0.94) saturate(1.1);
+  box-shadow: 0 6px 20px -6px var(--brand-glow);
+}
+
+/* Links pick up the brand on hover */
+a:hover { color: var(--brand-soft); }
+
+/* Cards: brand-tinted border on hover */
+.bench-stat-card:hover,
+.qs-card:hover,
+.integration-card:hover {
+  border-color: rgba(0, 183, 214, 0.45);
+}
+
+/* Benchmarks: subtle slate band for section rhythm */
+.benchmarks {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+.benchmarks .bench-stat-card { background: var(--bg); }
+
+/* Footer: dark closing block */
+.footer {
+  background: #0a1929;
+  border-top: none;
+  color: #cbd5e1;
+}
+.footer-col h5 { color: #64748b; }
+.footer a { color: #cbd5e1; }
+.footer a:hover { color: #ffffff; }
+.footer-cta p { color: #94a3b8; }
+.footer-bottom { color: #64748b; border-top-color: rgba(148, 163, 184, 0.15); }
+
+/* Selection + focus in brand */
+::selection { background: rgba(0, 201, 167, 0.22); }
+:focus-visible { outline: 2px solid var(--brand-2); outline-offset: 2px; }
+
+/* Dark sections need the bright variant of the headline gradient */
+@supports (-webkit-background-clip: text) {
+  .ecosystem .gradient-text {
+    background: linear-gradient(105deg, #f1f5f9 0%, #7dd3fc 55%, #00C9A7 115%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+.ecosystem .section-kicker { color: var(--brand-1); }

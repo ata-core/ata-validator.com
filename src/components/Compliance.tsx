@@ -31,9 +31,16 @@ export function Compliance() {
           <div className="compliance-score">
             <div className="score-ring">
               <svg viewBox="0 0 120 120">
+                <defs>
+                  <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00C9A7" />
+                    <stop offset="55%" stopColor="#00B7D6" />
+                    <stop offset="100%" stopColor="#3D5AFE" />
+                  </linearGradient>
+                </defs>
                 <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" strokeWidth="8" />
                 <circle
-                  cx="60" cy="60" r="54" fill="none" stroke="#0a1929" strokeWidth="8"
+                  cx="60" cy="60" r="54" fill="none" stroke="url(#scoreGrad)" strokeWidth="8"
                   className="score-arc" strokeDasharray="339.3" strokeLinecap="round"
                   transform="rotate(-90 60 60)"
                 />
