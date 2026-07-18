@@ -2,6 +2,39 @@ import { CodeWindow } from "./CodeWindow";
 
 const features = [
   {
+    label: "TYPESCRIPT INFERENCE",
+    title: "Types come from the schema, not a second declaration",
+    desc: "defineSchema() gives you the runtime validator and the static type from one plain JSON Schema: unions, intersections, tuples, and recursive $ref all infer. Prefer a builder? ata-validator/t is a TypeBox-style chainable API that emits plain JSON Schema, so Infer, the validator, and AOT all consume it directly.",
+    bullets: [
+      { text: "Infer<typeof S>", rest: " resolves anyOf/oneOf unions, allOf intersections, tuples, recursive refs" },
+      { text: "t.object, t.pick, t.omit, t.partial, t.composite, t.recursive", rest: " — TypeBox-style, zero lock-in" },
+      { text: "No cast, no drift", rest: " — the schema is the single source of truth" },
+    ],
+    code: `import { defineSchema, Validator, type Infer } from 'ata-validator'
+import { t } from 'ata-validator/t'
+
+// Plain JSON Schema in, static type out
+const userSchema = defineSchema({
+  type: 'object',
+  properties: {
+    id:   { type: 'integer', minimum: 1 },
+    role: { type: 'string', enum: ['admin', 'user'] },
+  },
+  required: ['id'],
+})
+type User = Infer<typeof userSchema>
+// { id: number; role?: 'admin' | 'user' }
+
+// Or the builder — emits the same plain JSON Schema
+const Account = t.object({
+  name:  t.string({ minLength: 1 }),
+  email: t.optional(t.string({ format: 'email' })),
+})
+const v = new Validator(Account)`,
+    codeTitle: "types.ts",
+    lang: "js" as const,
+  },
+  {
     label: "PARSING",
     title: "simdjson: Gigabytes per second parsing",
     desc: "Built on Daniel Lemire's simdjson library, ata parses JSON at the speed of your CPU's SIMD instructions.",
@@ -28,6 +61,7 @@ const result = v.validate({ name: "Mert", age: 26 });
 // { valid: true, errors: [] }`,
     codeTitle: "example.js",
     lang: "js" as const,
+    reverse: true,
   },
   {
     label: "REGEX ENGINE",
@@ -58,7 +92,6 @@ const fmt = new Validator({
 // Also: date, uri, ipv4, uuid, hostname...`,
     codeTitle: "pattern.js",
     lang: "js" as const,
-    reverse: true,
   },
   {
     label: "CODEGEN ENGINE",
@@ -84,6 +117,7 @@ END
 // sub[1]: EXPECT_STRING, CHECK_FORMAT email`,
     codeTitle: "bytecode plan",
     lang: "bytecode" as const,
+    reverse: true,
   },
   {
     label: "ON DEMAND API",
@@ -108,7 +142,6 @@ JSON string
 No DOM tree. No allocation. Just validate.`,
     codeTitle: "on demand path",
     lang: "plain" as const,
-    reverse: true,
   },
   {
     label: "TYPESCRIPT GENERATOR",
@@ -139,6 +172,7 @@ export declare function isValid(data: unknown): data is User;
 export declare function validate(data: unknown): Result;`,
     codeTitle: "user.validator.d.mts",
     lang: "js" as const,
+    reverse: true,
   },
 ];
 

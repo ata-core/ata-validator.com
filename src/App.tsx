@@ -16,12 +16,12 @@ export default function App() {
       <Nav />
       <Hero />
       <Integrations />
-      <Benchmarks />
       <Foundation />
+      <QuickStart />
+      <Benchmarks />
       <Ecosystem />
       <Features />
       <Compliance />
-      <QuickStart />
       <Architecture />
 
       <section className="opensource">
@@ -29,7 +29,7 @@ export default function App() {
         <h2 className="section-title-xl gradient-text">MIT licensed</h2>
         <p>ata-validator is MIT licensed and open to contributions.</p>
         <a
-          href="https://github.com/mertcanaltin/ata-validator"
+          href="https://github.com/ata-core/ata-validator"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-gradient"
