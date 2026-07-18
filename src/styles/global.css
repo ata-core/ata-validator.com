@@ -21,6 +21,21 @@
   --brand-glow:   rgba(0, 183, 214, 0.4);
   --gradient: linear-gradient(90deg, #00C9A7 0%, #00B7D6 50%, #3D5AFE 100%);
 
+  /* Ink family: every dark surface derives from --text's navy hue */
+  --ink:          #0a1929;        /* dark surface base (terminal, footer) */
+  --ink-deep:     #061322;        /* darkest edge of ink radials */
+  --ink-raise:    #10263c;        /* raised strip on ink (terminal header) */
+  --ink-border:   #1c3a57;        /* hairline on ink */
+
+  /* Brand-derived accents for headlines and dark surfaces */
+  --brand-blue-ink: #213689;      /* headline gradient mid stop (ink toward brand-3) */
+  --brand-2-light:  #67e8f9;      /* brand-2 lightened for dark backgrounds */
+  --brand-3-light:  #8aa9ff;      /* brand-3 lightened: paths/links on ink */
+
+  /* Semantic terminal accents */
+  --code-err:     #ff7b72;
+  --code-warn:    #f0c674;
+
   /* Legacy compat (some older rules still reference these). */
   /* TODO(elysia-refresh): drop this block + the legacy aliases below in Task 14 once nothing references them. */
   --bg-card:      #ffffff;
@@ -439,7 +454,7 @@ code {
 
 /* Ecosystem — local dark zone with concentric orbit rings */
 .ecosystem {
-  background: radial-gradient(ellipse at center, #0a1929 0%, #050b18 75%);
+  background: radial-gradient(ellipse at center, var(--ink) 0%, var(--ink-deep) 75%);
   color: #e2e8f0;
   padding: 100px 24px;
   position: relative;
@@ -1470,7 +1485,7 @@ code {
 /* Headlines: restrained dark-to-teal sweep instead of flat navy */
 @supports (-webkit-background-clip: text) {
   .gradient-text {
-    background: linear-gradient(105deg, #0a1929 0%, #16467a 60%, #0d9488 115%);
+    background: linear-gradient(105deg, #0a1929 0%, var(--brand-blue-ink) 60%, #0d9488 115%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1484,7 +1499,7 @@ code {
     color: transparent;
   }
   .bench-stat-value {
-    background: linear-gradient(105deg, #0a1929 10%, #16467a 70%, #0d9488 130%);
+    background: linear-gradient(105deg, #0a1929 10%, var(--brand-blue-ink) 70%, #0d9488 130%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1546,7 +1561,7 @@ a:hover { color: var(--brand-soft); }
 
 /* Footer: dark closing block */
 .footer {
-  background: #0a1929;
+  background: var(--ink);
   border-top: none;
   color: #cbd5e1;
 }
@@ -1563,7 +1578,7 @@ a:hover { color: var(--brand-soft); }
 /* Dark sections need the bright variant of the headline gradient */
 @supports (-webkit-background-clip: text) {
   .ecosystem .gradient-text {
-    background: linear-gradient(105deg, #f1f5f9 0%, #7dd3fc 55%, #00C9A7 115%);
+    background: linear-gradient(105deg, #f1f5f9 0%, var(--brand-2-light) 55%, #00C9A7 115%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
