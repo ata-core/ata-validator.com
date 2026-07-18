@@ -179,7 +179,7 @@ export declare function validate(data: unknown): Result;`,
 export function Features() {
   return (
     <section id="features" className="features">
-      <div className="features-header">
+      <div className="features-header" data-reveal>
         <div className="section-kicker">Internals</div>
         <h2 className="section-title-xl gradient-text">One validator, layered engines</h2>
       </div>
@@ -187,6 +187,7 @@ export function Features() {
         <div
           key={f.label}
           className={`feature-row${f.reverse ? " reverse" : ""}`}
+          data-reveal
         >
           <div className="feature-text">
             <div className="feature-label">{f.label}</div>

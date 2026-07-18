@@ -1371,3 +1371,96 @@ code {
   .btn, .btn-gradient { padding: 8px 16px; font-size: 0.8rem; }
   .compliance-score { flex-direction: column; align-items: flex-start; gap: 16px; }
 }
+
+/* ---------- motion layer ---------- */
+
+/* Nav: transparent at top, glass once scrolled */
+.nav {
+  background: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 6px 24px -18px rgba(15, 23, 42, 0.25);
+}
+
+/* Compliance arc final state (also the reduced-motion state) */
+.score-arc { stroke-dashoffset: 1.7; }
+
+/* Unified card lift */
+.foundation-cell,
+.qs-card,
+.arch-step,
+.bench-stat-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.bench-stat-card:hover,
+.qs-card:hover,
+.arch-step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.3);
+}
+.foundation-cell:hover { transform: translateY(-3px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Scroll reveal */
+  [data-reveal],
+  [data-reveal-stagger] > * {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.7, 0.3, 1);
+  }
+  [data-reveal].in,
+  [data-reveal-stagger].in > * {
+    opacity: 1;
+    transform: none;
+  }
+  [data-reveal-stagger].in > :nth-child(2) { transition-delay: 0.07s; }
+  [data-reveal-stagger].in > :nth-child(3) { transition-delay: 0.14s; }
+  [data-reveal-stagger].in > :nth-child(4) { transition-delay: 0.21s; }
+  [data-reveal-stagger].in > :nth-child(5) { transition-delay: 0.28s; }
+  [data-reveal-stagger].in > :nth-child(6) { transition-delay: 0.35s; }
+  [data-reveal-stagger].in > :nth-child(7) { transition-delay: 0.42s; }
+  [data-reveal-stagger].in > :nth-child(8) { transition-delay: 0.49s; }
+
+  /* Compliance arc draws itself in */
+  [data-reveal] .score-arc {
+    stroke-dashoffset: 339.3;
+    transition: stroke-dashoffset 1.3s cubic-bezier(0.3, 0.7, 0.25, 1) 0.25s;
+  }
+  [data-reveal].in .score-arc { stroke-dashoffset: 1.7; }
+
+  /* Hero dot grid drifts, barely */
+  @keyframes grid-drift {
+    from { background-position: 0 0; }
+    to { background-position: 28px 28px; }
+  }
+  .hero-grid { animation: grid-drift 60s linear infinite; }
+
+  /* Ecosystem orbit rotates; logos counter-rotate to stay upright */
+  @keyframes orbit-spin {
+    from { --spin: 0deg; }
+    to { --spin: 360deg; }
+  }
+  .orbit { animation: orbit-spin 150s linear infinite; }
+  .orbit:hover { animation-play-state: paused; }
+  .orbit-item {
+    transform: rotate(calc(var(--angle) + var(--spin, 0deg)))
+      translate(var(--r, var(--orbit-radius)))
+      rotate(calc((var(--angle) + var(--spin, 0deg)) * -1));
+  }
+  .orbit-item:hover {
+    transform: rotate(calc(var(--angle) + var(--spin, 0deg)))
+      translate(var(--r, var(--orbit-radius)))
+      rotate(calc((var(--angle) + var(--spin, 0deg)) * -1))
+      scale(1.08);
+  }
+}
+
+@property --spin {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}

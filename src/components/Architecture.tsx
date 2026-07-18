@@ -8,7 +8,7 @@ const steps = [
 export function Architecture() {
   return (
     <section className="architecture">
-      <div className="arch-header">
+      <div className="arch-header" data-reveal>
         <div className="section-kicker">Pipeline</div>
         <h2 className="section-title-xl gradient-text">How it works</h2>
       </div>

@@ -39,7 +39,7 @@ const INTEGRATIONS: Integration[] = [
 export function Integrations() {
   return (
     <section id="integrations" className="integrations">
-      <div className="integrations-header">
+      <div className="integrations-header" data-reveal>
         <div className="section-kicker">Integrations</div>
         <h2 className="section-title-xl gradient-text">Works with your stack.</h2>
         <p className="section-sub">
@@ -48,7 +48,7 @@ export function Integrations() {
         </p>
       </div>
 
-      <div className="integrations-grid">
+      <div className="integrations-grid" data-reveal-stagger>
         {INTEGRATIONS.map((it) => (
           <a
             key={it.name}

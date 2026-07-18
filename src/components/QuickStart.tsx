@@ -3,11 +3,11 @@ import { CodeWindow } from './CodeWindow'
 export function QuickStart() {
   return (
     <section id="quickstart" className="quickstart">
-      <div className="qs-header">
+      <div className="qs-header" data-reveal>
         <div className="section-kicker">Get started in seconds</div>
         <h2 className="section-title-xl gradient-text">Quick Start</h2>
       </div>
-      <div className="qs-grid">
+      <div className="qs-grid" data-reveal-stagger>
         <div className="qs-card">
           <h4>Node.js</h4>
           <CodeWindow title="terminal">{`$ npm install ata-validator`}</CodeWindow>

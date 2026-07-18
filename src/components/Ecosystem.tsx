@@ -41,7 +41,7 @@ export function Ecosystem() {
           ))}
         </div>
 
-        <div className="ecosystem-text">
+        <div className="ecosystem-text" data-reveal>
           <div className="section-kicker">Your code,</div>
           <h2 className="section-title-xl gradient-text">Your runtime</h2>
           <p>

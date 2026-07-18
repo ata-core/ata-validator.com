@@ -14,7 +14,7 @@ export function Compliance() {
   return (
     <section className="compliance">
       <div className="compliance-inner">
-        <div className="compliance-text">
+        <div className="compliance-text" data-reveal>
           <div className="section-kicker">Standards</div>
           <h2 className="section-title-xl gradient-text">99.5% spec coverage</h2>
           <p>
@@ -34,7 +34,7 @@ export function Compliance() {
                 <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" strokeWidth="8" />
                 <circle
                   cx="60" cy="60" r="54" fill="none" stroke="#0a1929" strokeWidth="8"
-                  strokeDasharray="339.3" strokeDashoffset="1.7" strokeLinecap="round"
+                  className="score-arc" strokeDasharray="339.3" strokeLinecap="round"
                   transform="rotate(-90 60 60)"
                 />
               </svg>
@@ -47,7 +47,7 @@ export function Compliance() {
             </div>
           </div>
         </div>
-        <div className="compliance-list">
+        <div className="compliance-list" data-reveal>
           <h4>Fully supported keywords</h4>
           <div className="keyword-grid">
             {keywords.map((kw) => (

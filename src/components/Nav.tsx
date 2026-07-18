@@ -1,13 +1,21 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Nav() {
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
   return (
-    <nav className="nav">
+    <nav className={scrolled ? 'nav scrolled' : 'nav'}>
       <div className="nav-inner">
         <Link to="/" className="nav-logo" aria-label="ata-validator home">
           <span className="nav-logo-text" aria-hidden>ata</span>
         </Link>
-        <span className="nav-tagline">Ultra-fast JSON Schema validator</span>
+        <span className="nav-tagline">JSON Schema validation, finally readable</span>
         <div className="nav-spacer" />
         <div className="nav-links">
           <a href="/#features">Features</a>

@@ -24,7 +24,7 @@ const features = [
 export function Foundation() {
   return (
     <section className="foundation">
-      <div className="foundation-grid">
+      <div className="foundation-grid" data-reveal-stagger>
         {features.map((f) => (
           <div key={f.title} className="foundation-cell">
             <h3>{f.title}</h3>
