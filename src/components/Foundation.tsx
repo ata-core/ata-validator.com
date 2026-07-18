@@ -17,7 +17,7 @@ const features = [
   },
   {
     title: 'Spec-compliant',
-    desc: '98.5% Draft 2020-12.\nFull $dynamicRef + $anchor.',
+    desc: '99.5% Draft 2020-12.\nFull $dynamicRef + $anchor.',
   },
 ]
 

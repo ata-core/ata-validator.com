@@ -257,7 +257,7 @@ app.post('/users', {
                       JSON Schema Test Suite (Draft 2020-12)
                     </a>
                   </td>
-                  <td>98.5%</td>
+                  <td>99.5%</td>
                 </tr>
                 <tr>
                   <td>
@@ -266,6 +266,14 @@ app.post('/users', {
                     </a>
                   </td>
                   <td>95.3%</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="https://github.com/fastify/fastify" target="_blank" rel="noreferrer">
+                      Fastify validation suite (as default validator)
+                    </a>
+                  </td>
+                  <td>181/187, every applicable test</td>
                 </tr>
                 <tr>
                   <td>

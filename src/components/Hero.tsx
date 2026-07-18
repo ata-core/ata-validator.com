@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.0.0'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.2.0'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,7 +24,7 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          1.0 is out → a stability commitment
+          1.2 is out → every schema, every runtime
         </a>
 
         <h1 className="hero-title">

@@ -16,7 +16,7 @@ export function Compliance() {
       <div className="compliance-inner">
         <div className="compliance-text">
           <div className="section-kicker">Standards</div>
-          <h2 className="section-title-xl gradient-text">98.5% spec coverage</h2>
+          <h2 className="section-title-xl gradient-text">99.5% spec coverage</h2>
           <p>
             Tested against the official{' '}
             <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank" rel="noopener noreferrer">
@@ -34,16 +34,16 @@ export function Compliance() {
                 <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" strokeWidth="8" />
                 <circle
                   cx="60" cy="60" r="54" fill="none" stroke="#0a1929" strokeWidth="8"
-                  strokeDasharray="339.3" strokeDashoffset="5.1" strokeLinecap="round"
+                  strokeDasharray="339.3" strokeDashoffset="1.7" strokeLinecap="round"
                   transform="rotate(-90 60 60)"
                 />
               </svg>
-              <span className="score-text gradient-text">98.5%</span>
+              <span className="score-text gradient-text">99.5%</span>
             </div>
             <div className="score-details">
-              <div><strong>1,172</strong> tests passed</div>
+              <div><strong>1,184</strong> tests passed</div>
               <div><strong>$dynamicRef</strong> 42/42 (100%)</div>
-              <div><strong>Draft 7 + 2020-12</strong></div>
+              <div><strong>Draft 7 + 2020-12</strong>, native or pure JS</div>
             </div>
           </div>
         </div>
