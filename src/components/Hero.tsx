@@ -30,7 +30,7 @@ export function Hero() {
         <h1 className="hero-title">
           <span className="gradient-text">
             JSON Schema validation<br />
-            <span className="hero-title-accent">where eval isn't allowed.</span>
+            <span className="hero-title-accent">that doesn't need eval.</span>
           </span>
         </h1>
 
