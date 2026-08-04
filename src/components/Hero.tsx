@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.2.0'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.4.0'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,25 +24,28 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          1.2 is out → every schema, every runtime
+          1.4 is out → checked eval-free guarantee
         </a>
 
         <h1 className="hero-title">
           <span className="gradient-text">
-            JSON Schema validation,<br />
-            <span className="hero-title-accent">finally readable.</span>
+            JSON Schema validation<br />
+            <span className="hero-title-accent">where eval isn't allowed.</span>
           </span>
         </h1>
 
         <p className="hero-desc">
-          ata-validator gives you <strong>tsc --pretty</strong> style errors with
-          schema source frame, request payload byte offset, and stable error
-          codes, in a <strong>1 KB</strong> compiled bundle.
+          Cloudflare Workers, Deno Deploy and pages under a strict CSP refuse{' '}
+          <strong>new Function</strong>, which is how most validators compile a
+          schema. ata falls back to an interpreted engine and still scores{' '}
+          <strong>1286 of 1290</strong> on the official Draft 2020-12 suite with
+          code generation blocked, within one case of its compiled path.
         </p>
 
         <p className="hero-desc hero-desc-sub">
-          First-class TypeScript. AOT compilation. Standard Schema V1. Drop-in for
-          Fastify and RJSF. MIT licensed.
+          Where codegen is allowed, compiling 1000 Fastify route schemas costs{' '}
+          <strong>42 ms</strong> against 540 ms. AOT output imports nothing at
+          all. First-class TypeScript, Standard Schema V1, MIT licensed.
         </p>
 
         <p className="hero-proof">
@@ -69,7 +72,7 @@ export function Hero() {
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See the 1.2 release →
+            See the 1.4 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

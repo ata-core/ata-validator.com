@@ -35,6 +35,39 @@ const v = new Validator(Account)`,
     lang: "js" as const,
   },
   {
+    label: "PORTABILITY",
+    title: "Runs where code generation is refused",
+    desc: "Most validators turn a schema into source and hand it to new Function. Cloudflare Workers, Deno Deploy and any page under a strict Content-Security-Policy refuse that outright. ata detects it and falls back to an interpreted engine rather than degrading, and the whole official suite is run that way in CI so the guarantee is checked rather than assumed.",
+    bullets: [
+      { text: "1286 of 1290", rest: " on Draft 2020-12 with eval and new Function blocked, within one case of the compiled path" },
+      { text: "No native addon required", rest: " — the core package ships no binaries, the accelerator is optional" },
+      { text: "AOT output imports nothing", rest: " — a compiled schema is a standalone module with zero dependencies" },
+    ],
+    code: `// A Worker, a CSP-locked page, an embedded runtime:
+// new Function throws, so codegen is not an option.
+
+import { Validator } from 'ata-validator'
+
+const v = new Validator({
+  type: 'object',
+  properties: {
+    id:    { type: 'integer', minimum: 1 },
+    email: { type: 'string', format: 'email' },
+  },
+  required: ['id'],
+})
+
+// No compilation step, no eval, same answers.
+v.validate({ id: 1, email: 'a@b.co' }).valid  // true
+v.validate({ id: 0 }).valid                   // false
+
+// Or skip the runtime entirely: ata build emits a module
+// that imports nothing at all.
+import validate from './schemas/user.mjs'`,
+    codeTitle: "worker.ts",
+    lang: "js" as const,
+  },
+  {
     label: "PARSING",
     title: "simdjson: Gigabytes per second parsing",
     desc: "Built on Daniel Lemire's simdjson library, ata parses JSON at the speed of your CPU's SIMD instructions.",
