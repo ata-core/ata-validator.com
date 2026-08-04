@@ -127,13 +127,13 @@ const fmt = new Validator({
     lang: "js" as const,
   },
   {
-    label: "CODEGEN ENGINE",
-    title: "Bytecode compiler for fast validation",
-    desc: "Schemas are compiled into a flat bytecode plan at compile time. The executor runs through instructions sequentially, with no tree walking and no recursion on the hot path.",
+    label: "EXECUTION PLAN",
+    title: "Three engines, picked to fit the runtime",
+    desc: "The optional native accelerator compiles a schema into a flat bytecode plan and steps through it sequentially, with no tree walking and no recursion on the hot path. Without it, ata generates JavaScript for the shapes that suit it. Where new Function is refused, it walks the schema directly instead. You do not choose: ata probes what the runtime allows and routes accordingly.",
     bullets: [
-      { text: "Schema \u2192 bytecode", rest: " at compile time" },
-      { text: "Zero-allocation", rest: " validation loop" },
-      { text: "Interpreted fallback", rest: " for shapes codegen can't represent, in every runtime" },
+      { text: "Native bytecode plan", rest: " when the optional accelerator is installed" },
+      { text: "Generated JavaScript", rest: " where code generation is available, with a zero-allocation loop" },
+      { text: "Direct interpretation", rest: " under a CSP or on Workers, scoring 1286 of 1290 with codegen blocked" },
     ],
     code: `// Internal bytecode generated from schema
 EXPECT_OBJECT
