@@ -39,7 +39,15 @@ export function Hero() {
           <strong>new Function</strong>, which is how most validators compile a
           schema. ata falls back to an interpreted engine and still scores{' '}
           <strong>1286 of 1290</strong> on the official Draft 2020-12 suite with
-          code generation blocked, within one case of its compiled path.
+          code generation blocked, within one case of its compiled path.{' '}
+          <a
+            href="https://github.com/ata-core/ata-validator/blob/master/docs/edge-runtimes.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Running on the edge
+          </a>
+          .
         </p>
 
         <p className="hero-desc hero-desc-sub">
