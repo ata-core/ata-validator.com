@@ -30,6 +30,7 @@ export default function Docs() {
               <li><a href="#what">What is ata</a></li>
               <li><a href="#how">How it works</a></li>
               <li><a href="#features">Features</a></li>
+              <li><a href="#dialects">Dialects</a></li>
               <li><a href="#install">Installation</a></li>
               <li><a href="#api">API reference</a></li>
               <li><a href="#integrations">Integrations</a></li>
@@ -67,7 +68,8 @@ const result = v.validate({ id: 42 })
           <section id="what">
             <h2>What is ata</h2>
             <p>
-              ata-validator is a JSON Schema validator for Draft 2020-12 and Draft 7. It
+              ata-validator is a JSON Schema validator for Draft 2020-12, Draft 7 and the
+              JSON Schema v1 dialect. It
               compiles schemas into V8-optimized JavaScript, uses simdjson for JSON parsing
               and RE2 for pattern keywords, and falls back to a pure-JS engine when the
               native addon is unavailable.
@@ -103,7 +105,7 @@ const result = v.validate({ id: 42 })
               <tbody>
                 <tr>
                   <td><strong>Drafts</strong></td>
-                  <td>Draft 2020-12, Draft 7</td>
+                  <td>Draft 2020-12, Draft 7, JSON Schema v1</td>
                 </tr>
                 <tr>
                   <td><strong>Keywords</strong></td>
@@ -127,6 +129,43 @@ const result = v.validate({ id: 42 })
             </table>
           </section>
 
+          <section id="dialects">
+            <h2>Dialects</h2>
+            <p>
+              <code>$schema</code> selects the dialect. Draft 2020-12 is the default, draft 7
+              is normalized on the way in, and <code>https://json-schema.org/v1</code> (or the
+              dated <code>https://json-schema.org/v1/2026</code>) selects JSON Schema v1.
+            </p>
+
+            <DocsCode lang="js">{`const validator = new Validator({
+  $schema: 'https://json-schema.org/v1',
+  type: 'object',
+  propertyDependencies: {
+    kind: {
+      card: { required: ['cardNumber'] },
+      bank: { required: ['iban'] },
+    },
+  },
+})`}</DocsCode>
+
+            <p>
+              Two things differ under v1. <code>propertyDependencies</code> selects a subschema
+              by the value of a property rather than by its presence, which is what{' '}
+              <code>dependentSchemas</code> does. And <code>$dynamicRef</code> no longer requires
+              bookending: the reference resolves through the dynamic scope whether or not the
+              schema it first lands on carries a matching <code>$dynamicAnchor</code>, so the
+              outermost matching anchor still in scope wins.
+            </p>
+            <p>
+              Everything else is identical under both dialects, so a schema that declares no{' '}
+              <code>$schema</code> behaves exactly as before. Both keywords are implemented in
+              the interpreted engine, which means a v1 schema using <code>$dynamicRef</code>{' '}
+              validates there rather than through the compiler or the native addon, since those
+              resolve the 2020-12 way. Schemas that use neither take the same compiled path
+              they always did.
+            </p>
+          </section>
+
           <section id="install">
             <h2>Installation</h2>
 
@@ -144,7 +183,8 @@ const result = v.validate({ id: 42 })
             <p>
               Typical schemas compile to specialized JS; shapes the compiler cannot represent
               fall back to an interpreted engine, so every schema validates in every runtime.
-              The pure-JS setup passes 99.5% of the official draft 2020-12 suite. Only the
+              The pure-JS setup passes 1,286 of the official draft 2020-12 suite's 1,290
+              cases, within one case of the compiled path. Only the
               buffer and parallel APIs need the native engine and say so with a clear error.
             </p>
 
@@ -262,7 +302,23 @@ app.post('/users', {
                       JSON Schema Test Suite (Draft 2020-12)
                     </a>
                   </td>
-                  <td>99.5%</td>
+                  <td>1,285 / 1,290</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank" rel="noreferrer">
+                      JSON Schema Test Suite (v1 dialect)
+                    </a>
+                  </td>
+                  <td>1,123 / 1,127</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank" rel="noreferrer">
+                      JSON Schema Test Suite (Draft 7)
+                    </a>
+                  </td>
+                  <td>911 / 922</td>
                 </tr>
                 <tr>
                   <td>

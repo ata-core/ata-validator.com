@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.4.0'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.6.0'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,7 +24,7 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          1.4 is out → checked eval-free guarantee
+          1.6 is out → the JSON Schema v1 dialect
         </a>
 
         <h1 className="hero-title">
@@ -53,7 +53,9 @@ export function Hero() {
         <p className="hero-desc hero-desc-sub">
           Where codegen is allowed, compiling 1000 Fastify route schemas costs{' '}
           <strong>42 ms</strong> against 540 ms. AOT output imports nothing at
-          all. First-class TypeScript, Standard Schema V1, MIT licensed.
+          all. Draft 2020-12, draft 7 and the{' '}
+          <strong>JSON Schema v1</strong> dialect. First-class TypeScript,
+          Standard Schema V1, MIT licensed.
         </p>
 
         <p className="hero-proof">
@@ -80,7 +82,7 @@ export function Hero() {
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See the 1.4 release →
+            See the 1.6 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

@@ -49,8 +49,8 @@ export function Ecosystem() {
             runtime dependencies. The full runtime is pure JS too: schemas the
             compiler cannot represent run on an interpreted engine, so every
             schema validates in Node, Bun, Deno, Cloudflare Workers, and the
-            browser. 99.5% of the official draft 2020-12 suite passes without
-            any native code.
+            browser. 1,286 of the official draft 2020-12 suite's 1,290 cases
+            pass without any native code.
           </p>
           <p>
             On servers, per-platform native packages add simdjson parsing and

@@ -17,7 +17,7 @@ const features = [
   },
   {
     title: 'Spec-compliant',
-    desc: '99.5% Draft 2020-12.\nEvery schema, every runtime.',
+    desc: '99.6% Draft 2020-12.\nEvery schema, every runtime.',
   },
 ]
 

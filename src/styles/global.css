@@ -1402,7 +1402,7 @@ code {
 }
 
 /* Compliance arc final state (also the reduced-motion state) */
-.score-arc { stroke-dashoffset: 1.7; }
+.score-arc { stroke-dashoffset: 1.4; }
 
 /* Unified card lift */
 .foundation-cell,
@@ -1445,7 +1445,7 @@ code {
     stroke-dashoffset: 339.3;
     transition: stroke-dashoffset 1.3s cubic-bezier(0.3, 0.7, 0.25, 1) 0.25s;
   }
-  [data-reveal].in .score-arc { stroke-dashoffset: 1.7; }
+  [data-reveal].in .score-arc { stroke-dashoffset: 1.4; }
 
   /* Hero dot grid drifts, barely */
   @keyframes grid-drift {

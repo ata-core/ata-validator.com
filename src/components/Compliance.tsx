@@ -4,7 +4,8 @@ const keywords = [
   'allOf', 'anyOf', 'oneOf', 'not', 'if/then/else', '$ref',
   '$defs', 'enum', 'const', 'format', 'minimum', 'maximum',
   'pattern', 'minLength', 'maxLength', 'uniqueItems',
-  'dependentRequired', 'dependentSchemas', 'propertyNames',
+  'dependentRequired', 'dependentSchemas', 'propertyDependencies',
+  'propertyNames',
   'unevaluatedProperties', 'unevaluatedItems',
   '$id', '$anchor', '$dynamicRef', '$dynamicAnchor',
   'definitions', 'dependencies',
@@ -16,17 +17,18 @@ export function Compliance() {
       <div className="compliance-inner">
         <div className="compliance-text" data-reveal>
           <div className="section-kicker">Standards</div>
-          <h2 className="section-title-xl gradient-text">99.5% spec coverage</h2>
+          <h2 className="section-title-xl gradient-text">99.6% spec coverage</h2>
           <p>
-            Tested against the official{' '}
+            Measured against the official{' '}
             <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank" rel="noopener noreferrer">
               JSON Schema Test Suite
             </a>{' '}
-            and{' '}
+            with nothing excluded, across all three dialects, and against the{' '}
             <a href="https://github.com/ExodusMovement/schemasafe" target="_blank" rel="noopener noreferrer">
               @exodus/schemasafe
             </a>{' '}
-            test suite for Draft 2020-12.
+            suite. <code>npm run test:suite</code> reproduces every number here
+            and names the cases that still fail.
           </p>
           <div className="compliance-score">
             <div className="score-ring">
@@ -45,12 +47,12 @@ export function Compliance() {
                   transform="rotate(-90 60 60)"
                 />
               </svg>
-              <span className="score-text gradient-text">99.5%</span>
+              <span className="score-text gradient-text">99.6%</span>
             </div>
             <div className="score-details">
-              <div><strong>1,184</strong> tests passed</div>
-              <div><strong>$dynamicRef</strong> 42/42 (100%)</div>
-              <div><strong>Draft 7 + 2020-12</strong>, native or pure JS</div>
+              <div><strong>Draft 2020-12</strong> 1,285 of 1,290</div>
+              <div><strong>JSON Schema v1</strong> 1,123 of 1,127</div>
+              <div><strong>Draft 7</strong> 911 of 922, native or pure JS</div>
             </div>
           </div>
         </div>
