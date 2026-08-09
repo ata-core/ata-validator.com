@@ -50,9 +50,9 @@ export function Compliance() {
               <span className="score-text gradient-text">99.6%</span>
             </div>
             <div className="score-details">
-              <div><strong>Draft 2020-12</strong> 1,285 of 1,290</div>
-              <div><strong>JSON Schema v1</strong> 1,123 of 1,127</div>
-              <div><strong>Draft 7</strong> 911 of 922, native or pure JS</div>
+              <div><strong>Draft 2020-12</strong> 1,294 of 1,299</div>
+              <div><strong>JSON Schema v1</strong> 1,131 of 1,133</div>
+              <div><strong>Draft 7</strong> 916 of 927, native or pure JS</div>
             </div>
           </div>
         </div>

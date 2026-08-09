@@ -49,7 +49,7 @@ export function Ecosystem() {
             runtime dependencies. The full runtime is pure JS too: schemas the
             compiler cannot represent run on an interpreted engine, so every
             schema validates in Node, Bun, Deno, Cloudflare Workers, and the
-            browser. 1,286 of the official draft 2020-12 suite's 1,290 cases
+            browser. 1,295 of the official draft 2020-12 suite's 1,299 cases
             pass without any native code.
           </p>
           <p>

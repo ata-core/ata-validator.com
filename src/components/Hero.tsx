@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.6.0'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.6.1'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -38,7 +38,7 @@ export function Hero() {
           Cloudflare Workers, Deno Deploy and pages under a strict CSP refuse{' '}
           <strong>new Function</strong>, which is how most validators compile a
           schema. ata falls back to an interpreted engine and still scores{' '}
-          <strong>1286 of 1290</strong> on the official Draft 2020-12 suite with
+          <strong>1295 of 1299</strong> on the official Draft 2020-12 suite with
           code generation blocked, within one case of its compiled path.{' '}
           <a
             href="https://github.com/ata-core/ata-validator/blob/master/docs/edge-runtimes.md"
