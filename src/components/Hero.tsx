@@ -19,7 +19,7 @@ export function Hero() {
   }
 
   return (
-    <section id="benchmarks" className="hero">
+    <section className="hero">
       <div className="hero-grid" aria-hidden />
 
       <div className="hero-content">
@@ -35,27 +35,12 @@ export function Hero() {
         </h1>
 
         <p className="hero-desc">
-          Cloudflare Workers, Deno Deploy and pages under a strict CSP refuse{' '}
-          <strong>new Function</strong>, which is how most validators compile a
-          schema. ata falls back to an interpreted engine and still scores{' '}
-          <strong>1298 of 1299</strong> on the official Draft 2020-12 suite with
-          code generation blocked, the same figure as its compiled path.{' '}
-          <a
-            href="https://github.com/ata-core/ata-validator/blob/master/docs/edge-runtimes.md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Running on the edge
-          </a>
-          .
-        </p>
-
-        <p className="hero-desc hero-desc-sub">
-          Where codegen is allowed, compiling 1000 Fastify route schemas costs{' '}
-          <strong>42 ms</strong> against 540 ms. AOT output imports nothing at
-          all. Draft 2020-12, draft 7 and the{' '}
-          <strong>JSON Schema v1</strong> dialect. First-class TypeScript,
-          Standard Schema V1, MIT licensed.
+          Most validators turn a schema into source and hand it to{' '}
+          <strong>new Function</strong>. Cloudflare Workers and pages under a
+          strict CSP refuse that, so ata carries an interpreted engine too, and
+          scores <strong>1298 of 1299</strong> on the official suite either
+          way. Draft 2020-12, draft 7 and the <strong>JSON Schema v1</strong>{' '}
+          dialect. First-class TypeScript, Standard Schema V1, MIT licensed.
         </p>
 
         <p className="hero-proof">

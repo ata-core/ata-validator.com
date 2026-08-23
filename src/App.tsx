@@ -1,13 +1,9 @@
 import { useEffect } from "react";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
-import { Foundation } from "./components/Foundation";
-import { Ecosystem } from "./components/Ecosystem";
-import { Features } from "./components/Features";
-import { Compliance } from "./components/Compliance";
+import { Benefits } from "./components/Benefits";
 import { QuickStart } from "./components/QuickStart";
-import { Architecture } from "./components/Architecture";
-import { Benchmarks } from "./components/Benchmarks";
+import { Measured } from "./components/Measured";
 import { Integrations } from "./components/Integrations";
 import { Footer } from "./components/Footer";
 
@@ -34,14 +30,10 @@ export default function App() {
     <>
       <Nav />
       <Hero />
-      <Integrations />
-      <Foundation />
+      <Benefits />
       <QuickStart />
-      <Benchmarks />
-      <Ecosystem />
-      <Features />
-      <Compliance />
-      <Architecture />
+      <Measured />
+      <Integrations />
 
       <section className="opensource" data-reveal>
         <div className="section-kicker">Free &amp; open source</div>

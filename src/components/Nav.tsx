@@ -18,8 +18,8 @@ export function Nav() {
         <span className="nav-tagline">JSON Schema validation, finally readable</span>
         <div className="nav-spacer" />
         <div className="nav-links">
-          <a href="/#features">Features</a>
-          <a href="/#benchmarks">Benchmarks</a>
+          <a href="/#integrations">Integrations</a>
+          <a href="/#compliance">Numbers</a>
           <a href="/#quickstart">Quick Start</a>
           <Link to="/playground">Playground</Link>
           <Link to="/docs">Docs</Link>

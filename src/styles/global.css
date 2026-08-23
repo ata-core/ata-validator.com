@@ -1586,3 +1586,102 @@ a:hover { color: var(--brand-soft); }
   }
 }
 .ecosystem .section-kicker { color: var(--brand-1); }
+
+/* --- Benefits: four calm cards under the hero (paseri-style density) --- */
+.benefits {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 72px;
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 960px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .benefits-grid { grid-template-columns: 1fr; } }
+.benefit-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 20px;
+  background: var(--bg);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.benefit-card:hover { border-color: var(--brand-tint); transform: translateY(-2px); }
+.benefit-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.benefit-card p {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-body);
+}
+
+/* --- Measured: compliance + performance as two quiet tables --- */
+.measured {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  text-align: left;
+}
+.measured .section-kicker { text-align: left; }
+.measured .section-title-xl { text-align: left; margin-bottom: 12px; }
+.measured-sub {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  max-width: 640px;
+  margin-bottom: 36px;
+}
+.measured-sub code, .measured-foot code {
+  font-size: 0.85em;
+}
+.measured-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 760px) { .measured-tables { grid-template-columns: 1fr; } }
+.measured-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.measured-table th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mute);
+  font-weight: 600;
+  padding: 0 12px 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.measured-table td {
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-body);
+  vertical-align: top;
+}
+.measured-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+.measured-note {
+  color: var(--text-mute);
+  font-size: 0.82rem;
+}
+.measured-foot {
+  margin-top: 28px;
+  font-size: 0.82rem;
+  color: var(--text-mute);
+  max-width: 640px;
+}
+.measured-foot a { color: var(--brand-soft); }
