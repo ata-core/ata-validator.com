@@ -17,7 +17,7 @@ export function Compliance() {
       <div className="compliance-inner">
         <div className="compliance-text" data-reveal>
           <div className="section-kicker">Standards</div>
-          <h2 className="section-title-xl gradient-text">99.6% spec coverage</h2>
+          <h2 className="section-title-xl gradient-text">99.9% spec coverage</h2>
           <p>
             Measured against the official{' '}
             <a href="https://github.com/json-schema-org/JSON-Schema-Test-Suite" target="_blank" rel="noopener noreferrer">
@@ -47,12 +47,12 @@ export function Compliance() {
                   transform="rotate(-90 60 60)"
                 />
               </svg>
-              <span className="score-text gradient-text">99.6%</span>
+              <span className="score-text gradient-text">99.9%</span>
             </div>
             <div className="score-details">
-              <div><strong>Draft 2020-12</strong> 1,294 of 1,299</div>
-              <div><strong>JSON Schema v1</strong> 1,131 of 1,133</div>
-              <div><strong>Draft 7</strong> 916 of 927, native or pure JS</div>
+              <div><strong>Draft 2020-12</strong> 1,298 of 1,299</div>
+              <div><strong>JSON Schema v1</strong> 1,133 of 1,133</div>
+              <div><strong>Draft 7</strong> 927 of 927, native or pure JS</div>
             </div>
           </div>
         </div>

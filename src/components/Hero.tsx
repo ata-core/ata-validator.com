@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.6.1'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.7.0'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,7 +24,7 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          1.6 is out → the JSON Schema v1 dialect
+          1.7 is out → every path gives the same verdict
         </a>
 
         <h1 className="hero-title">
@@ -38,8 +38,8 @@ export function Hero() {
           Cloudflare Workers, Deno Deploy and pages under a strict CSP refuse{' '}
           <strong>new Function</strong>, which is how most validators compile a
           schema. ata falls back to an interpreted engine and still scores{' '}
-          <strong>1295 of 1299</strong> on the official Draft 2020-12 suite with
-          code generation blocked, within one case of its compiled path.{' '}
+          <strong>1298 of 1299</strong> on the official Draft 2020-12 suite with
+          code generation blocked, the same figure as its compiled path.{' '}
           <a
             href="https://github.com/ata-core/ata-validator/blob/master/docs/edge-runtimes.md"
             target="_blank"
@@ -82,7 +82,7 @@ export function Hero() {
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See the 1.6 release →
+            See the 1.7 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

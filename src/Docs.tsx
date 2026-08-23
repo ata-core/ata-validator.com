@@ -183,8 +183,8 @@ const result = v.validate({ id: 42 })
             <p>
               Typical schemas compile to specialized JS; shapes the compiler cannot represent
               fall back to an interpreted engine, so every schema validates in every runtime.
-              The pure-JS setup passes 1,295 of the official draft 2020-12 suite's 1,299
-              cases, within one case of the compiled path. Only the
+              The pure-JS setup passes 1,298 of the official draft 2020-12 suite's 1,299
+              cases, the same figure as the compiled path. Only the
               buffer and parallel APIs need the native engine and say so with a clear error.
             </p>
 
@@ -302,7 +302,7 @@ app.post('/users', {
                       JSON Schema Test Suite (Draft 2020-12)
                     </a>
                   </td>
-                  <td>1,294 / 1,299</td>
+                  <td>1,298 / 1,299</td>
                 </tr>
                 <tr>
                   <td>
@@ -310,7 +310,7 @@ app.post('/users', {
                       JSON Schema Test Suite (v1 dialect)
                     </a>
                   </td>
-                  <td>1,131 / 1,133</td>
+                  <td>1,133 / 1,133</td>
                 </tr>
                 <tr>
                   <td>
@@ -318,7 +318,7 @@ app.post('/users', {
                       JSON Schema Test Suite (Draft 7)
                     </a>
                   </td>
-                  <td>916 / 927</td>
+                  <td>927 / 927</td>
                 </tr>
                 <tr>
                   <td>
