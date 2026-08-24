@@ -82,7 +82,9 @@ export function runValidators(schemaText: string, dataText: string): RunResult {
   // inferred type + compiled zero-dependency validator
   try {
     base.tsType = toTypeScript(schema, { name: typeName(schema as Record<string, unknown>) })
-    const code = new Validator(schema).toStandaloneModule({ format: 'esm' })
+    // 0.19 moved toStandaloneModule to the build entry, which needs fs; the
+    // browser-safe equivalent is the static bundle emitter.
+    const code = Validator.bundleStandalone([schema], { format: 'esm' }) as string | null
     if (code) {
       base.compiledCode = code
       base.compiledBytes = new TextEncoder().encode(code).length
