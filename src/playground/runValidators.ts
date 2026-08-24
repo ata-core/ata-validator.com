@@ -1,4 +1,4 @@
-import { Validator, toTypeScript } from 'ata-validator'
+import { Validator, toTypeScript, version } from 'ata-validator'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import type { RunResult, AtaError, AjvError } from './types'
@@ -62,6 +62,34 @@ export function runValidators(schemaText: string, dataText: string): RunResult {
     const r = v.validateJSON(dataText)
     base.ataValid = r.valid
     base.ataErrors = (r.errors || []) as AtaError[]
+    base.engine = v.engine()
+    base.ataVersion = version()
+    // Verdict cost: median of repeated boolean checks, time-capped so a
+    // pathological schema cannot stall the tab. Browsers coarsen
+    // performance.now to ~100 µs, so first calibrate the batch size until one
+    // batch is comfortably above the timer resolution, then sample.
+    const value = dataParsed.value
+    for (let i = 0; i < 20; i++) v.isValidObject(value)
+    let batch = 128
+    for (;;) {
+      const t0 = performance.now()
+      for (let i = 0; i < batch; i++) v.isValidObject(value)
+      const dt = performance.now() - t0
+      if (dt >= 1 || batch >= 1 << 20) break
+      batch *= 4
+    }
+    const samples: number[] = []
+    const budgetEnd = performance.now() + 30
+    while (performance.now() < budgetEnd && samples.length < 30) {
+      const t0 = performance.now()
+      for (let i = 0; i < batch; i++) v.isValidObject(value)
+      samples.push((performance.now() - t0) / batch)
+    }
+    if (samples.length >= 3) {
+      samples.sort((a, b) => a - b)
+      const ns = samples[Math.floor(samples.length / 2)] * 1e6
+      if (ns >= 1) base.verdictNs = Math.round(ns)
+    }
   } catch (e) {
     base.ataValid = false
     base.ataErrors = [{ message: 'ata: ' + (e as Error).message }]

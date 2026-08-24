@@ -93,6 +93,15 @@ export default function Playground() {
         >
           {copied ? 'Copied!' : 'Copy link'}
         </button>
+        <span className="pg-meta">
+          {result.ataVersion && <span className="pg-meta-item">ata {result.ataVersion}</span>}
+          {result.engine && <span className="pg-meta-item">engine: <strong>{result.engine}</strong></span>}
+          {result.verdictNs != null && (
+            <span className="pg-meta-item" title="median cost of isValidObject() on this data, sampled live in your browser">
+              verdict: <strong>{result.verdictNs < 1000 ? `${result.verdictNs} ns` : `${(result.verdictNs / 1000).toFixed(1)} µs`}</strong>
+            </span>
+          )}
+        </span>
       </header>
 
       {/* Editor row */}

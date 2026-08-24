@@ -43,4 +43,7 @@ export interface RunResult {
   compiledCode: string
   compiledBytes: number
   compileError: string | null
+  engine?: string
+  ataVersion?: string
+  verdictNs?: number
 }

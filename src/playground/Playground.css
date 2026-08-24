@@ -236,3 +236,27 @@
   .pg-share { margin-left: 0; }
   .pg-top { gap: 0.5rem; }
 }
+
+/* ── Live meta strip: version, engine, measured verdict cost ─── */
+.pg-meta {
+  margin-left: auto;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  color: var(--text-mute);
+}
+
+.pg-meta-item {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+  background: var(--bg-subtle);
+  white-space: nowrap;
+}
+
+.pg-meta-item strong {
+  color: var(--brand-soft);
+  font-weight: 600;
+}
