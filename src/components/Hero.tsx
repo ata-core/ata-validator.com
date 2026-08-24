@@ -24,23 +24,25 @@ export function Hero() {
 
       <div className="hero-content">
         <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="hero-badge badge-ocean">
-          1.7 is out → every path gives the same verdict
+          every path, one verdict → held at zero in CI
         </a>
 
         <h1 className="hero-title">
           <span className="gradient-text">
-            JSON Schema validation<br />
-            <span className="hero-title-accent">that doesn't need eval.</span>
+            Errors that<br />
+            <span className="hero-title-accent">explain themselves.</span>
           </span>
         </h1>
+        <p className="hero-subline">Speed that doesn't pay for them.</p>
 
         <p className="hero-desc">
-          Most validators turn a schema into source and hand it to{' '}
-          <strong>new Function</strong>. Cloudflare Workers and pages under a
-          strict CSP refuse that, so ata carries an interpreted engine too, and
-          scores <strong>1298 of 1299</strong> on the official suite either
-          way. Draft 2020-12, draft 7 and the <strong>JSON Schema v1</strong>{' '}
-          dialect. First-class TypeScript, Standard Schema V1, MIT licensed.
+          ata answers <code>.valid</code> in nanoseconds and builds the error,
+          with its code, the offending byte and a fix suggestion, only when you
+          read it. Ahead of every error-capable validator we measured, and the
+          same <strong>1298 of 1299</strong> suite score where{' '}
+          <strong>new Function</strong> is blocked. Draft 2020-12, draft 7 and
+          the <strong>JSON Schema v1</strong> dialect. First-class TypeScript,
+          Standard Schema V1, MIT licensed.
         </p>
 
         <p className="hero-proof">

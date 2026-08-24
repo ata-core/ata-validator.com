@@ -15,7 +15,7 @@ export function Nav() {
         <Link to="/" className="nav-logo" aria-label="ata-validator home">
           <span className="nav-logo-text" aria-hidden>ata</span>
         </Link>
-        <span className="nav-tagline">JSON Schema validation, finally readable</span>
+        <span className="nav-tagline">errors that explain themselves</span>
         <div className="nav-spacer" />
         <div className="nav-links">
           <a href="/#integrations">Integrations</a>

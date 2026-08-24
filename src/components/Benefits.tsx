@@ -1,19 +1,19 @@
 const BENEFITS = [
   {
+    title: 'Errors are built when read',
+    desc: 'validate() answers the verdict from the fastest engine for the schema; the error object, its code, the offending byte and the suggestion are materialized on first access and cached. A gateway that only checks .valid never pays for them.',
+  },
+  {
+    title: 'Every path, one verdict',
+    desc: 'Four code generators, a closure compiler, an interpreter and the buffer APIs are run against each other over the whole official suite in CI. Any split verdict fails the build. The count of disagreements is held at zero, not documented.',
+  },
+  {
     title: 'Runs where eval is refused',
-    desc: 'Cloudflare Workers, Deno Deploy and pages under a strict CSP block new Function. ata detects it and validates through an interpreted engine, scoring the same on the official suite either way.',
-  },
-  {
-    title: 'Compiles to nothing but code',
-    desc: 'ata compile turns a schema into a standalone module that imports nothing, about 1 KB gzipped, with a .d.mts beside it. No validator in your bundle.',
-  },
-  {
-    title: 'Types come from the schema',
-    desc: 'Infer<S> turns a plain JSON Schema literal into a static type. No builder DSL to learn, and validate() narrows to it.',
+    desc: 'Cloudflare Workers and pages under a strict CSP block new Function. ata compiles schemas into a tree of plain closures instead and scores the same 1298 of 1299 with code generation blocked.',
   },
   {
     title: 'Safe by construction',
-    desc: 'Pattern matching is linear-time with no backtracking, so a hostile regex cannot stall a request. One engine backs every path, including compiled output.',
+    desc: 'Pattern matching is linear-time with no backtracking: a hostile ^(a+)+$ against 100,000 characters takes one millisecond, not thirty seconds. The same engine backs every path, including compiled output.',
   },
 ]
 

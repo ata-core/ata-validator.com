@@ -214,16 +214,18 @@ const result = v.validate(data)
 
 const result = validate(schema, data)`}</DocsCode>
 
-            <h3>fastValidate</h3>
+            <h3>isValidObject and engine</h3>
             <p>
-              Uses a precompiled fast path for supported schemas. Returns <code>null</code> on
-              validation success, an array of errors on failure, keeping the hot path
-              allocation-free.
+              <code>isValidObject(data)</code> is the verdict-only check: no result
+              object, no error construction, the fastest call in the API.
+              <code>engine()</code> reports which engine answers a schema
+              (<code>codegen</code>, <code>closure</code> or <code>interpreter</code>),
+              useful in startup logs and benchmarks.
             </p>
-            <DocsCode lang="js">{`import { fastValidate } from 'ata-validator'
+            <DocsCode lang="js">{`const v = new Validator(schema)
 
-const errors = fastValidate(schema, data)
-if (errors) { /* handle */ }`}</DocsCode>
+v.isValidObject(data) // boolean, allocation-free
+v.engine()            // 'codegen' for typical request schemas`}</DocsCode>
 
             <h3>Standard Schema V1</h3>
             <p>

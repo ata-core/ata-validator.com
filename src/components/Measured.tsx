@@ -7,6 +7,8 @@ const SUITE_ROWS = [
 const PERF_ROWS = [
   { what: 'Compile one schema', value: '6 µs', note: 'lazy, on first use' },
   { what: 'validate() on a passing object', value: '7 ns', note: 'generated JS, warm' },
+  { what: 'Rejection, errors never read', value: '~70 ns', note: 'the error is built on first read of .errors' },
+  { what: 'Whole official suite, per case', value: '~150 ns', note: 'mixed valid and invalid, prebuilt validators' },
   { what: 'Compiled validator, gzipped', value: '955 B', note: 'imports nothing' },
   { what: 'Fastify boot, 10 route schemas', value: '3.1 ms', note: 'cold process to first validated request' },
 ]
@@ -54,6 +56,13 @@ export function Measured() {
           </tbody>
         </table>
       </div>
+
+      <p className="measured-sub" style={{ marginTop: '28px', marginBottom: 0 }}>
+        The agreement itself is tested: every engine and every buffer API runs
+        the whole suite against the others in CI, and any split verdict fails
+        the build. Error output is held byte-for-byte across engines the same
+        way.
+      </p>
 
       <p className="measured-foot">
         Benchmarks run on Apple Silicon with{' '}
