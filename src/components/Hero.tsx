@@ -29,7 +29,7 @@ export function Hero() {
 
         <h1 className="hero-title">
           <span className="gradient-text">
-            Errors that<br />
+            Errors that{' '}<br />
             <span className="hero-title-accent">explain themselves.</span>
           </span>
         </h1>
@@ -37,12 +37,14 @@ export function Hero() {
 
         <p className="hero-desc">
           ata answers <code>.valid</code> in nanoseconds and builds the error,
-          with its code, the offending byte and a fix suggestion, only when you
-          read it. Ahead of every error-capable validator we measured, and the
-          same <strong>1298 of 1299</strong> suite score where{' '}
-          <strong>new Function</strong> is blocked. Draft 2020-12, draft 7 and
-          the <strong>JSON Schema v1</strong> dialect. First-class TypeScript,
-          Standard Schema V1, MIT licensed.
+          with its code, the offending byte and a fix suggestion, only when
+          you read it. Ahead of every error-capable validator we measured.
+        </p>
+
+        <p className="hero-desc hero-desc-quiet">
+          Draft 2020-12, draft 7 and the JSON Schema v1 dialect. The same
+          suite score where <strong>new Function</strong> is blocked.
+          TypeScript inference, Standard Schema V1, MIT.
         </p>
 
         <p className="hero-proof">

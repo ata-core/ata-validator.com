@@ -1,36 +1,36 @@
 :root {
   /* Surfaces */
   --bg:           #ffffff;
-  --bg-subtle:    #f8fafc;        /* card surface, code well */
-  --bg-tint:      #f0fdfa;        /* badge background */
-  --border:       #e2e8f0;
-  --border-light: #f1f5f9;
+  --bg-subtle:    #fafafa;        /* card surface, code well */
+  --bg-tint:      #fafafa;        /* badge background */
+  --border:       #eaeaea;
+  --border-light: #f2f2f2;
 
-  /* Text */
-  --text:         #0a1929;        /* primary text & headings */
-  --text-body:    #475569;        /* body paragraphs */
-  --text-dim:     #64748b;        /* nav links, secondary */
-  --text-mute:    #94a3b8;        /* captions, footnotes */
+  /* Text: monochrome, vercel-style */
+  --text:         #0a0a0a;        /* primary text & headings */
+  --text-body:    #444444;        /* body paragraphs */
+  --text-dim:     #666666;        /* nav links, secondary */
+  --text-mute:    #999999;        /* captions, footnotes */
 
-  /* Brand (locked to logo) */
-  --brand-1:      #00C9A7;        /* gradient start (teal) */
-  --brand-2:      #00B7D6;        /* gradient mid (cyan) */
-  --brand-3:      #3D5AFE;        /* gradient end (blue) */
-  --brand-soft:   #0d9488;        /* solid accent for links/highlight values */
-  --brand-tint:   #99f6e4;        /* badge border */
-  --brand-glow:   rgba(0, 183, 214, 0.4);
-  --gradient: linear-gradient(90deg, #00C9A7 0%, #00B7D6 50%, #3D5AFE 100%);
+  /* Brand: collapsed to black; the palette is typography and space */
+  --brand-1:      #0a0a0a;
+  --brand-2:      #0a0a0a;
+  --brand-3:      #0a0a0a;
+  --brand-soft:   #0a0a0a;        /* solid accent for links/highlight values */
+  --brand-tint:   #d4d4d4;        /* badge border */
+  --brand-glow:   rgba(0, 0, 0, 0.16);
+  --gradient: linear-gradient(90deg, #0a0a0a 0%, #0a0a0a 100%);
 
-  /* Ink family: every dark surface derives from --text's navy hue */
-  --ink:          #0a1929;        /* dark surface base (terminal, footer) */
-  --ink-deep:     #061322;        /* darkest edge of ink radials */
-  --ink-raise:    #10263c;        /* raised strip on ink (terminal header) */
-  --ink-border:   #1c3a57;        /* hairline on ink */
+  /* Ink family: dark surfaces are neutral near-black */
+  --ink:          #0a0a0a;        /* dark surface base (terminal, footer) */
+  --ink-deep:     #000000;        /* darkest edge of ink radials */
+  --ink-raise:    #171717;        /* raised strip on ink (terminal header) */
+  --ink-border:   #2a2a2a;        /* hairline on ink */
 
-  /* Brand-derived accents for headlines and dark surfaces */
-  --brand-blue-ink: #213689;      /* headline gradient mid stop (ink toward brand-3) */
-  --brand-2-light:  #67e8f9;      /* brand-2 lightened for dark backgrounds */
-  --brand-3-light:  #8aa9ff;      /* brand-3 lightened: paths/links on ink */
+  /* On-dark accents: light grays instead of tinted blues */
+  --brand-blue-ink: #171717;
+  --brand-2-light:  #a3a3a3;
+  --brand-3-light:  #d4d4d4;
 
   /* Semantic terminal accents */
   --code-err:     #ff7b72;
@@ -60,6 +60,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; overflow-x: hidden; }
+body { overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -158,7 +159,7 @@ code {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 72px;
   align-items: center;
   overflow: hidden;
 }
@@ -180,31 +181,38 @@ code {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .hero-content .hero-badge {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 4.6vw, 3.6rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.3rem);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.05;
-  margin: 0 0 20px;
+  line-height: 1.12;
+  margin: 0 0 14px;
 }
 
 .hero-desc {
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--text-body);
-  max-width: 540px;
-  margin: 0 0 28px;
-  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 0 20px;
+  line-height: 1.7;
 }
 
 .hero-desc strong { color: var(--text); font-weight: 600; }
+
+.hero-desc-quiet {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-bottom: 26px;
+}
 
 .hero-desc-sub {
   font-size: 0.92rem;
@@ -214,7 +222,7 @@ code {
 }
 
 .hero-proof {
-  margin-top: 10px;
+  margin: 14px 0 14px;
   font-size: 0.8rem;
   color: var(--text-dim);
 }
@@ -232,7 +240,7 @@ code {
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 32px;
+  margin: 6px 0 40px;
 }
 
 .hero-install-block {
@@ -1331,17 +1339,25 @@ code {
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
-    padding: 90px 16px 56px;
+    padding: 84px 20px 48px;
+    gap: 36px;
   }
   .hero-logo-img { max-width: 320px; }
-  .hero-title { font-size: clamp(1.75rem, 8vw, 2.5rem); }
-  .hero-desc { font-size: 0.92rem; }
-  .hero-buttons { flex-wrap: wrap; margin-bottom: 32px; }
+  .hero-title { font-size: clamp(1.9rem, 8.5vw, 2.4rem); line-height: 1.15; }
+  .hero-subline { font-size: 1rem; margin-bottom: 22px; }
+  .hero-desc { font-size: 0.95rem; max-width: none; }
+  .hero-desc-quiet { font-size: 0.85rem; }
+  .hero-buttons { flex-wrap: wrap; margin: 4px 0 30px; }
+  .hero-buttons a { flex: 1 1 auto; text-align: center; }
+  .hero-install-block { max-width: none; }
+  /* the two-line desktop break fights small screens; wrap naturally */
+  .hero-title br { display: none; }
   .hero-install { font-size: 0.78rem; padding: 8px 14px; }
 
   .nav-tagline { display: none; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 0.75rem; }
+  .nav-inner { height: auto; min-height: 52px; flex-wrap: wrap; padding: 8px 16px; row-gap: 2px; gap: 12px; }
+  .nav-links { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+  .nav-links a { font-size: 0.75rem; white-space: nowrap; }
 
   .feature-row, .feature-row.reverse {
     grid-template-columns: 1fr;
@@ -1484,60 +1500,39 @@ code {
 
 /* Headlines: restrained dark-to-teal sweep instead of flat navy */
 @supports (-webkit-background-clip: text) {
-  .gradient-text {
-    background: linear-gradient(105deg, #0a1929 0%, var(--brand-blue-ink) 60%, #0d9488 115%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  .hero-title-accent {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  .bench-stat-value {
-    background: linear-gradient(105deg, #0a1929 10%, var(--brand-blue-ink) 70%, #0d9488 130%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  .orbit-center-text {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
+  /* Monochrome headlines: in the hero the first words recede and the accent
+     stays black; section titles are simply black. */
+  .gradient-text { color: var(--text-mute); }
+  .section-title-xl.gradient-text, .section-title-xl .gradient-text { color: var(--text); }
+  h2.gradient-text { color: var(--text); }
+  .hero-title-accent { color: var(--text); }
+  .bench-stat-value { color: var(--text); }
+  .orbit-center-text { color: var(--text); }
 }
 
-/* Kickers: brand-colored small caps */
+/* Kickers: quiet small caps */
 .section-kicker {
-  color: var(--brand-soft);
+  color: var(--text-mute);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.72rem;
   font-weight: 700;
 }
 
-/* Hero badge: brand tint */
+/* Hero badge: monochrome pill */
 .badge-ocean {
-  background: var(--bg-tint);
-  border-color: var(--brand-tint);
-  color: #0f766e;
+  background: var(--bg-subtle);
+  border-color: var(--border);
+  color: var(--text-dim);
 }
-.badge-ocean:hover { color: #115e59; border-color: var(--brand-soft); }
+.badge-ocean:hover { color: var(--text); border-color: var(--text-mute); }
 
-/* Primary CTA carries the brand gradient */
+/* Primary CTA: solid black, white text */
 .btn-gradient {
-  background: var(--gradient);
+  background: #0a0a0a;
 }
 .btn-gradient:hover {
-  background: var(--gradient);
-  filter: brightness(0.94) saturate(1.1);
+  background: #000;
   box-shadow: 0 6px 20px -6px var(--brand-glow);
 }
 
@@ -1575,17 +1570,9 @@ a:hover { color: var(--brand-soft); }
 ::selection { background: rgba(0, 201, 167, 0.22); }
 :focus-visible { outline: 2px solid var(--brand-2); outline-offset: 2px; }
 
-/* Dark sections need the bright variant of the headline gradient */
-@supports (-webkit-background-clip: text) {
-  .ecosystem .gradient-text {
-    background: linear-gradient(105deg, #f1f5f9 0%, var(--brand-2-light) 55%, #00C9A7 115%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-}
-.ecosystem .section-kicker { color: var(--brand-1); }
+/* Dark sections: light monochrome headline */
+.ecosystem .gradient-text { color: #fafafa; }
+.ecosystem .section-kicker { color: var(--text-mute); }
 
 /* --- Benefits: four calm cards under the hero (paseri-style density) --- */
 .benefits {
@@ -1689,9 +1676,9 @@ a:hover { color: var(--brand-soft); }
 /* Hero subline: the second half of the headline, quieter. */
 .hero-subline {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text-dim);
-  margin: 2px 0 18px;
+  margin: 0 0 28px;
 }
