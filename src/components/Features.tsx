@@ -37,7 +37,7 @@ const v = new Validator(Account)`,
   {
     label: "PORTABILITY",
     title: "Runs where code generation is refused",
-    desc: "Most validators turn a schema into source and hand it to new Function. Cloudflare Workers, Deno Deploy and any page under a strict Content-Security-Policy refuse that outright. ata detects it and falls back to an interpreted engine rather than degrading, and the whole official suite is run that way in CI so the guarantee is checked rather than assumed.",
+    desc: "Most validators turn a schema into source and hand it to new Function. Cloudflare Workers, Deno Deploy and any page under a strict Content-Security-Policy refuse that outright. ata detects it and falls back to an interpreted engine rather than degrading, and the whole official suite is run that way in CI so the guarantee is checked rather than assumed. Node has a switch for the same environment, so you can check this for yourself in thirty seconds: run anything under node --disallow-code-generation-from-strings and see what survives.",
     bullets: [
       { text: "1298 of 1299", rest: " on Draft 2020-12 with eval and new Function blocked, the same figure as the compiled path" },
       { text: "No native addon required", rest: " — the core package ships no binaries, the accelerator is optional" },

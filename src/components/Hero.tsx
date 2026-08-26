@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ErrorShowcase } from './ErrorShowcase'
 
 const INSTALL_CMD = 'npm install ata-validator'
-const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.7.2'
+const RELEASE_URL = 'https://github.com/ata-core/ata-validator/releases/tag/v1.7.4'
 
 export function Hero() {
   const [copied, setCopied] = useState(false)
@@ -71,7 +71,7 @@ export function Hero() {
 
         <div className="hero-buttons">
           <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-            See the 1.7.2 release →
+            See the 1.7.4 release →
           </a>
           <a href="#quickstart" className="btn btn-secondary">
             Try in 30 seconds

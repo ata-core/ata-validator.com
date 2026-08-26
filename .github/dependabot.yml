@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # ata-validator moves faster than this repository does. A bump PR lands here
+  # on its own so what this repository shows is never several versions behind
+  # what is published.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
