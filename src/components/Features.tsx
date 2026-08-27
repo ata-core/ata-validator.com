@@ -39,7 +39,7 @@ const v = new Validator(Account)`,
     title: "Runs where code generation is refused",
     desc: "Most validators turn a schema into source and hand it to new Function. Cloudflare Workers, Deno Deploy and any page under a strict Content-Security-Policy refuse that outright. ata detects it and falls back to an interpreted engine rather than degrading, and the whole official suite is run that way in CI so the guarantee is checked rather than assumed. Node has a switch for the same environment, so you can check this for yourself in thirty seconds: run anything under node --disallow-code-generation-from-strings and see what survives.",
     bullets: [
-      { text: "1298 of 1299", rest: " on Draft 2020-12 with eval and new Function blocked, the same figure as the compiled path" },
+      { text: "1299 of 1299", rest: " on Draft 2020-12 with eval and new Function blocked, the same figure as the compiled path" },
       { text: "No native addon required", rest: " — the core package ships no binaries, the accelerator is optional" },
       { text: "AOT output imports nothing", rest: " — a compiled schema is a standalone module with zero dependencies" },
     ],
@@ -133,7 +133,7 @@ const fmt = new Validator({
     bullets: [
       { text: "Native bytecode plan", rest: " when the optional accelerator is installed" },
       { text: "Generated JavaScript", rest: " where code generation is available, with a zero-allocation loop" },
-      { text: "Direct interpretation", rest: " under a CSP or on Workers, scoring 1298 of 1299 with codegen blocked" },
+      { text: "Direct interpretation", rest: " under a CSP or on Workers, scoring 1299 of 1299 with codegen blocked" },
     ],
     code: `// Internal bytecode generated from schema
 EXPECT_OBJECT

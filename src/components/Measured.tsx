@@ -1,5 +1,5 @@
 const SUITE_ROWS = [
-  { dialect: 'Draft 2020-12', score: '1,298 / 1,299', note: 'the one miss needs $vocabulary' },
+  { dialect: 'Draft 2020-12', score: '1,299 / 1,299', note: '' },
   { dialect: 'Draft 7', score: '927 / 927', note: '' },
   { dialect: 'JSON Schema v1', score: '1,133 / 1,133', note: 'the new dialect, supported since 1.6' },
 ]

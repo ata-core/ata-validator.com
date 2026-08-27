@@ -9,7 +9,7 @@ const BENEFITS = [
   },
   {
     title: 'Runs where eval is refused',
-    desc: 'Cloudflare Workers and pages under a strict CSP block new Function. ata compiles schemas into a tree of plain closures instead and scores the same 1298 of 1299 with code generation blocked.',
+    desc: 'Cloudflare Workers and pages under a strict CSP block new Function. ata compiles schemas into a tree of plain closures instead and scores the same 1299 of 1299 with code generation blocked.',
   },
   {
     title: 'Safe by construction',
