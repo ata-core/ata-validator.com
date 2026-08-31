@@ -26,7 +26,19 @@ export default function Home() {
           required binaries, and the same results in every runtime.
         </p>
 
-        <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
+        <DocsCode lang="js">{`// npm install ata-validator
+import { Validator } from 'ata-validator'
+
+const v = new Validator({
+  type: 'object',
+  required: ['id', 'email'],
+  properties: {
+    id: { type: 'integer', minimum: 1 },
+    email: { type: 'string', format: 'email' }
+  }
+})
+
+v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</DocsCode>
 
         <div className="dx-hero-actions">
           <Link className="dx-btn dx-btn-primary" to="/docs/quick-start">Get started</Link>
@@ -41,20 +53,6 @@ export default function Home() {
           </a>
         </div>
       </header>
-
-      <h2>What it looks like</h2>
-      <DocsCode lang="js">{`import { Validator } from 'ata-validator'
-
-const v = new Validator({
-  type: 'object',
-  required: ['id', 'email'],
-  properties: {
-    id: { type: 'integer', minimum: 1 },
-    email: { type: 'string', format: 'email' }
-  }
-})
-
-v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</DocsCode>
 
       <h2>When it fails</h2>
       <p>
