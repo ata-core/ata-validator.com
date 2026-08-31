@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DOC_PAGES, docHref } from './registry'
+import { DOC_CHAIN, docHref } from './registry'
 
 type Entry = {
   title: string
@@ -14,7 +14,7 @@ type Entry = {
 // so the index never drifts from what is actually on the page.
 function buildEntries(headings: Map<string, { text: string; id: string; page: string }[]>): Entry[] {
   const out: Entry[] = []
-  for (const p of DOC_PAGES) {
+  for (const p of DOC_CHAIN) {
     out.push({
       title: p.title,
       page: p.title,

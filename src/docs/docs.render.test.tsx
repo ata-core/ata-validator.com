@@ -1,8 +1,9 @@
 import { describe, expect, test } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { DOC_PAGES, docHref } from './registry'
+import { DOC_CHAIN, DOC_PAGES, docHref } from './registry'
 import DocsLayout from './DocsLayout'
+import Home from './pages/Home'
 import Introduction from './pages/Introduction'
 import QuickStart from './pages/QuickStart'
 import Installation from './pages/Installation'
@@ -37,6 +38,9 @@ const renderAt = (slug: string) =>
   renderToStaticMarkup(
     <MemoryRouter initialEntries={[docHref(slug)]}>
       <Routes>
+        <Route path="/" element={<DocsLayout />}>
+          <Route index element={<Home />} />
+        </Route>
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={ELEMENTS['']} />
           {Object.entries(ELEMENTS)
@@ -76,8 +80,15 @@ describe('documentation shell', () => {
     expect(html).toContain('Next')
   })
 
-  test('the first page has no previous link and the last has no next', () => {
-    expect(renderAt('')).not.toContain('Previous')
-    expect(renderAt(DOC_PAGES[DOC_PAGES.length - 1].slug)).not.toContain('>Next<')
+  test('the front page renders inside the shell and starts the chain', () => {
+    const html = renderAt('/')
+    expect(html).toContain('dx-article-home')
+    expect(html).toContain('dx-sidebar')
+    expect(html).not.toContain('Previous')
+    expect(html).toContain('Next')
+  })
+
+  test('the last page in the chain has no next link', () => {
+    expect(renderAt(DOC_CHAIN[DOC_CHAIN.length - 1].slug)).not.toContain('>Next<')
   })
 })

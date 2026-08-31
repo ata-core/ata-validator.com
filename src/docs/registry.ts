@@ -9,6 +9,17 @@ export type DocPage = {
   keywords?: string[] // extra search terms that are not in the title
 }
 
+// The overview sits above the groups in the sidebar and at the head of the
+// previous/next chain. It is the site's front page and a documentation page at
+// the same time.
+export const HOME_PAGE: DocPage = {
+  slug: '/',
+  title: 'Overview',
+  group: '',
+  summary: 'What ata-validator is, in one page',
+  keywords: ['home', 'start', 'ata'],
+}
+
 export const DOC_PAGES: DocPage[] = [
   {
     slug: '',
@@ -105,6 +116,10 @@ export const DOC_PAGES: DocPage[] = [
 
 export const DOC_GROUPS = ['Getting started', 'Guides', 'Reference', 'Ecosystem']
 
-export const docHref = (slug: string) => (slug ? `/docs/${slug}` : '/docs')
+export const docHref = (slug: string) =>
+  slug === '/' ? '/' : slug ? `/docs/${slug}` : '/docs'
+
+// Order of the previous/next chain across the whole site.
+export const DOC_CHAIN: DocPage[] = [HOME_PAGE, ...DOC_PAGES]
 
 export const ATA_VERSION = '1.10.0'

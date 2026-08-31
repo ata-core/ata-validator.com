@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import App from './App'
 import ErrorCodePage from './ErrorCodePage'
 import Playground from './playground/Playground'
 import DocsLayout from './docs/DocsLayout'
+import Home from './docs/pages/Home'
 import Introduction from './docs/pages/Introduction'
 import QuickStart from './docs/pages/QuickStart'
 import Installation from './docs/pages/Installation'
@@ -24,7 +24,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<DocsLayout />}>
+          <Route index element={<Home />} />
+        </Route>
         <Route path="/playground" element={<Playground />} />
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<Introduction />} />

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { DOC_GROUPS, DOC_PAGES, docHref } from './registry'
+import { DOC_CHAIN, DOC_GROUPS, DOC_PAGES, HOME_PAGE, docHref } from './registry'
 import { TopBar } from './TopBar'
+import { Footer } from '../components/Footer'
 import './docs.css'
 
 // The documentation used to be one page with anchors. Links to those anchors
@@ -29,10 +30,11 @@ const slugify = (s: string) =>
 
 export default function DocsLayout() {
   const location = useLocation()
-  const slug = location.pathname.replace(/^\/docs\/?/, '').replace(/\/$/, '')
-  const index = DOC_PAGES.findIndex((p) => p.slug === slug)
-  const prev = index > 0 ? DOC_PAGES[index - 1] : null
-  const next = index >= 0 && index < DOC_PAGES.length - 1 ? DOC_PAGES[index + 1] : null
+  const isHome = location.pathname === '/' || location.pathname === ''
+  const slug = isHome ? '/' : location.pathname.replace(/^\/docs\/?/, '').replace(/\/$/, '')
+  const index = DOC_CHAIN.findIndex((p) => p.slug === slug)
+  const prev = index > 0 ? DOC_CHAIN[index - 1] : null
+  const next = index >= 0 && index < DOC_CHAIN.length - 1 ? DOC_CHAIN[index + 1] : null
 
   const legacyTarget =
     location.pathname.replace(/\/$/, '') === '/docs' ? LEGACY_ANCHORS[location.hash] : undefined
@@ -115,6 +117,19 @@ export default function DocsLayout() {
         {navOpen && <div className="dx-scrim" onClick={() => setNavOpen(false)} />}
 
         <aside className={navOpen ? 'dx-sidebar open' : 'dx-sidebar'}>
+          <div className="dx-group">
+            <ul>
+              <li>
+                <Link
+                  to="/"
+                  className={isHome ? 'active' : undefined}
+                  onClick={() => setNavOpen(false)}
+                >
+                  {HOME_PAGE.title}
+                </Link>
+              </li>
+            </ul>
+          </div>
           {grouped.map(({ group, pages }) => (
             <div className="dx-group" key={group}>
               <p className="dx-group-label">{group}</p>
@@ -136,7 +151,7 @@ export default function DocsLayout() {
         </aside>
 
         <main className="dx-main">
-          <article className="dx-article" ref={articleRef}>
+          <article className={isHome ? 'dx-article dx-article-home' : 'dx-article'} ref={articleRef}>
             <Outlet />
           </article>
 
@@ -185,6 +200,8 @@ export default function DocsLayout() {
           )}
         </aside>
       </div>
+
+      <Footer />
 
     </div>
   )
