@@ -1,30 +1,46 @@
 import { Link } from 'react-router-dom'
 import { DocsCode } from '../../components/DocsCode'
 
-type Bar = { label: string; value: string; ratio: number; note?: string }
+type Bar = { label: string; value: string; ratio: number }
 
-const THROUGHPUT: Bar[] = [
-  { label: 'Object accepted, unknown keys allowed', value: '127.8M ops/s', ratio: 1 },
-  { label: 'Object accepted, unknown keys rejected', value: '69.9M ops/s', ratio: 0.55 },
+const REQUEST: Bar[] = [
+  { label: 'Accepts the body', value: '24 ns', ratio: 0.05 },
+  { label: 'Rejects it, verdict only', value: '15 ns', ratio: 0.03 },
+  { label: 'Rejects it, error list read', value: '478 ns', ratio: 1 },
+]
+
+const BLOCKED = [
+  { what: 'Accepts the body', compiled: '24 ns', interpreted: '223 ns' },
+  { what: 'Rejects it, verdict only', compiled: '15 ns', interpreted: '93 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.24 ms', interpreted: '0.52 ms' },
 ]
 
 const MEMORY: Bar[] = [
-  { label: 'Constructed, never used, schema shared', value: '0.43 KB', ratio: 0.13 },
-  { label: 'Constructed, never used, own schema', value: '1.12 KB', ratio: 0.34 },
-  { label: 'Compiled and used', value: '3.30 KB', ratio: 1 },
+  { label: 'Constructed, never called', value: '0.43 KB', ratio: 0.13 },
+  { label: 'Constructed with its own schema', value: '1.12 KB', ratio: 0.34 },
+  { label: 'Compiled and in use', value: '3.30 KB', ratio: 1 },
 ]
 
-const COST = [
-  { what: 'validate() on a passing object', value: '4.7 ns' },
-  { what: 'Rejection, errors never read', value: '5.0 ns' },
-  { what: 'Compile a schema, once, on first use', value: '6.0 µs' },
-  { what: 'Construct a validator', value: '855 ns' },
-]
-
-const FORMATS = [
-  { what: 'date', before: '45.7 ns', after: '14.2 ns' },
-  { what: 'ipv4', before: '54.5 ns', after: '27.1 ns' },
-]
+const SCHEMA = `{
+  type: 'object',
+  required: ['email', 'name', 'age'],
+  additionalProperties: false,
+  properties: {
+    email: { type: 'string', format: 'email', maxLength: 128 },
+    name: { type: 'string', minLength: 1, maxLength: 80 },
+    age: { type: 'integer', minimum: 13, maximum: 130 },
+    tags: { type: 'array', items: { type: 'string' }, maxItems: 10 },
+    address: {
+      type: 'object',
+      required: ['city', 'country'],
+      properties: {
+        city: { type: 'string' },
+        country: { type: 'string', minLength: 2, maxLength: 2 },
+        zip: { type: 'string', pattern: '^[0-9]{5}$' }
+      }
+    }
+  }
+}`
 
 function Bars({ rows }: { rows: Bar[] }) {
   return (
@@ -36,7 +52,7 @@ function Bars({ rows }: { rows: Bar[] }) {
             <span className="dx-bar-value">{r.value}</span>
           </div>
           <div className="dx-bar-track">
-            <div className="dx-bar-fill" style={{ width: `${Math.round(r.ratio * 100)}%` }} />
+            <div className="dx-bar-fill" style={{ width: `${Math.max(2, Math.round(r.ratio * 100))}%` }} />
           </div>
         </div>
       ))}
@@ -50,96 +66,108 @@ export default function Benchmarks() {
       <p className="dx-eyebrow">Ecosystem</p>
       <h1>Benchmarks</h1>
       <p className="dx-lede">
-        The figures below come from runs on one development machine, Apple silicon on Node 25.
-        They are medians of interleaved rounds in a single process. Treat them as relative cost,
-        not as a promise for your hardware.
+        The interesting question is not which validator wins a microbenchmark. It is what
+        validation costs inside your own request, at startup, in your bundle, and when the
+        runtime will not let you generate code. Those are the four numbers below.
       </p>
 
-      <h2>Throughput</h2>
+      <h2>The schema everything here uses</h2>
       <p>
-        Measured inside the public runtime type benchmark harness, on its own shapes: an object
-        of seven fields with one nested object, run in both of its assertion modes.
+        A signup body, five fields with a nested object and a pattern, closed to unknown keys.
+        Roughly what an HTTP route carries.
       </p>
-      <Bars rows={THROUGHPUT} />
-      <p className="dx-note">
-        The case file that produces these lives in that benchmark's repository, so the run can
-        be repeated rather than trusted.
+      <DocsCode lang="js">{SCHEMA}</DocsCode>
+
+      <h2>One request</h2>
+      <Bars rows={REQUEST} />
+      <p>
+        Accepting a valid body takes 24 ns, so a route handling ten thousand requests a second
+        spends about a quarter of a millisecond per second on validation. Rejecting is cheaper
+        than accepting, because the check stops at the first rule that fails.
+      </p>
+      <p>
+        The third bar is the one worth understanding. Errors are built when you read them. If
+        the route answers a bad body with a 400 and no detail, you never pay the 478 ns; if it
+        returns the list, you do, once.
       </p>
 
-      <h2>Cost per call</h2>
+      <h2>Startup</h2>
       <p>
-        On a small object schema with two properties, one of them constrained. Compilation is
-        paid once, on the first validating call, and never again.
+        Ten route schemas, compiled and ready to serve: <strong>0.24 ms</strong>. A schema is
+        compiled the first time it validates something, so a process that boots and idles
+        compiles nothing at all. This matters on platforms that charge for cold starts.
+      </p>
+
+      <h2>When code generation is blocked</h2>
+      <p>
+        Some runtimes refuse <code>new Function</code>: browser pages under a strict policy,
+        several edge platforms, a few embedded engines. ata keeps working there on its
+        interpreter, and this is what that costs.
       </p>
       <table className="dx-table">
         <thead>
-          <tr><th>Operation</th><th>Measured</th></tr>
+          <tr><th>Same schema</th><th>Compiled</th><th>Code generation blocked</th></tr>
         </thead>
         <tbody>
-          {COST.map((r) => (
+          {BLOCKED.map((r) => (
             <tr key={r.what}>
               <td>{r.what}</td>
-              <td className="dx-num">{r.value}</td>
+              <td className="dx-num">{r.compiled}</td>
+              <td className="dx-num">{r.interpreted}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <p>
-        A rejection costs about as much as an acceptance because the error objects are built
-        when the list is first read. A service that answers a bad request with a status code
-        never pays for them.
+        Slower, and still fast enough to be unremarkable in a request. The verdicts are
+        identical: the whole official suite runs in this mode on every change, at the same
+        counts as the compiled path.
       </p>
+
+      <h2>In a bundle</h2>
+      <p>
+        <code>ata compile</code> turns that schema into a module of{' '}
+        <strong>2.27 KB gzipped</strong> that imports nothing. No compiler, no interpreter, no
+        runtime dependency, so the size of the library stops being part of the conversation for
+        front-end and edge builds.
+      </p>
+      <DocsCode lang="shell">{`npx ata compile schema.json --out validate.js`}</DocsCode>
 
       <h2>Memory per validator</h2>
       <p>
-        Retained heap per instance on a ten-key object schema, measured as the delta across two
-        forced collections over two thousand instances.
+        An application with two hundred routes constructs two hundred validators, and usually
+        exercises a handful per request. Retained heap per instance, on a ten-key object schema:
       </p>
       <Bars rows={MEMORY} />
       <p>
-        Methods are built on first use rather than bound in the constructor, so a validator that
-        is constructed and never called stays at the first figure.
+        Methods are built on first use instead of being bound in the constructor, which is why
+        an idle validator sits at 0.43 KB.
       </p>
 
-      <h2>Format checks</h2>
+      <h2>The public harness</h2>
       <p>
-        Two format checks were rewritten to read the string once, with no regular expression and
-        no allocation. Both are fuzzed against their previous forms with no mismatches.
+        On the shapes used by the runtime type benchmark that most of the ecosystem reports
+        against, ata reaches <strong>127.8M ops/s</strong> with unknown keys allowed and{' '}
+        <strong>69.9M ops/s</strong> with them rejected. The case file is in that project's
+        repository, so the run is reproducible by anyone.
       </p>
-      <table className="dx-table">
-        <thead>
-          <tr><th>Format</th><th>Before</th><th>After</th></tr>
-        </thead>
-        <tbody>
-          {FORMATS.map((r) => (
-            <tr key={r.what}>
-              <td><code>{r.what}</code></td>
-              <td className="dx-num">{r.before}</td>
-              <td className="dx-num">{r.after}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
 
-      <h2>Engine coverage</h2>
+      <h2>How these were taken</h2>
       <p>
-        Release 1.10.0 moved schema shapes that used to fall back to the interpreter onto the
-        compiler: boolean subschemas, recursive definitions, and{' '}
-        <code>additionalProperties</code> next to composition. Every suite group that moved got
-        faster, 31 of 31 on Draft 2020-12 and 28 of 28 on draft 7, with the summed per-group
-        time down 70 percent. Suite-wide the figure stayed inside measurement noise, which is
-        why this is described as coverage rather than as a speedup.
+        One laptop, Apple silicon, Node 25. Medians of nine interleaved rounds in a single
+        process, after a warmup. Heap figures are deltas across two forced collections over two
+        thousand instances. Numbers move with hardware and with the schema, so treat them as
+        shape rather than as a contract, and rerun them yourself:
       </p>
-
-      <h2>Running them yourself</h2>
       <DocsCode lang="shell">{`git clone https://github.com/ata-core/ata-validator
 cd ata-validator && npm install
 
-npm run test:suite      # the official suite, three dialects
-node benchmark/bench.mjs # the timing harness`}</DocsCode>
+npm run test:suite         # correctness, three dialects
+node benchmark/bench.mjs   # the timing harness`}</DocsCode>
       <p>
-        <Link to="/docs/performance">Performance</Link> explains what is measured and why some
-        paths cost what they do.
+        <Link to="/docs/performance">Performance</Link> explains why the failure path is cheap
+        and where the time goes, and <Link to="/docs/compliance">Compliance</Link> has the
+        correctness results, which are the ones that should decide this.
       </p>
     </>
   )

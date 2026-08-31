@@ -8,10 +8,10 @@ const SUITE = [
 ]
 
 const COST = [
-  { what: 'validate() on a passing object', value: '4.7 ns' },
-  { what: 'Rejection, errors never read', value: '5.0 ns' },
-  { what: 'Compile a schema, once, on first use', value: '6.0 µs' },
-  { what: 'Validator constructed and never used', value: '0.43 KB' },
+  { what: 'Accept a typical route body', value: '24 ns' },
+  { what: 'Reject it, verdict only', value: '15 ns' },
+  { what: 'Ten route schemas ready at startup', value: '0.24 ms' },
+  { what: 'Compiled validator in a bundle, gzipped', value: '2.27 KB' },
 ]
 
 export default function Home() {
@@ -134,8 +134,8 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         </tbody>
       </table>
       <p className="dx-note">
-        Timings are medians of interleaved runs on one development machine, on a small object
-        schema. They show relative cost, not a promise for your hardware.{' '}
+        Medians of interleaved runs on one laptop, on a signup body with a nested object.
+        Yours will differ with hardware and schema.{' '}
 <Link to="/docs/benchmarks">See the benchmarks</Link>.
       </p>
 
