@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 type Lang = 'js' | 'shell' | 'plain'
 
@@ -102,16 +102,38 @@ function highlight(code: string, lang: Lang): Token[] {
 
 export function DocsCode({ lang = 'js', children }: Props) {
   const tokens = useMemo(() => highlight(children, lang), [children, lang])
+  const [copied, setCopied] = useState(false)
+
+  const copy = () => {
+    void navigator.clipboard?.writeText(children).then(
+      () => {
+        setCopied(true)
+        window.setTimeout(() => setCopied(false), 1600)
+      },
+      () => {},
+    )
+  }
+
   return (
-    <pre className="docs-code">
-      <code>
-        {tokens.map((t, i) => {
-          const cls = t.color === T.comment ? 'tk-cm' : undefined
-          return (
-            <span key={i} className={cls} style={{ color: t.color }}>{t.text}</span>
-          )
-        })}
-      </code>
-    </pre>
+    <div className={lang === 'shell' ? 'docs-code-wrap is-command' : 'docs-code-wrap'}>
+      <pre className="docs-code">
+        <code>
+          {tokens.map((t, i) => {
+            const cls = t.color === T.comment ? 'tk-cm' : undefined
+            return (
+              <span key={i} className={cls} style={{ color: t.color }}>{t.text}</span>
+            )
+          })}
+        </code>
+      </pre>
+      <button
+        type="button"
+        className={copied ? 'docs-code-copy copied' : 'docs-code-copy'}
+        onClick={copy}
+        aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+      >
+        {copied ? 'Copied' : 'Copy'}
+      </button>
+    </div>
   )
 }

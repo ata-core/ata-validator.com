@@ -532,3 +532,64 @@
   .dx-hero-mark { font-size: 36px; }
   .dx-article-home h1 { font-size: 28px; }
 }
+
+/* ---------- code blocks ---------- */
+
+.docs-code-wrap {
+  position: relative;
+  margin: 0 0 20px;
+}
+
+.docs-code {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  overflow-x: auto;
+  line-height: 1.6;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+}
+.docs-code code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 0;
+}
+
+.docs-code-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+.docs-code-wrap:hover .docs-code-copy,
+.docs-code-copy:focus-visible { opacity: 1; }
+.docs-code-copy:hover { color: var(--text); border-color: var(--brand-tint); }
+.docs-code-copy.copied { opacity: 1; color: var(--text); }
+
+/* A command is short and the button would sit on top of it, so the block
+   makes room and the button stays visible without a hover. */
+.docs-code-wrap.is-command .docs-code { padding-right: 92px; }
+.docs-code-wrap.is-command .docs-code-copy { opacity: 1; }
+
+@media (max-width: 640px) {
+  .docs-code { padding: 12px 14px; font-size: 12px; }
+}
