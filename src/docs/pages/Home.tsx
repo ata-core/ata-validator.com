@@ -26,6 +26,8 @@ export default function Home() {
           required binaries, and the same results in every runtime.
         </p>
 
+        <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
+
         <DocsCode lang="js">{`// npm install ata-validator
 import { Validator } from 'ata-validator'
 
