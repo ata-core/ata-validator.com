@@ -466,7 +466,10 @@
 
 .dx-hero { margin-bottom: 8px; }
 
-.dx-hero-mark {
+/* Scoped past .dx-article p, which would otherwise paint the wordmark in body
+   text gray. */
+.dx-hero-mark,
+.dx-article p.dx-hero-mark {
   font-family: var(--mono);
   font-size: 148px;
   font-weight: 700;
@@ -530,7 +533,8 @@
 }
 
 @media (max-width: 900px) {
-  .dx-hero-mark { font-size: 92px; margin-bottom: 28px; }
+  .dx-hero-mark,
+  .dx-article p.dx-hero-mark { font-size: 92px; margin-bottom: 28px; }
   .dx-article-home h1 { font-size: 28px; }
 }
 
