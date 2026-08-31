@@ -84,77 +84,11 @@ code {
 }
 
 /* Nav */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.nav-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.nav-logo-text {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  color: var(--text);
-  line-height: 1;
-}
-
-.nav-tagline {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-
-.nav-spacer { flex: 1; }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.nav-links a {
-  color: var(--text-dim);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-.nav-links a:hover { color: var(--text); }
-
-.nav-github { display: flex; color: var(--text-dim); }
-.nav-github:hover { color: var(--text); }
 
 /* Hero — Bun-style split: copy left, dark bench card right */
 .hero {
   position: relative;
-  padding: 120px 24px 80px;
+  padding: 60px 24px 80px;
   max-width: 1080px;
   margin: 0 auto;
   display: grid;
@@ -1354,7 +1288,6 @@ code {
   .hero-title br { display: none; }
   .hero-install { font-size: 0.78rem; padding: 8px 14px; }
 
-  .nav-tagline { display: none; }
   .nav-inner { height: auto; min-height: 52px; flex-wrap: wrap; padding: 8px 16px; row-gap: 2px; gap: 12px; }
   .nav-links { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
   .nav-links a { font-size: 0.75rem; white-space: nowrap; }
@@ -1404,18 +1337,6 @@ code {
 }
 
 /* ---------- motion layer ---------- */
-
-/* Nav: transparent at top, glass once scrolled */
-.nav {
-  background: rgba(255, 255, 255, 0.55);
-  border-bottom: 1px solid transparent;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-.nav.scrolled {
-  background: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid var(--border-light);
-  box-shadow: 0 6px 24px -18px rgba(15, 23, 42, 0.25);
-}
 
 /* Compliance arc final state (also the reduced-motion state) */
 .score-arc { stroke-dashoffset: 0.4; }

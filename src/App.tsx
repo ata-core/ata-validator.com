@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Nav } from "./components/Nav";
+import { TopBar } from "./docs/TopBar";
+import "./docs/docs.css";
 import { Hero } from "./components/Hero";
 import { Benefits } from "./components/Benefits";
 import { QuickStart } from "./components/QuickStart";
@@ -28,7 +29,7 @@ export default function App() {
 
   return (
     <>
-      <Nav />
+      <TopBar />
       <Hero />
       <Benefits />
       <QuickStart />
