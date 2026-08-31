@@ -15,6 +15,7 @@ import Dialects from './docs/pages/Dialects'
 import Api from './docs/pages/Api'
 import ErrorCodes from './docs/pages/ErrorCodes'
 import Integrations from './docs/pages/Integrations'
+import Benchmarks from './docs/pages/Benchmarks'
 import Performance from './docs/pages/Performance'
 import Compliance from './docs/pages/Compliance'
 import Faq from './docs/pages/Faq'
@@ -39,6 +40,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="api" element={<Api />} />
           <Route path="error-codes" element={<ErrorCodes />} />
           <Route path="integrations" element={<Integrations />} />
+          <Route path="benchmarks" element={<Benchmarks />} />
           <Route path="performance" element={<Performance />} />
           <Route path="compliance" element={<Compliance />} />
           <Route path="faq" element={<Faq />} />

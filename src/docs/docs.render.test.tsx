@@ -14,6 +14,7 @@ import Dialects from './pages/Dialects'
 import Api from './pages/Api'
 import ErrorCodes from './pages/ErrorCodes'
 import Integrations from './pages/Integrations'
+import Benchmarks from './pages/Benchmarks'
 import Performance from './pages/Performance'
 import Compliance from './pages/Compliance'
 import Faq from './pages/Faq'
@@ -29,6 +30,7 @@ const ELEMENTS: Record<string, React.ReactElement> = {
   api: <Api />,
   'error-codes': <ErrorCodes />,
   integrations: <Integrations />,
+  benchmarks: <Benchmarks />,
   performance: <Performance />,
   compliance: <Compliance />,
   faq: <Faq />,

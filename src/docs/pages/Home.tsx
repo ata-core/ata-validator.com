@@ -136,7 +136,7 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
       <p className="dx-note">
         Timings are medians of interleaved runs on one development machine, on a small object
         schema. They show relative cost, not a promise for your hardware.{' '}
-        <Link to="/docs/performance">How these are measured</Link>.
+<Link to="/docs/benchmarks">See the benchmarks</Link>.
       </p>
 
       <h2>Where it is used</h2>

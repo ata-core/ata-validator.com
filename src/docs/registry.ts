@@ -92,6 +92,13 @@ export const DOC_PAGES: DocPage[] = [
     keywords: ['fastify', 'rjsf', 'vite', 'standard schema', 'node'],
   },
   {
+    slug: 'benchmarks',
+    title: 'Benchmarks',
+    group: 'Ecosystem',
+    summary: 'Measured throughput, cost per call and memory per validator',
+    keywords: ['bench', 'ops', 'throughput', 'memory', 'numbers', 'speed'],
+  },
+  {
     slug: 'performance',
     title: 'Performance',
     group: 'Ecosystem',

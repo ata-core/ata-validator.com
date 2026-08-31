@@ -598,3 +598,40 @@
 @media (max-width: 640px) {
   .docs-code { padding: 12px 14px; font-size: 12px; }
 }
+
+/* ---------- benchmark bars ---------- */
+
+.dx-bars { margin: 0 0 22px; }
+
+.dx-bar-row + .dx-bar-row { margin-top: 16px; }
+
+.dx-bar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.dx-bar-label { font-size: 14px; color: var(--text-body); }
+
+.dx-bar-value {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.dx-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.dx-bar-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 999px;
+}
