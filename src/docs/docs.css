@@ -491,7 +491,10 @@
   margin: 20px 0 8px;
 }
 
-.dx-btn {
+/* Scoped against .dx-article a, which is more specific than a bare class and
+   would otherwise repaint the label in body text color. */
+.dx-btn,
+.dx-article a.dx-btn {
   display: inline-flex;
   align-items: center;
   height: 38px;
@@ -504,14 +507,26 @@
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s;
 }
-.dx-btn:hover { border-color: var(--brand-tint); background: var(--bg-subtle); color: var(--text); }
+.dx-btn:hover,
+.dx-article a.dx-btn:hover {
+  border-color: var(--brand-tint);
+  background: var(--bg-subtle);
+  color: var(--text);
+  text-decoration: none;
+}
 
-.dx-btn-primary {
+.dx-btn-primary,
+.dx-article a.dx-btn-primary {
   background: var(--ink);
   border-color: var(--ink);
   color: #ffffff;
 }
-.dx-btn-primary:hover { background: var(--ink-raise); border-color: var(--ink-raise); color: #ffffff; }
+.dx-btn-primary:hover,
+.dx-article a.dx-btn-primary:hover {
+  background: var(--ink-raise);
+  border-color: var(--ink-raise);
+  color: #ffffff;
+}
 
 @media (max-width: 900px) {
   .dx-hero-mark { font-size: 36px; }
