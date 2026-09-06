@@ -68,6 +68,12 @@ check.parse(data)      // throws a real ZodError`}</DocsCode>
       </p>
 
       <h2>What it costs</h2>
+      <img
+        src="/integrations/zod-bench.png"
+        alt="One zod schema, three ways to run it: measured times for accepting and rejecting documents, in Node and with code generation blocked"
+        style={{ width: '100%', borderRadius: 12, border: '1px solid var(--border, #e3e3e0)', margin: '4px 0 16px' }}
+        loading="lazy"
+      />
       <p>
         Measured on a nine-field object schema, zod 4.5.4 on ata-validator 1.13.1, interleaved
         medians: accepting a document takes 21 ns and rejecting one 5 ns, against 526 and
