@@ -138,7 +138,11 @@ export default function DocsLayout() {
                   <li key={p.slug}>
                     <Link
                       to={docHref(p.slug)}
-                      className={p.slug === slug ? 'active' : undefined}
+                      className={
+                        [p.slug === slug ? 'active' : '', p.slug.includes('/') ? 'sub' : '']
+                          .filter(Boolean)
+                          .join(' ') || undefined
+                      }
                       onClick={() => setNavOpen(false)}
                     >
                       {p.title}

@@ -86,10 +86,45 @@ export const DOC_PAGES: DocPage[] = [
   },
   {
     slug: 'integrations',
-    title: 'Integrations',
-    group: 'Ecosystem',
-    summary: 'Fastify, react-jsonschema-form, Vite and Standard Schema',
-    keywords: ['fastify', 'rjsf', 'vite', 'standard schema', 'node'],
+    title: 'Overview',
+    group: 'Integrations',
+    summary: 'Where ata plugs in: schema DSLs, frameworks, forms, build steps',
+    keywords: ['ecosystem', 'plugins', 'integrations'],
+  },
+  {
+    slug: 'integrations/zod',
+    title: 'zod',
+    group: 'Integrations',
+    summary: 'Run zod 4 schemas on the ata engine, same answers, nanosecond verdicts',
+    keywords: ['zod', 'toJSONSchema', 'compile', 'safeParse', 'bridge'],
+  },
+  {
+    slug: 'integrations/fastify',
+    title: 'Fastify',
+    group: 'Integrations',
+    summary: 'The validator compiler hook and the fastify-ata plugin',
+    keywords: ['fastify', 'fastify-ata', 'setValidatorCompiler', 'routes'],
+  },
+  {
+    slug: 'integrations/react-forms',
+    title: 'React forms',
+    group: 'Integrations',
+    summary: 'The ata validator packages shipped in react-jsonschema-form',
+    keywords: ['rjsf', 'react-jsonschema-form', 'forms', 'precompiled'],
+  },
+  {
+    slug: 'integrations/vite',
+    title: 'Vite',
+    group: 'Integrations',
+    summary: 'Compile schemas at build time into standalone modules',
+    keywords: ['ata-vite', 'bundler', 'build', 'standalone', 'plugin'],
+  },
+  {
+    slug: 'integrations/standards',
+    title: 'Standards and runtimes',
+    group: 'Integrations',
+    summary: 'Standard Schema V1, the Node.js story, and Bowtie',
+    keywords: ['standard schema', 'node', 'bowtie', 'harness'],
   },
   {
     slug: 'benchmarks',
@@ -121,7 +156,7 @@ export const DOC_PAGES: DocPage[] = [
   },
 ]
 
-export const DOC_GROUPS = ['Getting started', 'Guides', 'Reference', 'Ecosystem']
+export const DOC_GROUPS = ['Getting started', 'Guides', 'Reference', 'Integrations', 'Ecosystem']
 
 export const docHref = (slug: string) =>
   slug === '/' ? '/' : slug ? `/docs/${slug}` : '/docs'
@@ -129,4 +164,4 @@ export const docHref = (slug: string) =>
 // Order of the previous/next chain across the whole site.
 export const DOC_CHAIN: DocPage[] = [HOME_PAGE, ...DOC_PAGES]
 
-export const ATA_VERSION = '1.11.0'
+export const ATA_VERSION = '1.13.1'

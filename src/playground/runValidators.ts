@@ -1,4 +1,6 @@
 import { Validator, toTypeScript, version } from 'ata-validator'
+import type { JSONSchema } from 'ata-validator'
+import { bundleStandalone } from 'ata-validator/aot'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import type { RunResult, AtaError, AjvError } from './types'
@@ -110,9 +112,9 @@ export function runValidators(schemaText: string, dataText: string): RunResult {
   // inferred type + compiled zero-dependency validator
   try {
     base.tsType = toTypeScript(schema, { name: typeName(schema as Record<string, unknown>) })
-    // 0.19 moved toStandaloneModule to the build entry, which needs fs; the
-    // browser-safe equivalent is the static bundle emitter.
-    const code = Validator.bundleStandalone([schema], { format: 'esm' }) as string | null
+    // 1.13 keeps the emitters out of the default browser bundle; the
+    // `ata-validator/aot` entry is the explicit, fs-free way back in.
+    const code = bundleStandalone(Validator, [schema as JSONSchema], { format: 'esm' }) as string | null
     if (code) {
       base.compiledCode = code
       base.compiledBytes = new TextEncoder().encode(code).length

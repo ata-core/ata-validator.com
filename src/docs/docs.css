@@ -165,6 +165,16 @@
   font-weight: 500;
   box-shadow: inset 2px 0 0 var(--text);
 }
+/* Child pages of a topic sit one step in, on a hairline that ties them to
+   their overview. */
+.dx-group a.sub {
+  margin-left: 12px;
+  padding-left: 14px;
+  border-left: 1px solid var(--border, rgba(127, 127, 127, 0.25));
+  border-radius: 0 6px 6px 0;
+  font-size: 0.94em;
+}
+.dx-group a.sub.active { box-shadow: inset 2px 0 0 var(--text); }
 
 /* ---------- article ---------- */
 

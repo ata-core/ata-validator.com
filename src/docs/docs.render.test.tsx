@@ -14,6 +14,11 @@ import Dialects from './pages/Dialects'
 import Api from './pages/Api'
 import ErrorCodes from './pages/ErrorCodes'
 import Integrations from './pages/Integrations'
+import IntegrationZod from './pages/integrations/Zod'
+import IntegrationFastify from './pages/integrations/Fastify'
+import IntegrationReactForms from './pages/integrations/ReactForms'
+import IntegrationVite from './pages/integrations/VitePlugin'
+import IntegrationStandards from './pages/integrations/Standards'
 import Benchmarks from './pages/Benchmarks'
 import Performance from './pages/Performance'
 import Compliance from './pages/Compliance'
@@ -30,6 +35,11 @@ const ELEMENTS: Record<string, React.ReactElement> = {
   api: <Api />,
   'error-codes': <ErrorCodes />,
   integrations: <Integrations />,
+  'integrations/zod': <IntegrationZod />,
+  'integrations/fastify': <IntegrationFastify />,
+  'integrations/react-forms': <IntegrationReactForms />,
+  'integrations/vite': <IntegrationVite />,
+  'integrations/standards': <IntegrationStandards />,
   benchmarks: <Benchmarks />,
   performance: <Performance />,
   compliance: <Compliance />,

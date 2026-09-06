@@ -189,7 +189,7 @@ export default function Benchmarks() {
         <code>z.object</code> strips unknown keys and defaults fill, so parsing valid input
         runs at zod speed by design. The last two rows are the blocked-codegen case from
         above, through the bridge. Setup and the mode rules are on{' '}
-        <Link to="/docs/integrations">Integrations</Link>.
+        <Link to="/docs/integrations/zod">the zod integration page</Link>.
       </p>
 
       <h2>How these were taken</h2>
