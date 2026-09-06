@@ -15,6 +15,14 @@ const BLOCKED = [
   { what: 'Ten route schemas ready', compiled: '0.24 ms', interpreted: '0.52 ms' },
 ]
 
+const ZOD = [
+  { what: 'Accepts a document, verdict', zod: '526 ns', compiled: '45 ns', bridge: '21 ns' },
+  { what: 'Rejects one, verdict', zod: '1,419 ns', compiled: '1,429 ns', bridge: '5 ns' },
+  { what: 'Rejects via safeParse', zod: '1,419 ns', compiled: '1,429 ns', bridge: '6.7 ns' },
+  { what: 'Accepts, code generation blocked', zod: '1,269 ns', compiled: '1,281 ns', bridge: '641 ns' },
+  { what: 'Rejects, code generation blocked', zod: '2,267 ns', compiled: '2,250 ns', bridge: '112 ns' },
+]
+
 const MEMORY: Bar[] = [
   { label: 'Constructed, never called', value: '0.43 KB', ratio: 0.13 },
   { label: 'Constructed with its own schema', value: '1.12 KB', ratio: 0.34 },
@@ -150,6 +158,38 @@ export default function Benchmarks() {
         against, ata reaches <strong>127.8M ops/s</strong> with unknown keys allowed and{' '}
         <strong>69.9M ops/s</strong> with them rejected. The case file is in that project's
         repository, so the run is reproducible by anyone.
+      </p>
+
+      <h2>Through a zod schema</h2>
+      <p>
+        <code>@ata-project/zod</code> takes a zod 4 schema and answers its verdicts from the
+        ata engine, with the same answers as zod itself, differential-tested on 13,030
+        generated values. Three ways to run one nine-field schema, zod 4.5.4 on
+        ata-validator 1.13.1:
+      </p>
+      <table className="dx-table">
+        <thead>
+          <tr><th>Same zod schema</th><th>safeParse</th><th>z.compile</th><th>@ata-project/zod</th></tr>
+        </thead>
+        <tbody>
+          {ZOD.map((r) => (
+            <tr key={r.what}>
+              <td>{r.what}</td>
+              <td className="dx-num">{r.zod}</td>
+              <td className="dx-num">{r.compiled}</td>
+              <td className="dx-num">{r.bridge}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        The rejection rows are the story: a rejected <code>safeParse</code> builds its{' '}
+        <code>ZodError</code> on first read, so a route that answers with a plain 400 pays
+        6.7 ns. Accepted values are always produced by zod itself, since plain{' '}
+        <code>z.object</code> strips unknown keys and defaults fill, so parsing valid input
+        runs at zod speed by design. The last two rows are the blocked-codegen case from
+        above, through the bridge. Setup and the mode rules are on{' '}
+        <Link to="/docs/integrations">Integrations</Link>.
       </p>
 
       <h2>How these were taken</h2>
