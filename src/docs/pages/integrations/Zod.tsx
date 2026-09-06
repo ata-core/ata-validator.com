@@ -24,9 +24,10 @@ const user = z.object({
 })
 
 const check = compile(user)
-check.isValid(data)    // ata answers
-check.safeParse(data)  // zod-shaped result, zod-produced value
-check.parse(data)      // throws a real ZodError`}</DocsCode>
+check.isValid(data)        // ata answers
+check.safeParse(data)      // zod-shaped result, zod-produced value
+check.parse(data)          // throws a real ZodError
+check.isValidBytes(bytes)  // verdict straight from a Buffer, no JSON.parse`}</DocsCode>
 
       <h2>How it stays correct</h2>
       <p>
@@ -89,6 +90,26 @@ check.parse(data)      // throws a real ZodError`}</DocsCode>
         Accepted values are always produced by zod itself, since plain <code>z.object</code>{' '}
         strips unknown keys, defaults fill and transforms rewrite, so parsing valid input runs
         at zod speed by design. The verdict and the rejection are what the bridge accelerates.
+      </p>
+
+      <h2>Raw bytes</h2>
+      <p>
+        Since 0.2.0, <code>isValidBytes</code> answers from a <code>Buffer</code>,{' '}
+        <code>Uint8Array</code> or JSON string without <code>JSON.parse</code> and without
+        materializing a JavaScript object, a path zod does not have. On an{' '}
+        <code>engine: 'ata'</code> schema with the native engine present the verdict comes from
+        a SIMD walk of the buffer; other modes and pure-JS installs parse first, so the call is
+        correct everywhere. Bytes that are not valid JSON return <code>false</code> rather than
+        throwing.
+      </p>
+      <p>
+        Measured on the same schema, first element invalid on the rejects: a 0.2 KB payload is
+        rejected in 0.6 &micro;s against 1.6 &micro;s for parse-then-<code>safeParse</code>,
+        and a 229 KB payload in 482 &micro;s against 791 &micro;s. Rejection never costs more
+        than acceptance. This is a verdict, not a parse: when you need the value, parse and{' '}
+        <code>safeParse</code> as before. It earns its keep where rejection is the common case,
+        gateways, webhook endpoints and queue consumers that drop bad messages before doing any
+        further work.
       </p>
 
       <h2>Standard Schema</h2>
