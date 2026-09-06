@@ -6,9 +6,43 @@ export default function Integrations() {
       <p className="dx-eyebrow">Ecosystem</p>
       <h1>Integrations</h1>
       <p className="dx-lede">
-        ata plugs in where a validator is already expected: an HTTP framework, a form library, a
-        build step, or anything that reads Standard Schema.
+        ata plugs in where a validator is already expected: a schema DSL like zod, an HTTP
+        framework, a form library, a build step, or anything that reads Standard Schema.
       </p>
+
+      <h2>zod</h2>
+      <p>
+        <code>@ata-project/zod</code> runs a zod 4 schema on the ata engine. The schema stays
+        zod; <code>compile()</code> converts it through <code>z.toJSONSchema</code> and
+        classifies it first, so the answers always match zod's own. Where the conversion is
+        exact, ata answers alone; refinements and transforms make ata's rejection final and
+        hand acceptances back to zod; coercion hands the whole schema to zod rather than risk
+        a wrong answer. The package is differential-tested against zod on 13,030 generated
+        values.
+      </p>
+      <DocsCode lang="js">{`import { z } from 'zod'
+import { compile } from '@ata-project/zod'
+
+const user = z.object({
+  id: z.number().int().min(1),
+  email: z.string().email(),
+})
+
+const check = compile(user)
+check.isValid(data)    // ata answers
+check.safeParse(data)  // zod-shaped result, zod-produced value`}</DocsCode>
+      <p>
+        Measured on a nine-field object schema, zod 4.5.4 on ata-validator 1.13.1, interleaved
+        medians: accepting a document takes 21 ns and rejecting one 5 ns, against 526 and
+        1,419 ns through <code>safeParse</code> and 45 and 1,429 ns through{' '}
+        <code>z.compile</code>. A rejected <code>safeParse</code> builds its{' '}
+        <code>ZodError</code> on first read and costs 6.7 ns until then. With code generation
+        blocked, the way a strict CSP blocks it, compiled paths lose their advantage; the
+        bridge falls back to ata's interpreted engine and keeps answering at 641 ns for
+        accepts and 112 ns for rejects. Accepted values are always produced by zod itself,
+        so parsing valid input runs at zod speed by design.
+      </p>
+      <DocsCode lang="shell">{`npm install @ata-project/zod`}</DocsCode>
 
       <h2>Fastify</h2>
       <p>
