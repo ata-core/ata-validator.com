@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ErrorCodePage from './ErrorCodePage'
 import Playground from './playground/Playground'
+import Race from './race/Race'
 import DocsLayout from './docs/DocsLayout'
 import Home from './docs/pages/Home'
 import Introduction from './docs/pages/Introduction'
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<Home />} />
         </Route>
         <Route path="/playground" element={<Playground />} />
+        <Route path="/race" element={<Race />} />
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<Introduction />} />
           <Route path="quick-start" element={<QuickStart />} />

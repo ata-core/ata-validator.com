@@ -84,7 +84,8 @@ check.isValidBytes(bytes)  // verdict straight from a Buffer, no JSON.parse`}</D
         blocked, the way a strict CSP blocks it, compiled paths lose their advantage; the
         bridge falls back to ata's interpreted engine and keeps answering at 641 ns for
         accepts and 112 ns for rejects. The full table is on{' '}
-        <Link to="/docs/benchmarks">Benchmarks</Link>.
+        <Link to="/docs/benchmarks">Benchmarks</Link>. Or skip the tables and{' '}
+        <Link to="/race">watch the two engines race in your own browser</Link>.
       </p>
       <p>
         Accepted values are always produced by zod itself, since plain <code>z.object</code>{' '}
