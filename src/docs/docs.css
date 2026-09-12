@@ -645,3 +645,19 @@
   background: var(--ink);
   border-radius: 999px;
 }
+
+/* A quote from someone using ata, kept close to the adoption paragraph it
+   belongs to rather than staged as a testimonial wall. */
+.dx-quote {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin: 24px 0 0;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+}
+.dx-quote img { border-radius: 8px; flex: none; }
+.dx-quote blockquote { margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-body); }
+.dx-quote figcaption { margin-top: 8px; font-size: 13.5px; color: var(--text-mute); }

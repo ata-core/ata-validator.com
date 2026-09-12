@@ -149,6 +149,20 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         <Link to="/docs/integrations">See the integrations</Link>.
       </p>
 
+      <figure className="dx-quote">
+        <img src="/refs/jollypixel.jpg" alt="JollyPixel" width={44} height={44} loading="lazy" />
+        <div>
+          <blockquote>
+            On the JollyPixel back end I use ata instead of AJV for parsing and validating JSON,
+            with AOT pre-compilation for performance and type inference from the schema.
+          </blockquote>
+          <figcaption>
+            Thomas Gentilhomme, on{' '}
+            <a href="https://github.com/fraxken" rel="noreferrer">building JollyPixel</a>
+          </figcaption>
+        </div>
+      </figure>
+
       <h2>Start here</h2>
       <p>
         <Link to="/docs/quick-start">Quick start</Link> takes about a minute.{' '}
