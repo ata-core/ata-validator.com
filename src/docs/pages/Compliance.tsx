@@ -72,7 +72,11 @@ export default function Compliance() {
         ata participates in{' '}
         <a href="https://bowtie.report/" target="_blank" rel="noreferrer">Bowtie</a>, which runs
         the official suite against many implementations and publishes the results side by side.
-        That report is the independent version of the table above.
+        That report is the independent version of the table above. The harness lives in its own
+        repository, bowtie-json-schema/js-ata, and declares Draft 2020-12 and draft 7; at ata
+        1.16.1 both dialects pass under Bowtie's runner with nothing failed, errored or skipped,
+        1299 and 927 tests. The v1 dialect passes the same way, 1133 tests, and is declared in a
+        harness change that waits for a Bowtie release which knows the dialect.
       </p>
 
       <h2>Fuzzing</h2>

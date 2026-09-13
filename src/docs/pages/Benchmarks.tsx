@@ -79,6 +79,32 @@ export default function Benchmarks() {
         runtime will not let you generate code. Those are the four numbers below.
       </p>
 
+      <h2>Measured by others</h2>
+      <p>
+        Two public harnesses run ata without ata's involvement, and their numbers come before
+        any number on this page.
+      </p>
+      <ul>
+        <li>
+          <a href="https://schemabenchmarks.dev/validation" target="_blank" rel="noreferrer">
+            schemabenchmarks.dev
+          </a>{' '}
+          benchmarks runtime validation libraries on one product document. On its validation
+          page, valid data, the run of 2026-09-13 against ata 1.14.1 puts ata first at{' '}
+          <strong>603 ns</strong>, with the next entry at 1.77 times that. The same site puts ata
+          last on the download page, 64.9 KB gzipped, because the entry it bundles is the runtime
+          compiler; the module <code>ata build</code> emits for that schema is 3.9 KB minified
+          and gzipped, and a compiled entry for the harness is in preparation.
+        </li>
+        <li>
+          <a href="https://bowtie.report/" target="_blank" rel="noreferrer">Bowtie</a> runs the
+          official JSON Schema Test Suite against every implementation it knows and publishes
+          the results side by side. ata's harness declares Draft 2020-12 and draft 7 there; at
+          ata 1.16.1 the suite passes under Bowtie's own runner with nothing failed, errored or
+          skipped. The v1 dialect is declared in a harness change that waits for a Bowtie
+          release.
+        </li>
+      </ul>
       <h2>The schema everything here uses</h2>
       <p>
         A signup body, five fields with a nested object and a pattern, closed to unknown keys.
