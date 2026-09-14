@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import { DocsCode } from '../../components/DocsCode'
 
 const SUITE = [
-  { dialect: 'Draft 2020-12', score: '1299 / 1299' },
-  { dialect: 'Draft 7', score: '927 / 927' },
-  { dialect: 'JSON Schema v1', score: '1133 / 1133' },
+  { dialect: 'Draft 2020-12', score: '1301 / 1301' },
+  { dialect: 'Draft 7', score: '929 / 929' },
+  { dialect: 'JSON Schema v1', score: '1135 / 1135' },
 ]
 
 const COST = [

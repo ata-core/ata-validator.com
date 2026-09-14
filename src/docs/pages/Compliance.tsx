@@ -16,9 +16,9 @@ export default function Compliance() {
           <tr><th>Dialect</th><th>Result</th></tr>
         </thead>
         <tbody>
-          <tr><td>Draft 2020-12</td><td className="dx-num">1299 / 1299</td></tr>
-          <tr><td>Draft 7</td><td className="dx-num">927 / 927</td></tr>
-          <tr><td>JSON Schema v1</td><td className="dx-num">1133 / 1133</td></tr>
+          <tr><td>Draft 2020-12</td><td className="dx-num">1301 / 1301</td></tr>
+          <tr><td>Draft 7</td><td className="dx-num">929 / 929</td></tr>
+          <tr><td>JSON Schema v1</td><td className="dx-num">1135 / 1135</td></tr>
         </tbody>
       </table>
       <p>
@@ -34,7 +34,7 @@ export default function Compliance() {
         <tbody>
           <tr>
             <td>Buffer path agreement with <code>validate()</code></td>
-            <td className="dx-num">3359 / 3359 suite cases</td>
+            <td className="dx-num">3365 / 3365 suite cases</td>
           </tr>
           <tr>
             <td>Entry point agreement, all generators and the interpreter</td>
