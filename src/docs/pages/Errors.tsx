@@ -120,6 +120,35 @@ if (!r.valid) console.error(renderPretty(r.errors, { data: obj }))`}</DocsCode>
         Errors come back in the order the schema declares its properties, not in the order the
         input happens to list them, so the same failure always reads the same way.
       </p>
+
+      <h2>When the reader is a model</h2>
+      <p>
+        If you ask a model for structured output and validate it, the error is part of the
+        retry prompt. <code>toRetryMessage(errors)</code> writes it as a string that names what
+        was expected and what arrived, and <code>describeSchema(schema)</code> writes the
+        constraints out for the generation prompt.
+      </p>
+      <DocsCode lang="js">{`import { describeSchema, toRetryMessage, Validator } from 'ata-validator'
+
+describeSchema(schema)
+// output: object
+//   status: one of "AWAITING_CLEARANCE", "PART_SETTLED", "CLOSED_OUT"
+//   amount: integer, at least 1
+//   no other fields
+
+const r = new Validator(schema).validate(fromTheModel)
+if (!r.valid) toRetryMessage(r.errors)
+// /status: expected one of ["AWAITING_CLEARANCE", ...], found "partial"
+// /amount: expected \u22651, found 0`}</DocsCode>
+      <p>
+        Whether the wording is worth anything depends on the schema, and the measurement that
+        says so is{' '}
+        <a href="https://github.com/mertcanaltin/retry-message-experiment">public</a>, harness
+        and raw results included. On constraints a model can work out from the document it
+        changes nothing, 40 of 40 recovered either way. On an <code>enum</code> of internal
+        codes it was 0 of 30 against 30 of 30. One model, one schema shape, 30 to 40 documents
+        per arm: a finding, not a law.
+      </p>
     </>
   )
 }
