@@ -19,11 +19,13 @@ export default function Home() {
     <>
       <header className="dx-hero">
         <p className="dx-hero-mark">ata</p>
-        <h1>A JSON Schema validator that explains itself</h1>
+        <h1>A JSON Schema validator that runs where code generation is blocked</h1>
         <p className="dx-lede">
-          Compiles your schema into a plain function on first use, validates with it afterwards,
-          and points at the exact line that broke when a document fails. Three dialects, no
-          required binaries, and the same results in every runtime.
+          It compiles your schema into a plain function for speed, and falls back to a complete
+          interpreted engine where <code>new Function</code> is refused, on an edge runtime or
+          under a strict Content-Security-Policy. Both engines give the same answers, at 100% of
+          the official suite in either mode, and a failing document still points at the line that
+          broke it.
         </p>
 
         <DocsCode lang="shell">{`npm install ata-validator`}</DocsCode>
