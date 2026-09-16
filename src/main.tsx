@@ -20,6 +20,7 @@ import IntegrationZod from './docs/pages/integrations/Zod'
 import IntegrationFastify from './docs/pages/integrations/Fastify'
 import IntegrationReactForms from './docs/pages/integrations/ReactForms'
 import IntegrationVite from './docs/pages/integrations/VitePlugin'
+import IntegrationCloudflareWorkers from './docs/pages/integrations/CloudflareWorkers'
 import IntegrationStandards from './docs/pages/integrations/Standards'
 import Benchmarks from './docs/pages/Benchmarks'
 import Performance from './docs/pages/Performance'
@@ -51,6 +52,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="integrations/fastify" element={<IntegrationFastify />} />
           <Route path="integrations/react-forms" element={<IntegrationReactForms />} />
           <Route path="integrations/vite" element={<IntegrationVite />} />
+          <Route path="integrations/cloudflare-workers" element={<IntegrationCloudflareWorkers />} />
           <Route path="integrations/standards" element={<IntegrationStandards />} />
           <Route path="benchmarks" element={<Benchmarks />} />
           <Route path="performance" element={<Performance />} />

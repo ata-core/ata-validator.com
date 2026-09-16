@@ -18,6 +18,7 @@ import IntegrationZod from './pages/integrations/Zod'
 import IntegrationFastify from './pages/integrations/Fastify'
 import IntegrationReactForms from './pages/integrations/ReactForms'
 import IntegrationVite from './pages/integrations/VitePlugin'
+import IntegrationCloudflareWorkers from './pages/integrations/CloudflareWorkers'
 import IntegrationStandards from './pages/integrations/Standards'
 import Benchmarks from './pages/Benchmarks'
 import Performance from './pages/Performance'
@@ -39,6 +40,7 @@ const ELEMENTS: Record<string, React.ReactElement> = {
   'integrations/fastify': <IntegrationFastify />,
   'integrations/react-forms': <IntegrationReactForms />,
   'integrations/vite': <IntegrationVite />,
+  'integrations/cloudflare-workers': <IntegrationCloudflareWorkers />,
   'integrations/standards': <IntegrationStandards />,
   benchmarks: <Benchmarks />,
   performance: <Performance />,

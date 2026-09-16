@@ -22,6 +22,11 @@ const TOPICS = [
     what: 'ata-vite compiles schemas at build time into standalone modules, so no compiler ships to the browser.',
   },
   {
+    to: '/docs/integrations/cloudflare-workers',
+    title: 'Cloudflare Workers',
+    what: 'The runtime forbids eval, which most validators compile through. Compiled ata modules and the interpreted engine both run there; measured against the field.',
+  },
+  {
     to: '/docs/integrations/standards',
     title: 'Standards and runtimes',
     what: 'Standard Schema V1, the Node.js story, and Bowtie, where the engine is verified in public.',

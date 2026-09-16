@@ -120,6 +120,13 @@ export const DOC_PAGES: DocPage[] = [
     keywords: ['ata-vite', 'bundler', 'build', 'standalone', 'plugin'],
   },
   {
+    slug: 'integrations/cloudflare-workers',
+    title: 'Cloudflare Workers',
+    group: 'Integrations',
+    summary: 'Validation where eval is forbidden: compiled modules and the interpreted engine',
+    keywords: ['cloudflare', 'workers', 'edge', 'csp', 'eval', 'wrangler'],
+  },
+  {
     slug: 'integrations/standards',
     title: 'Standards and runtimes',
     group: 'Integrations',
