@@ -54,7 +54,7 @@ const v = new Validator(schema, { coerceTypes: true })`}</DocsCode>
           <tr>
             <td><code>verbose</code></td>
             <td className="dx-num">false</td>
-            <td>Attach the subschema that produced each error.</td>
+            <td>Attach <code>parentSchema</code>, <code>schema</code> and <code>data</code> to each error: the schema owning the failing keyword, that keyword's value, and the value the error points at.</td>
           </tr>
           <tr>
             <td><code>formats</code></td>
