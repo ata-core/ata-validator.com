@@ -55,8 +55,7 @@ export default {
         Workers runtime enforces. One validator per process, interleaved, median of 7 runs,
         Apple M4, Node 24, a realistic API event schema, ata 1.25.0.
       </p>
-      <div className="dx-table-wrap">
-        <table>
+      <table className="dx-table">
           <thead>
             <tr>
               <th>validator</th>
@@ -93,8 +92,7 @@ export default {
               <td colSpan={3}>throws at compile under the restriction</td>
             </tr>
           </tbody>
-        </table>
-      </div>
+      </table>
       <p>
         ajv and schemasafe are excellent validators; they throw here because their
         compilation model requires <code>new Function</code>, which this environment
