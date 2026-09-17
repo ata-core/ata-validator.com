@@ -4,23 +4,23 @@ import { DocsCode } from '../../components/DocsCode'
 type Bar = { label: string; value: string; ratio: number }
 
 const REQUEST: Bar[] = [
-  { label: 'Accepts the body', value: '24 ns', ratio: 0.05 },
-  { label: 'Rejects it, verdict only', value: '15 ns', ratio: 0.03 },
-  { label: 'Rejects it, error list read', value: '478 ns', ratio: 1 },
+  { label: 'Accepts the body', value: '60 ns', ratio: 0.19 },
+  { label: 'Rejects it, verdict only', value: '49 ns', ratio: 0.16 },
+  { label: 'Rejects it, error list read', value: '313 ns', ratio: 1 },
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '24 ns', interpreted: '223 ns' },
-  { what: 'Rejects it, verdict only', compiled: '15 ns', interpreted: '93 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.24 ms', interpreted: '0.52 ms' },
+  { what: 'Accepts the body', compiled: '60 ns', interpreted: '255 ns' },
+  { what: 'Rejects it, verdict only', compiled: '49 ns', interpreted: '125 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.10 ms', interpreted: '0.33 ms' },
 ]
 
 const ZOD = [
-  { what: 'Accepts a document, verdict', zod: '526 ns', compiled: '45 ns', bridge: '21 ns' },
-  { what: 'Rejects one, verdict', zod: '1,419 ns', compiled: '1,429 ns', bridge: '5 ns' },
-  { what: 'Rejects via safeParse', zod: '1,419 ns', compiled: '1,429 ns', bridge: '6.7 ns' },
-  { what: 'Accepts, code generation blocked', zod: '1,269 ns', compiled: '1,281 ns', bridge: '641 ns' },
-  { what: 'Rejects, code generation blocked', zod: '2,267 ns', compiled: '2,250 ns', bridge: '112 ns' },
+  { what: 'Accepts a document, verdict', zod: '512 ns', compiled: '43 ns', bridge: '20 ns' },
+  { what: 'Rejects one, verdict', zod: '811 ns', compiled: '823 ns', bridge: '5 ns' },
+  { what: 'Rejects via safeParse', zod: '811 ns', compiled: '823 ns', bridge: '6.5 ns' },
+  { what: 'Accepts, code generation blocked', zod: '1,260 ns', compiled: '1,245 ns', bridge: '644 ns' },
+  { what: 'Rejects, code generation blocked', zod: '1,651 ns', compiled: '1,675 ns', bridge: '107 ns' },
 ]
 
 const MEMORY: Bar[] = [
@@ -115,19 +115,19 @@ export default function Benchmarks() {
       <h2>One request</h2>
       <Bars rows={REQUEST} />
       <p>
-        Accepting a valid body takes 24 ns, so a route handling ten thousand requests a second
-        spends about a quarter of a millisecond per second on validation. Rejecting is cheaper
+        Accepting a valid body takes 60 ns, so a route handling ten thousand requests a second
+        spends less than a millisecond per second on validation. Rejecting is cheaper
         than accepting, because the check stops at the first rule that fails.
       </p>
       <p>
         The third bar is the one worth understanding. Errors are built when you read them. If
-        the route answers a bad body with a 400 and no detail, you never pay the 478 ns; if it
+        the route answers a bad body with a 400 and no detail, you never pay the 313 ns; if it
         returns the list, you do, once.
       </p>
 
       <h2>Startup</h2>
       <p>
-        Ten route schemas, compiled and ready to serve: <strong>0.24 ms</strong>. A schema is
+        Ten route schemas, compiled and ready to serve: <strong>0.10 ms</strong>. A schema is
         compiled the first time it validates something, so a process that boots and idles
         compiles nothing at all. This matters on platforms that charge for cold starts.
       </p>
@@ -161,7 +161,8 @@ export default function Benchmarks() {
       <h2>In a bundle</h2>
       <p>
         <code>ata compile</code> turns that schema into a module of{' '}
-        <strong>2.27 KB gzipped</strong> that imports nothing. No compiler, no interpreter, no
+        <strong>3.5 KB gzipped</strong> that imports nothing, full error detail included. No
+        compiler, no interpreter, no
         runtime dependency, so the size of the library stops being part of the conversation for
         front-end and edge builds.
       </p>
@@ -170,8 +171,8 @@ export default function Benchmarks() {
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
         built with <code>bun build --minify --target=browser</code>: the compiled module is{' '}
-        <strong>1.9 KB</strong> gzipped, <code>new Validator(schema)</code> is{' '}
-        <strong>75.6 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        <strong>4.5 KB</strong> gzipped, <code>new Validator(schema)</code> is{' '}
+        <strong>87.0 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
@@ -204,8 +205,8 @@ export default function Benchmarks() {
       <p>
         <code>@ata-project/zod</code> takes a zod 4 schema and answers its verdicts from the
         ata engine, with the same answers as zod itself, differential-tested on 13,030
-        generated values. Three ways to run one nine-field schema, zod 4.5.4 on
-        ata-validator 1.13.1:
+        generated values. Three ways to run one nine-field schema, zod 4.6.5 on
+        ata-validator 1.25.0:
       </p>
       <table className="dx-table">
         <thead>
@@ -225,7 +226,7 @@ export default function Benchmarks() {
       <p>
         The rejection rows are the story: a rejected <code>safeParse</code> builds its{' '}
         <code>ZodError</code> on first read, so a route that answers with a plain 400 pays
-        6.7 ns. Accepted values are always produced by zod itself, since plain{' '}
+        6.5 ns. Accepted values are always produced by zod itself, since plain{' '}
         <code>z.object</code> strips unknown keys and defaults fill, so parsing valid input
         runs at zod speed by design. The last two rows are the blocked-codegen case from
         above, through the bridge. Setup and the mode rules are on{' '}
@@ -242,8 +243,8 @@ export default function Benchmarks() {
       <DocsCode lang="shell">{`git clone https://github.com/ata-core/ata-validator
 cd ata-validator && npm install
 
-npm run test:suite         # correctness, three dialects
-node benchmark/bench.mjs   # the timing harness`}</DocsCode>
+npm run test:suite                    # correctness, three dialects
+node benchmark/bench_docs_site.mjs    # the timing harness behind this page`}</DocsCode>
       <p>
         <Link to="/docs/performance">Performance</Link> explains why the failure path is cheap
         and where the time goes, and <Link to="/docs/compliance">Compliance</Link> has the

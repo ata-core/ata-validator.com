@@ -171,4 +171,4 @@ export const docHref = (slug: string) =>
 // Order of the previous/next chain across the whole site.
 export const DOC_CHAIN: DocPage[] = [HOME_PAGE, ...DOC_PAGES]
 
-export const ATA_VERSION = '1.13.1'
+export const ATA_VERSION = '1.25.0'

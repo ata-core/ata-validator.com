@@ -8,10 +8,10 @@ const SUITE = [
 ]
 
 const COST = [
-  { what: 'Accept a typical route body', value: '24 ns' },
-  { what: 'Reject it, verdict only', value: '15 ns' },
-  { what: 'Ten route schemas ready at startup', value: '0.24 ms' },
-  { what: 'Compiled validator in a bundle, gzipped', value: '2.27 KB' },
+  { what: 'Accept a typical route body', value: '60 ns' },
+  { what: 'Reject it, verdict only', value: '49 ns' },
+  { what: 'Ten route schemas ready at startup', value: '0.10 ms' },
+  { what: 'Compiled validator in a bundle, gzipped', value: '3.5 KB' },
 ]
 
 export default function Home() {
