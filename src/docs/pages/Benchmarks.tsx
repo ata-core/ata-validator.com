@@ -93,7 +93,7 @@ export default function Benchmarks() {
           page, valid data, the run of 2026-09-13 against ata 1.14.1 puts ata first at{' '}
           <strong>603 ns</strong>, with the next entry at 1.77 times that. The same site puts ata
           last on the download page, 64.9 KB gzipped, because the entry it bundles is the runtime
-          compiler; the module <code>ata build</code> emits for that schema is 3.9 KB minified
+          compiler; the module <code>ata build</code> emits for that schema is 5.1 KB minified
           and gzipped, and a compiled entry for the harness is in preparation.
         </li>
         <li>
