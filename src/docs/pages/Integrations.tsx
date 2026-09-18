@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom'
 
 const TOPICS = [
   {
+    to: '/docs/integrations/agents',
+    title: 'Agents and MCP',
+    what: 'The agent loop end to end: describe the schema to the model, validate the output, turn the failure into a retry message, and a validator provider for the MCP SDK.',
+  },
+  {
     to: '/docs/integrations/zod',
     title: 'zod',
     what: 'Run a zod 4 schema on the ata engine: same answers, verdicts in nanoseconds, speed that survives a strict CSP.',

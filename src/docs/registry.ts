@@ -92,6 +92,13 @@ export const DOC_PAGES: DocPage[] = [
     keywords: ['ecosystem', 'plugins', 'integrations'],
   },
   {
+    slug: 'integrations/agents',
+    title: 'Agents and MCP',
+    group: 'Integrations',
+    summary: 'The agent loop end to end: describe, validate, retry, and the MCP SDK provider',
+    keywords: ['agents', 'mcp', 'llm', 'tool calling', 'structured output', 'retry', 'describeSchema'],
+  },
+  {
     slug: 'integrations/zod',
     title: 'zod',
     group: 'Integrations',
@@ -171,4 +178,4 @@ export const docHref = (slug: string) =>
 // Order of the previous/next chain across the whole site.
 export const DOC_CHAIN: DocPage[] = [HOME_PAGE, ...DOC_PAGES]
 
-export const ATA_VERSION = '1.25.0'
+export const ATA_VERSION = '1.27.1'

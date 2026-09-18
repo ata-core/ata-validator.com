@@ -16,6 +16,7 @@ import Dialects from './docs/pages/Dialects'
 import Api from './docs/pages/Api'
 import ErrorCodes from './docs/pages/ErrorCodes'
 import Integrations from './docs/pages/Integrations'
+import IntegrationAgents from './docs/pages/integrations/Agents'
 import IntegrationZod from './docs/pages/integrations/Zod'
 import IntegrationFastify from './docs/pages/integrations/Fastify'
 import IntegrationReactForms from './docs/pages/integrations/ReactForms'
@@ -48,6 +49,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="api" element={<Api />} />
           <Route path="error-codes" element={<ErrorCodes />} />
           <Route path="integrations" element={<Integrations />} />
+          <Route path="integrations/agents" element={<IntegrationAgents />} />
           <Route path="integrations/zod" element={<IntegrationZod />} />
           <Route path="integrations/fastify" element={<IntegrationFastify />} />
           <Route path="integrations/react-forms" element={<IntegrationReactForms />} />
