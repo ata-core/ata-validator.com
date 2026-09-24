@@ -4,15 +4,15 @@ import { DocsCode } from '../../components/DocsCode'
 type Bar = { label: string; value: string; ratio: number }
 
 const REQUEST: Bar[] = [
-  { label: 'Accepts the body', value: '60 ns', ratio: 0.19 },
-  { label: 'Rejects it, verdict only', value: '49 ns', ratio: 0.16 },
-  { label: 'Rejects it, error list read', value: '313 ns', ratio: 1 },
+  { label: 'Accepts the body', value: '39 ns', ratio: 0.19 },
+  { label: 'Rejects it, verdict only', value: '27 ns', ratio: 0.13 },
+  { label: 'Rejects it, error list read', value: '207 ns', ratio: 1 },
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '60 ns', interpreted: '255 ns' },
-  { what: 'Rejects it, verdict only', compiled: '49 ns', interpreted: '125 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.10 ms', interpreted: '0.33 ms' },
+  { what: 'Accepts the body', compiled: '39 ns', interpreted: '231 ns' },
+  { what: 'Rejects it, verdict only', compiled: '27 ns', interpreted: '101 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.11 ms', interpreted: '0.50 ms' },
 ]
 
 const ZOD = [
