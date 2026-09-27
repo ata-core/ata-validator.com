@@ -661,3 +661,61 @@
 .dx-quote img { border-radius: 8px; flex: none; }
 .dx-quote blockquote { margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-body); }
 .dx-quote figcaption { margin-top: 8px; font-size: 13.5px; color: var(--text-mute); }
+
+/* Where it is used: logo cards. Logos sit in grayscale to keep the page
+   monochrome and take their colour on hover or focus. */
+.dx-usedby,
+.dx-article ul.dx-usedby {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+.dx-usedby li { margin: 0; }
+.dx-usedby a {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  height: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dx-usedby a:hover,
+.dx-usedby a:focus-visible { border-color: var(--text-mute); background: var(--bg); }
+.dx-usedby a:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.dx-usedby img,
+.dx-usedby-mono {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  filter: grayscale(1);
+  opacity: 0.85;
+  transition: filter 0.15s ease, opacity 0.15s ease;
+}
+.dx-usedby a:hover img,
+.dx-usedby a:focus-visible img { filter: none; opacity: 1; }
+.dx-usedby-mono {
+  display: grid;
+  place-items: center;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  filter: none;
+  opacity: 1;
+}
+.dx-usedby-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.dx-usedby-text strong { font-size: 14.5px; color: var(--text); }
+.dx-usedby-text span { font-size: 13.5px; line-height: 1.45; color: var(--text-dim); }
+@media (prefers-reduced-motion: reduce) {
+  .dx-usedby a, .dx-usedby img { transition: none; }
+}

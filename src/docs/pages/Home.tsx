@@ -7,6 +7,48 @@ const SUITE = [
   { dialect: 'JSON Schema v1', score: '1135 / 1135' },
 ]
 
+// Projects whose code depends on ata, from GitHub's dependency graph, plus the
+// framework that lists the plugin. Each line says what the project does with
+// it; nothing here claims an endorsement.
+const USED_BY: { name: string; href: string; what: string; logo?: string; mono?: string }[] = [
+  {
+    name: 'react-jsonschema-form',
+    href: 'https://github.com/rjsf-team/react-jsonschema-form',
+    logo: '/refs/rjsf.png',
+    what: 'Ships an ata validator in its main repository, runtime and precompiled.',
+  },
+  {
+    name: 'Socket',
+    href: 'https://github.com/SocketDev/socket-cli',
+    logo: '/refs/socket.png',
+    what: 'Depends on ata across its CLI, SDK, MCP server and editor extension.',
+  },
+  {
+    name: 'JollyPixel',
+    href: 'https://github.com/JollyPixel/editor',
+    logo: '/refs/jollypixel.jpg',
+    what: 'Parses and validates JSON on its back end with ata, compiled ahead of time.',
+  },
+  {
+    name: 'Fastify',
+    href: 'https://fastify.dev/ecosystem/',
+    logo: '/refs/fastify.png',
+    what: 'Lists the fastify-ata plugin in its ecosystem.',
+  },
+  {
+    name: 'better-drizzle',
+    href: 'https://github.com/almeidazs/better-drizzle',
+    mono: 'bd',
+    what: 'Ships an ata plugin for queries and rows.',
+  },
+  {
+    name: 'svelte-jsonschema-form',
+    href: 'https://github.com/x0k/svelte-jsonschema-form',
+    mono: 'sj',
+    what: 'Publishes an ata validator package, runtime and precompiled.',
+  },
+]
+
 const COST = [
   { what: 'Accept a typical route body', value: '43 ns' },
   { what: 'Reject it, verdict only', value: '29 ns' },
@@ -142,11 +184,24 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
       </p>
 
       <h2>Where it is used</h2>
+      <ul className="dx-usedby">
+        {USED_BY.map((u) => (
+          <li key={u.name}>
+            <a href={u.href} target="_blank" rel="noopener noreferrer">
+              {u.logo
+                ? <img src={u.logo} alt="" width={40} height={40} loading="lazy" />
+                : <span className="dx-usedby-mono" aria-hidden="true">{u.mono}</span>}
+              <span className="dx-usedby-text">
+                <strong>{u.name}</strong>
+                <span>{u.what}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
       <p>
-        Fastify lists ata among its alternative validators, and the{' '}
-        <code>fastify-ata</code> plugin wires it in with the framework's own defaults.
-        react-jsonschema-form ships an ata validator in its main repository, in a runtime and a
-        precompiled form. <code>ata-vite</code> compiles schemas during a build so the bundle
+        The <code>fastify-ata</code> plugin wires ata into Fastify with the framework's own
+        defaults, and <code>ata-vite</code> compiles schemas during a build so the bundle
         carries validation functions and no compiler.{' '}
         <Link to="/docs/integrations">See the integrations</Link>.
       </p>
