@@ -63,7 +63,7 @@ export default function Installation() {
         <tbody>
           <tr>
             <td><strong>Node.js</strong></td>
-            <td>18 and later</td>
+            <td>20 and later</td>
           </tr>
           <tr>
             <td><strong>Browsers</strong></td>

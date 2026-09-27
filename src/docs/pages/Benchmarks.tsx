@@ -4,15 +4,15 @@ import { DocsCode } from '../../components/DocsCode'
 type Bar = { label: string; value: string; ratio: number }
 
 const REQUEST: Bar[] = [
-  { label: 'Accepts the body', value: '39 ns', ratio: 0.19 },
-  { label: 'Rejects it, verdict only', value: '27 ns', ratio: 0.13 },
-  { label: 'Rejects it, error list read', value: '207 ns', ratio: 1 },
+  { label: 'Accepts the body', value: '43 ns', ratio: 0.2 },
+  { label: 'Rejects it, verdict only', value: '29 ns', ratio: 0.13 },
+  { label: 'Rejects it, error list read', value: '219 ns', ratio: 1 },
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '39 ns', interpreted: '231 ns' },
-  { what: 'Rejects it, verdict only', compiled: '27 ns', interpreted: '101 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.11 ms', interpreted: '0.50 ms' },
+  { what: 'Accepts the body', compiled: '43 ns', interpreted: '234 ns' },
+  { what: 'Rejects it, verdict only', compiled: '29 ns', interpreted: '101 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.12 ms', interpreted: '0.51 ms' },
 ]
 
 const ZOD = [
@@ -89,12 +89,13 @@ export default function Benchmarks() {
           <a href="https://schemabenchmarks.dev/validation" target="_blank" rel="noreferrer">
             schemabenchmarks.dev
           </a>{' '}
-          benchmarks runtime validation libraries on one product document. On its validation
-          page, valid data, the run of 2026-09-13 against ata 1.14.1 puts ata first at{' '}
-          <strong>603 ns</strong>, with the next entry at 1.77 times that. The same site puts ata
-          last on the download page, 64.9 KB gzipped, because the entry it bundles is the runtime
-          compiler; the module <code>ata build</code> emits for that schema is 5.1 KB minified
-          and gzipped, and a compiled entry for the harness is in preparation.
+          benchmarks runtime validation libraries on one product document. Its published run of
+          2026-09-25 still uses ata 1.29.0 and puts it sixth of 30 on valid data at 870 ns and
+          tenth on invalid data at 67 ns. Most of that time was the <code>uri</code> format check
+          and a wrapper in the keywords package, both rewritten since. Run locally on an Apple M4
+          Pro, the same harness takes ata from 365 ns on 1.29.0 to <strong>240 ns</strong> on
+          1.32.1 for valid data, with invalid data at 21 ns on both; those are local figures, not
+          the site's.
         </li>
         <li>
           <a href="https://bowtie.report/" target="_blank" rel="noreferrer">Bowtie</a> runs the
@@ -115,19 +116,19 @@ export default function Benchmarks() {
       <h2>One request</h2>
       <Bars rows={REQUEST} />
       <p>
-        Accepting a valid body takes 60 ns, so a route handling ten thousand requests a second
+        Accepting a valid body takes 43 ns, so a route handling ten thousand requests a second
         spends less than a millisecond per second on validation. Rejecting is cheaper
         than accepting, because the check stops at the first rule that fails.
       </p>
       <p>
         The third bar is the one worth understanding. Errors are built when you read them. If
-        the route answers a bad body with a 400 and no detail, you never pay the 313 ns; if it
+        the route answers a bad body with a 400 and no detail, you never pay the 219 ns; if it
         returns the list, you do, once.
       </p>
 
       <h2>Startup</h2>
       <p>
-        Ten route schemas, compiled and ready to serve: <strong>0.10 ms</strong>. A schema is
+        Ten route schemas, compiled and ready to serve: <strong>0.12 ms</strong>. A schema is
         compiled the first time it validates something, so a process that boots and idles
         compiles nothing at all. This matters on platforms that charge for cold starts.
       </p>
@@ -161,7 +162,7 @@ export default function Benchmarks() {
       <h2>In a bundle</h2>
       <p>
         <code>ata compile</code> turns that schema into a module of{' '}
-        <strong>3.5 KB gzipped</strong> that imports nothing, full error detail included. No
+        <strong>3.8 KB gzipped</strong> that imports nothing, full error detail included. No
         compiler, no interpreter, no
         runtime dependency, so the size of the library stops being part of the conversation for
         front-end and edge builds.
@@ -170,16 +171,16 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code>: the compiled module is{' '}
-        <strong>4.5 KB</strong> gzipped, <code>new Validator(schema)</code> is{' '}
-        <strong>87.0 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        built with <code>bun build --minify --target=browser</code> on ata 1.32.1: every export of
+        the compiled module is <strong>2.3 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
+        is <strong>91.4 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
         On a server that difference is not worth thinking about, and the runtime API is the
         simpler thing to reach for. In a browser, on an edge runtime, or anywhere a cold start
-        is charged, compile: the same Hono route starts in 3.5 ms compiled against 10.7 ms on
-        the runtime API, and 3.6 ms with no validation at all.
+        is charged, compile: the same Hono route starts in 3.4 ms compiled against 11.2 ms on
+        the runtime API, and 3.5 ms with no validation at all.
       </p>
 
       <h2>Memory per validator</h2>
@@ -195,10 +196,15 @@ export default function Benchmarks() {
 
       <h2>The public harness</h2>
       <p>
-        On the shapes used by the runtime type benchmark that most of the ecosystem reports
-        against, ata reaches <strong>127.8M ops/s</strong> with unknown keys allowed and{' '}
-        <strong>69.9M ops/s</strong> with them rejected. The case file is in that project's
-        repository, so the run is reproducible by anyone.
+        In the official Node 24 run of{' '}
+        <a href="https://moltar.github.io/typescript-runtime-type-benchmarks/" target="_blank" rel="noreferrer">
+          moltar's runtime type benchmark
+        </a>
+        , on ata 1.32.0, ata is first of 45 on assertStrict at <strong>37.2M ops/s</strong>, and
+        its ahead-of-time entry is first of 44 on parseStrict at 36.3M. With unknown keys allowed
+        it is fifth of 56 at 85.8M. Some of the entries ahead of it there skip checks JSON Schema
+        requires, such as rejecting an array where an object is declared. The case files are in
+        that project's repository, so the run is reproducible by anyone.
       </p>
 
       <h2>Through a zod schema</h2>
@@ -235,7 +241,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, Apple silicon, Node 25. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25, ata 1.32.1 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:

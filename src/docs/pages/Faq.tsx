@@ -22,7 +22,7 @@ export default function Faq() {
       </p>
 
       <h2>Which Node.js versions are supported?</h2>
-      <p>Node.js 18 and later. Continuous integration runs on 18, 20, 22 and 24.</p>
+      <p>Node.js 20 and later. Continuous integration runs on 20 and 22.</p>
 
       <h2>Does it run in the browser?</h2>
       <p>
