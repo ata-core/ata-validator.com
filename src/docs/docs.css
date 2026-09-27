@@ -719,3 +719,14 @@
 @media (prefers-reduced-motion: reduce) {
   .dx-usedby a, .dx-usedby img { transition: none; }
 }
+
+/* The section title carries the name in the wordmark's own face: the hero's
+   IBM Plex Mono, bold, tracked in the same way. */
+.dx-usedby-title { display: flex; align-items: baseline; gap: 0.3em; }
+.dx-wordmark {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.28em;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}

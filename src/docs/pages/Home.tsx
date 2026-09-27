@@ -102,7 +102,7 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         </div>
       </header>
 
-      <h2>Where it is used</h2>
+      <h2 className="dx-usedby-title">Who uses <span className="dx-wordmark">ata</span></h2>
       <ul className="dx-usedby">
         {USED_BY.map((u) => (
           <li key={u.name}>
