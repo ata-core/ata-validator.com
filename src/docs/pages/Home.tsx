@@ -9,7 +9,9 @@ const SUITE = [
 
 // Projects whose code depends on ata, from GitHub's dependency graph, plus the
 // framework that lists the plugin. Each line says what the project does with
-// it; nothing here claims an endorsement.
+// it, checked against the project's own code; nothing here claims an
+// endorsement. Socket lists ata as a devDependency: it runs in their repository
+// tooling, not in the packages they publish, and the line says so.
 const USED_BY: { name: string; href: string; what: string; logo?: string; mono?: string }[] = [
   {
     name: 'react-jsonschema-form',
@@ -21,7 +23,7 @@ const USED_BY: { name: string; href: string; what: string; logo?: string; mono?:
     name: 'Socket',
     href: 'https://github.com/SocketDev/socket-cli',
     logo: '/refs/socket.png',
-    what: 'Depends on ata across its CLI, SDK, MCP server and editor extension.',
+    what: 'Uses ata, compiled ahead of time, in the shared build tooling of its repositories.',
   },
   {
     name: 'JollyPixel',
