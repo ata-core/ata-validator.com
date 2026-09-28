@@ -27,7 +27,7 @@ const ZOD = [
 const MEMORY: Bar[] = [
   { label: 'Constructed, never called', value: '0.58 KB', ratio: 0.07 },
   { label: 'Constructed with its own schema', value: '1.18 KB', ratio: 0.14 },
-  { label: 'Its own schema, compiled and in use', value: '8.33 KB', ratio: 1 },
+  { label: 'Its own schema, compiled and in use', value: '8.12 KB', ratio: 1 },
 ]
 
 const SCHEMA = `{
@@ -194,7 +194,9 @@ export default function Benchmarks() {
         Methods are built on first use instead of being bound in the constructor, which is why
         an idle validator sits at 0.58 KB. The last bar gives every instance a schema of its
         own, so each one compiles; validators built from the same schema share one compiled
-        function. Measured with <code>node --expose-gc benchmark/bench_memory.cjs</code>.
+        function. Measured on ata 1.36.1 with{' '}
+        <code>node --expose-gc benchmark/bench_memory.cjs</code>; 1.36.0 held 8.33 KB in the last
+        bar, a cache entry per schema that 1.36.1 removed.
       </p>
 
       <h2>The public harness</h2>
