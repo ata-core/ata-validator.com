@@ -77,7 +77,7 @@ v.engine()   // 'codegen', 'closure' or 'interpreter'`}</DocsCode>
         a schema. The output imports nothing, contains no interpreter and no compiler, and can
         be checked into a bundle or vendored.
       </p>
-      <DocsCode lang="shell">{`npx ata compile schema.json --out validate.js`}</DocsCode>
+      <DocsCode lang="shell">{`npx ata compile schema.json -o validate.mjs`}</DocsCode>
 
       <h2>Next</h2>
       <p>

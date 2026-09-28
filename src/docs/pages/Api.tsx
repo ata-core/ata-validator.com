@@ -151,7 +151,7 @@ const r = validate(schema, data)`}</DocsCode>
         schemas at once, and <code>Validator.fromStandalone(module, schema)</code> loads the
         result back into the normal interface.
       </p>
-      <DocsCode lang="shell">{`npx ata compile schema.json --out validate.js`}</DocsCode>
+      <DocsCode lang="shell">{`npx ata compile schema.json -o validate.mjs`}</DocsCode>
 
       <h2>Formats</h2>
       <p>

@@ -52,10 +52,10 @@ const USED_BY: { name: string; href: string; what: string; logo?: string; mono?:
 ]
 
 const COST = [
-  { what: 'Accept a typical route body', value: '43 ns' },
-  { what: 'Reject it, verdict only', value: '29 ns' },
-  { what: 'Ten route schemas ready at startup', value: '0.12 ms' },
-  { what: 'Compiled validator in a bundle, gzipped', value: '3.8 KB' },
+  { what: 'Accept a typical route body', value: '41 ns' },
+  { what: 'Reject it, verdict only', value: '28 ns' },
+  { what: 'Ten route schemas ready at startup', value: '0.10 ms' },
+  { what: 'Compiled validator in a bundle, gzipped', value: '3.5 KB' },
 ]
 
 export default function Home() {
