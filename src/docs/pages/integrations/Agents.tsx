@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom'
 import { DocsCode } from '../../../components/DocsCode'
 
 const MCP_BLOCKED = [
-  { provider: 'ata', valid: '174 ns', invalid: '499 ns' },
-  { provider: 'cfworker', valid: '2,788 ns', invalid: '837 ns' },
+  { provider: 'ata', valid: '181 ns', invalid: '509 ns' },
+  { provider: 'cfworker', valid: '2,906 ns', invalid: '869 ns' },
   { provider: 'ajv (SDK default)', valid: 'throws EvalError', invalid: 'throws EvalError' },
 ]
 
 const MCP_ALLOWED = [
-  { provider: 'ata', valid: '15 ns', invalid: '201 ns' },
-  { provider: 'ajv (SDK default)', valid: '52 ns', invalid: '34 ns' },
-  { provider: 'cfworker', valid: '2,737 ns', invalid: '831 ns' },
+  { provider: 'ata', valid: '19 ns', invalid: '192 ns' },
+  { provider: 'ajv (SDK default)', valid: '54 ns', invalid: '34 ns' },
+  { provider: 'cfworker', valid: '2,845 ns', invalid: '860 ns' },
 ]
 
 export default function IntegrationAgents() {
@@ -77,7 +77,7 @@ const client = new Client(info, {
         MCP error. With code generation blocked, the way Workers and strict-CSP pages block it,
         the SDK's default provider fails the tool call even when the result is valid; the
         cfworker provider and ata keep answering. What that costs per validation, on an
-        eight-field tool schema, medians of 7 interleaved rounds, Node 25, ata-validator 1.25.0:
+        eight-field tool schema, medians of 7 interleaved rounds, Node 25, ata-validator 1.36.0:
       </p>
       <table className="dx-table">
         <thead>

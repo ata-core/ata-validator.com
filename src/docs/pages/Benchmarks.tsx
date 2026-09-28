@@ -10,24 +10,24 @@ const REQUEST: Bar[] = [
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '41 ns', interpreted: '231 ns' },
+  { what: 'Accepts the body', compiled: '41 ns', interpreted: '234 ns' },
   { what: 'Rejects it, verdict only', compiled: '28 ns', interpreted: '103 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.10 ms', interpreted: '0.36 ms' },
+  { what: 'Ten route schemas ready', compiled: '0.07 ms', interpreted: '0.32 ms' },
 ]
 
 const ZOD = [
-  { what: 'Accepts a document, verdict', zod: '521 ns', compiled: '44 ns', bridge: '23 ns' },
-  { what: 'Accepts via safeParse', zod: '521 ns', compiled: '44 ns', bridge: '52.5 ns' },
-  { what: 'Rejects one, verdict', zod: '807 ns', compiled: '828 ns', bridge: '6 ns' },
-  { what: 'Rejects via safeParse', zod: '807 ns', compiled: '828 ns', bridge: '8.5 ns' },
-  { what: 'Accepts, code generation blocked', zod: '1,267 ns', compiled: '1,271 ns', bridge: '818 ns' },
-  { what: 'Rejects, code generation blocked', zod: '1,661 ns', compiled: '1,663 ns', bridge: '157 ns' },
+  { what: 'Accepts a document, verdict', zod: '527 ns', compiled: '44 ns', bridge: '23 ns' },
+  { what: 'Accepts via safeParse', zod: '527 ns', compiled: '44 ns', bridge: '54.3 ns' },
+  { what: 'Rejects one, verdict', zod: '822 ns', compiled: '851 ns', bridge: '6 ns' },
+  { what: 'Rejects via safeParse', zod: '822 ns', compiled: '851 ns', bridge: '8.3 ns' },
+  { what: 'Accepts, code generation blocked', zod: '1,290 ns', compiled: '1,273 ns', bridge: '651 ns' },
+  { what: 'Rejects, code generation blocked', zod: '1,695 ns', compiled: '1,700 ns', bridge: '113 ns' },
 ]
 
 const MEMORY: Bar[] = [
-  { label: 'Constructed, never called', value: '0.58 KB', ratio: 0.08 },
-  { label: 'Constructed with its own schema', value: '1.18 KB', ratio: 0.15 },
-  { label: 'Its own schema, compiled and in use', value: '7.69 KB', ratio: 1 },
+  { label: 'Constructed, never called', value: '0.58 KB', ratio: 0.07 },
+  { label: 'Constructed with its own schema', value: '1.18 KB', ratio: 0.14 },
+  { label: 'Its own schema, compiled and in use', value: '8.33 KB', ratio: 1 },
 ]
 
 const SCHEMA = `{
@@ -129,7 +129,7 @@ export default function Benchmarks() {
 
       <h2>Startup</h2>
       <p>
-        Ten route schemas, compiled and ready to serve: <strong>0.10 ms</strong>. A schema is
+        Ten route schemas, compiled and ready to serve: <strong>0.07 ms</strong>. A schema is
         compiled the first time it validates something, so a process that boots and idles
         compiles nothing at all. This matters on platforms that charge for cold starts.
       </p>
@@ -172,15 +172,15 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.33.1: every export of
+        built with <code>bun build --minify --target=browser</code> on ata 1.36.0: every export of
         the compiled module is <strong>2.2 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>92.3 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        is <strong>95.6 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
         On a server that difference is not worth thinking about, and the runtime API is the
         simpler thing to reach for. In a browser, on an edge runtime, or anywhere a cold start
-        is charged, compile: the same Hono route starts in 3.4 ms compiled against 11.2 ms on
+        is charged, compile: the same Hono route starts in 3.5 ms compiled against 7.8 ms on
         the runtime API, and 3.5 ms with no validation at all.
       </p>
 
@@ -215,7 +215,7 @@ export default function Benchmarks() {
         <code>@ata-project/zod</code> takes a zod 4 schema and answers its verdicts from the
         ata engine, with the same answers as zod itself, differential-tested on 15,068
         generated values. Three ways to run one nine-field schema, zod 4.6.5,
-        @ata-project/zod 0.3.0 on ata-validator 1.33.1:
+        @ata-project/zod 0.3.1 on ata-validator 1.36.0:
       </p>
       <table className="dx-table">
         <thead>
@@ -235,7 +235,7 @@ export default function Benchmarks() {
       <p>
         The rejection rows are the story: a rejected <code>safeParse</code> builds its{' '}
         <code>ZodError</code> on first read, so a route that answers with a plain 400 pays
-        8.5 ns. An accepted value is built by ata wherever it comes out exactly as zod would
+        8.3 ns. An accepted value is built by ata wherever it comes out exactly as zod would
         build it, key order included: plain objects, arrays, primitives and unions of
         primitives. A default, a transform, a record or a union of objects hands the value to
         zod, at zod speed. The last two rows are the blocked-codegen case from
@@ -245,7 +245,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25, ata 1.33.1 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25, ata 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:

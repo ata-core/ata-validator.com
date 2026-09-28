@@ -54,6 +54,15 @@ for (const e of r.errors) { }                 // built on this line`}</DocsCode>
         exercises a few of them pays for the few.
       </p>
 
+      <h2>Loading the package</h2>
+      <p>
+        On Node 22.10 and later, <code>import {'{'} Validator {'}'} from 'ata-validator'</code>{' '}
+        loads in 6.1 ms against 8.3 ms before 1.36.0, measured on an installed package, median
+        of 15 interleaved runs. Importing a CommonJS package made Node run its lexer over every
+        module to find names the entry already lists; Node now takes an entry that loads the
+        package the way <code>require</code> does. Bundlers keep the ordinary ESM entry.
+      </p>
+
       <h2>Engines and speed</h2>
       <p>
         Most schemas compile to generated JavaScript. Shapes the emitter declines run on a

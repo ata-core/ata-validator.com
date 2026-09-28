@@ -76,14 +76,14 @@ check.isValidBytes(bytes)  // verdict straight from a Buffer, no JSON.parse`}</D
         loading="lazy"
       />
       <p>
-        Measured on a nine-field object schema, zod 4.6.5 on ata-validator 1.25.0, interleaved
-        medians: accepting a document takes 20 ns and rejecting one 5 ns, against 512 and
-        811 ns through <code>safeParse</code> and 43 and 823 ns through{' '}
-        <code>z.compile</code>. A rejected <code>safeParse</code> builds its{' '}
-        <code>ZodError</code> on first read and costs 6.5 ns until then. With code generation
+        Measured on a nine-field object schema, zod 4.6.5 and @ata-project/zod 0.3.1 on
+        ata-validator 1.36.0, interleaved medians: accepting a document takes 23 ns and
+        rejecting one 6 ns, against 527 and 822 ns through <code>safeParse</code> and 44 and
+        851 ns through <code>z.compile</code>. A rejected <code>safeParse</code> builds its{' '}
+        <code>ZodError</code> on first read and costs 8.3 ns until then. With code generation
         blocked, the way a strict CSP blocks it, compiled paths lose their advantage; the
-        bridge falls back to ata's interpreted engine and keeps answering at 644 ns for
-        accepts and 107 ns for rejects. The full table is on{' '}
+        bridge falls back to ata's interpreted engine and keeps answering at 651 ns for
+        accepts and 113 ns for rejects. The full table is on{' '}
         <Link to="/docs/benchmarks">Benchmarks</Link>. Or skip the tables and{' '}
         <Link to="/race">watch the two engines race in your own browser</Link>.
       </p>

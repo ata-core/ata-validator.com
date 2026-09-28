@@ -12,10 +12,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@ata-project/zod": "^0.2.0",
+    "@ata-project/zod": "^0.3.1",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "ata-validator": "^1.32.1",
+    "ata-validator": "^1.36.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.1",
