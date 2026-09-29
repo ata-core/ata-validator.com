@@ -106,25 +106,27 @@ const v = new Validator(schema, { coerceTypes: true })`}</DocsCode>
           </tr>
           <tr>
             <td><code>isValid(buffer)</code></td>
-            <td>Boolean, straight from a Buffer or Uint8Array. Native engine only</td>
+            <td>Boolean, straight from a Buffer or Uint8Array</td>
           </tr>
           <tr>
             <td><code>countValid(ndjson)</code></td>
-            <td>Number of valid lines in an NDJSON buffer. Native engine only</td>
+            <td>Number of valid lines in an NDJSON buffer</td>
           </tr>
           <tr>
             <td><code>batchIsValid(buffers)</code></td>
-            <td>One boolean per buffer. Native engine only</td>
+            <td>Number of valid buffers in the array</td>
           </tr>
           <tr>
             <td><code>validateAndParse(text)</code></td>
-            <td>Validates and returns the parsed value in one pass. Native engine only</td>
+            <td>Validates and returns the parsed value in one pass</td>
           </tr>
         </tbody>
       </table>
       <p className="dx-note">
-        The four native-only methods throw a clear error when the native engine is not
-        installed, rather than falling back quietly to a slower path.
+        These four use the native engine where it is installed. Without it they answer
+        through the JavaScript engine with the same result, slower: a small document takes
+        177 ns instead of 92 on Node 25. In a browser, which has no <code>Buffer</code>, they
+        throw and name the methods to use instead.
       </p>
 
       <h2>Rendering</h2>
