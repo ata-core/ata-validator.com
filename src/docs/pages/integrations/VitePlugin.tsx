@@ -36,7 +36,9 @@ export default { plugins: [ata({ compileAway: true })] }`}</DocsCode>
         two checks takes 1.12 ms against 6.63 ms on the runtime. Across the 977 schemas of
         SchemaStore, 725 can be compiled away; a schema with custom error messages, a call with
         options or a schema built at run time stays on the runtime. Needs ata-validator 1.36.0
-        and ata-vite 0.6.0. The same option is in{' '}
+        and ata-vite 0.6.0; a call written as{' '}
+        <code>new Validator(schema, {'{'} useDefaults: false {'}'})</code> needs ata-validator 1.37.0
+        and ata-vite 0.6.1. The same option is in{' '}
         <code>@ata-project/unplugin</code> for Webpack, Rollup, Rolldown, esbuild and Rspack.
       </p>
     </>
