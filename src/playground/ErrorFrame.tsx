@@ -1,53 +1,52 @@
 import '../components/ErrorShowcase.css'
+import { renderPretty } from 'ata-validator'
 import type { AtaError } from './types'
 
-function caret(col: number, length = 1) {
-  return ' '.repeat(Math.max(0, col - 1)) + '^'.repeat(Math.max(1, length))
+// ata-validator 1.40.0 reads `process` in its renderers and a browser has none;
+// the fix is in ata-validator's next release. Until the site moves to it, a
+// stand-in with no terminal lets renderPretty run here. Remove with that bump.
+if (typeof (globalThis as { process?: unknown }).process === 'undefined') {
+  ;(globalThis as { process?: unknown }).process = { env: {}, stdout: {}, cwd: () => '' }
 }
 
-function OneError({ e }: { e: AtaError }) {
-  const ss = e.schemaSource
-  const df = e.dataFrame
-  return (
-    <div className="pg-frame">
-      <div>
-        <span className="sc-err">error[{e.code ?? 'ATA'}]:</span>{' '}
-        <span className="sc-fg">{e.message}</span>
-      </div>
-      {ss && (
-        <pre className="sc-block">
-{`  --> `}<span className="sc-path">{ss.file}:{ss.line}:{ss.col}</span>{`\n`}
-{`   |\n`}
-{` ${ss.line} | `}<span className="sc-fg">{ss.text}</span>{`\n`}
-{`   | `}<span className="sc-caret">{caret(ss.col + 4)}</span>{e.expected ? <>  <span className="sc-dim">{e.expected}</span></> : null}
-        </pre>
-      )}
-      {df && (
-        <pre className="sc-block">
-{`  --> `}<span className="sc-dim">input, byte {df.byteOffset}</span>{`\n`}
-{`   |\n`}
-{` ${df.line} | `}<span className="sc-fg">{df.text}</span>{`\n`}
-{`   | `}<span className="sc-caret">{caret(df.col + 4, df.length)}</span>{e.received ? <>  <span className="sc-dim">got {e.received}</span></> : null}
-        </pre>
-      )}
-      {e.suggestion && (
-        <div>{`   = `}<span className="sc-help">help:</span> {e.suggestion.text}</div>
-      )}
-      {e.docUrl && (
-        <div>{`   = `}<span className="sc-dim">note: see </span>
-          <a className="sc-dim" href={e.docUrl} target="_blank" rel="noreferrer">{e.docUrl}</a>
-        </div>
-      )}
-    </div>
-  )
+// The playground shows exactly what `renderPretty` prints in a terminal, the
+// same text line for line, and only adds colour. It used to draw its own
+// frames, which drifted from ata's output (byte offsets, "got", carets off by
+// a column) as the renderer moved on.
+function Line({ text }: { text: string }) {
+  let m: RegExpMatchArray | null
+  if ((m = text.match(/^(error(?:\[[A-Z0-9]+\])?:)(.*)$/))) {
+    return <div><span className="sc-err">{m[1]}</span><span className="sc-fg">{m[2]}</span></div>
+  }
+  if ((m = text.match(/^(\s*-->\s+)(\S+)(.*)$/))) {
+    return <div><span className="sc-dim">{m[1]}</span><span className="sc-path">{m[2]}</span><span className="sc-dim">{m[3]}</span></div>
+  }
+  if ((m = text.match(/^(\s*\d+ \| )(.*)$/))) {
+    return <div><span className="sc-dim">{m[1]}</span><span className="sc-fg">{m[2]}</span></div>
+  }
+  if ((m = text.match(/^(\s*\| )(\s*)(\^+)(.*)$/))) {
+    return <div><span className="sc-dim">{m[1]}</span>{m[2]}<span className="sc-caret">{m[3]}</span><span className="sc-dim">{m[4]}</span></div>
+  }
+  if ((m = text.match(/^(\s*= )(help:)(.*)$/))) {
+    return <div><span className="sc-dim">{m[1]}</span><span className="sc-help">{m[2]}</span>{m[3]}</div>
+  }
+  if ((m = text.match(/^(\s*= note: see )(https?:\/\/\S+)(.*)$/))) {
+    return <div><span className="sc-dim">{m[1]}</span><a className="sc-dim" href={m[2]} target="_blank" rel="noreferrer">{m[2]}</a>{m[3]}</div>
+  }
+  return <div className="sc-dim">{text || ' '}</div>
 }
 
 export function ErrorFrame({ errors, valid }: { errors: AtaError[]; valid: boolean }) {
   if (valid) return <div className="pg-ok">no errors. data is valid.</div>
+  let text: string
+  try {
+    text = renderPretty(errors as never, { color: 'never', cwd: '', maxErrors: 0 })
+  } catch (e) {
+    text = `error: could not render (${e instanceof Error ? e.message : String(e)})`
+  }
   return (
-    <div className="pg-frames">
-      {errors.map((e, i) => <OneError e={e} key={i} />)}
-      <div className="sc-dim">{`error: ${errors.length} schema violation${errors.length === 1 ? '' : 's'} in input`}</div>
-    </div>
+    <pre className="pg-frames sc-block">
+      {text.split('\n').map((l, i) => <Line text={l} key={i} />)}
+    </pre>
   )
 }
