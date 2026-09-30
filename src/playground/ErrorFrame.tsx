@@ -2,13 +2,6 @@ import '../components/ErrorShowcase.css'
 import { renderPretty } from 'ata-validator'
 import type { AtaError } from './types'
 
-// ata-validator 1.40.0 reads `process` in its renderers and a browser has none;
-// the fix is in ata-validator's next release. Until the site moves to it, a
-// stand-in with no terminal lets renderPretty run here. Remove with that bump.
-if (typeof (globalThis as { process?: unknown }).process === 'undefined') {
-  ;(globalThis as { process?: unknown }).process = { env: {}, stdout: {}, cwd: () => '' }
-}
-
 // The playground shows exactly what `renderPretty` prints in a terminal, the
 // same text line for line, and only adds colour. It used to draw its own
 // frames, which drifted from ata's output (byte offsets, "got", carets off by
