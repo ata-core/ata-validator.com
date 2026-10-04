@@ -102,11 +102,20 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         </div>
 
         <div className="dx-hero-badges">
-          <a href="https://www.bestpractices.dev/projects/15196" target="_blank" rel="noopener noreferrer">
-            <img src="https://www.bestpractices.dev/projects/15196/badge" alt="OpenSSF Best Practices: passing" height={20} />
+          <a href="https://www.npmjs.com/package/ata-validator" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/npm/v/ata-validator" alt="npm version" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
+          </a>
+          <a href="https://github.com/ata-core/ata-validator/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/npm/l/ata-validator" alt="License: MIT" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
           </a>
           <a href="https://scorecard.dev/viewer/?uri=github.com/ata-core/ata-validator" target="_blank" rel="noopener noreferrer">
-            <img src="https://api.scorecard.dev/projects/github.com/ata-core/ata-validator/badge" alt="OpenSSF Scorecard" height={20} />
+            <img src="https://api.scorecard.dev/projects/github.com/ata-core/ata-validator/badge" alt="OpenSSF Scorecard" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
+          </a>
+          <a href="https://www.bestpractices.dev/projects/15196" target="_blank" rel="noopener noreferrer">
+            <img src="https://www.bestpractices.dev/projects/15196/badge" alt="OpenSSF Best Practices: passing" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
+          </a>
+          <a href="https://socket.dev/npm/package/ata-validator" target="_blank" rel="noopener noreferrer">
+            <img src="https://badge.socket.dev/npm/package/ata-validator" alt="Socket" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
           </a>
         </div>
       </header>
