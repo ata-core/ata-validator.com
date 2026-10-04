@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DocsCode } from '../../components/DocsCode'
 
@@ -58,7 +59,23 @@ const COST = [
   { what: 'Compiled validator in a bundle, gzipped', value: '3.5 KB' },
 ]
 
+// Read live from the two OpenSSF services, so the page never states a level or a
+// score they no longer report. Until they answer, or if they do not, the row
+// names the check and links to it without a figure.
+function useLive<T>(url: string, pick: (j: any) => T | undefined): T | undefined {
+  const [v, setV] = useState<T | undefined>(undefined)
+  useEffect(() => {
+    if (typeof fetch !== 'function') return
+    let alive = true
+    fetch(url).then((r) => (r.ok ? r.json() : null)).then((j) => { if (alive && j) setV(pick(j)) }).catch(() => {})
+    return () => { alive = false }
+  }, [url])
+  return v
+}
+
 export default function Home() {
+  const level = useLive<string>('https://www.bestpractices.dev/projects/15196.json', (j) => j && j.badge_level)
+  const score = useLive<number>('https://api.scorecard.dev/projects/github.com/ata-core/ata-validator', (j) => j && j.score)
   return (
     <>
       <header className="dx-hero">
@@ -98,24 +115,6 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
             rel="noopener noreferrer"
           >
             GitHub
-          </a>
-        </div>
-
-        <div className="dx-hero-badges">
-          <a href="https://www.npmjs.com/package/ata-validator" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.shields.io/npm/v/ata-validator" alt="npm version" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
-          </a>
-          <a href="https://github.com/ata-core/ata-validator/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
-            <img src="https://img.shields.io/npm/l/ata-validator" alt="License: MIT" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
-          </a>
-          <a href="https://scorecard.dev/viewer/?uri=github.com/ata-core/ata-validator" target="_blank" rel="noopener noreferrer">
-            <img src="https://api.scorecard.dev/projects/github.com/ata-core/ata-validator/badge" alt="OpenSSF Scorecard" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
-          </a>
-          <a href="https://www.bestpractices.dev/projects/15196" target="_blank" rel="noopener noreferrer">
-            <img src="https://www.bestpractices.dev/projects/15196/badge" alt="OpenSSF Best Practices: passing" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
-          </a>
-          <a href="https://socket.dev/npm/package/ata-validator" target="_blank" rel="noopener noreferrer">
-            <img src="https://badge.socket.dev/npm/package/ata-validator" alt="Socket" height={20} onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = 'none' }} />
           </a>
         </div>
       </header>
@@ -239,6 +238,40 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         Yours will differ with hardware and schema.{' '}
 <Link to="/docs/benchmarks">See the benchmarks</Link>.
       </p>
+
+      <h2 className="dx-sec-title">
+        Supply chain
+        <a href="https://www.bestpractices.dev/projects/15196" target="_blank" rel="noopener noreferrer" aria-label="OpenSSF Best Practices">
+          <img src="/openssf-best-practices.svg" alt="" width={40} height={40} />
+        </a>
+      </h2>
+      <table className="dx-table">
+        <thead>
+          <tr><th>Check</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.bestpractices.dev/projects/15196" target="_blank" rel="noopener noreferrer">OpenSSF Best Practices</a></td>
+            <td className="dx-num">{level ?? 'view'}</td>
+          </tr>
+          <tr>
+            <td><a href="https://scorecard.dev/viewer/?uri=github.com/ata-core/ata-validator" target="_blank" rel="noopener noreferrer">OpenSSF Scorecard</a></td>
+            <td className="dx-num">{typeof score === 'number' ? `${score.toFixed(1)} / 10` : 'view'}</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.npmjs.com/package/ata-validator#provenance" target="_blank" rel="noopener noreferrer">npm provenance</a></td>
+            <td className="dx-num">every release, published from CI</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/ata-core/ata-validator/security" target="_blank" rel="noopener noreferrer">CodeQL</a></td>
+            <td className="dx-num">every push</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/ata-core/ata-validator/security/advisories/new" target="_blank" rel="noopener noreferrer">Vulnerability reports</a></td>
+            <td className="dx-num">private, through GitHub</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h2>Start here</h2>
       <p>

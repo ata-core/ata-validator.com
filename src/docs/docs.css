@@ -505,14 +505,6 @@
   margin: 20px 0 8px;
 }
 
-.dx-hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0 0;
-}
-.dx-hero-badges a { display: inline-flex; }
-.dx-hero-badges img { height: 20px; width: auto; display: block; }
 
 /* Scoped against .dx-article a, which is more specific than a bare class and
    would otherwise repaint the label in body text color. */
@@ -739,3 +731,6 @@
   letter-spacing: -0.06em;
   line-height: 1;
 }
+
+.dx-sec-title { display: flex; align-items: center; gap: 12px; }
+.dx-sec-title img { display: block; width: 40px; height: 40px; }
