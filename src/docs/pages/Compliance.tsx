@@ -73,10 +73,48 @@ export default function Compliance() {
         <a href="https://bowtie.report/" target="_blank" rel="noreferrer">Bowtie</a>, which runs
         the official suite against many implementations and publishes the results side by side.
         That report is the independent version of the table above. The harness lives in its own
-        repository, bowtie-json-schema/js-ata, and declares Draft 2020-12 and draft 7; at ata
-        1.16.1 both dialects pass under Bowtie's runner with nothing failed, errored or skipped,
-        1299 and 927 tests. The v1 dialect passes the same way, 1133 tests, and is declared in a
-        harness change that waits for a Bowtie release which knows the dialect.
+        repository, bowtie-json-schema/js-ata, and declares Draft 2020-12 and draft 7. In the
+        report published on 2026-10-05 (Bowtie 2026.7.4, ata 1.40.1), both dialects pass with
+        nothing failed, errored or skipped: 1301 tests on Draft 2020-12 and 929 on draft 7. The
+        v1 dialect is declared in a harness change that waits for a Bowtie release which knows
+        the dialect.
+      </p>
+
+      <h2>Real schemas, every engine</h2>
+      <p>
+        The official suite tests keywords one at a time; real schemas combine them. So CI runs
+        every{' '}
+        <a href="https://github.com/SchemaStore/schemastore" target="_blank" rel="noreferrer">SchemaStore</a>{' '}
+        schema against SchemaStore's own sample documents, 488 schemas and 2,220 documents, and
+        requires three answers to agree on each: the generated code, the interpreted engine,
+        and the standalone module <code>ata build</code> writes, where it writes one (419 of
+        them). Verdicts and error lists are compared field by field, on every change to the
+        engine and weekly, and a single difference fails the run. This is the check that found
+        a silent accept which had passed the official suite since 1.0.0.
+      </p>
+
+      <h2>Before a release</h2>
+      <p>
+        A release is measured against the previous tag before it is tagged: cold start,
+        compile time, hot validation with and without code generation, a request-shaped
+        benchmark that reads errors, Fastify boot, the browser bundle and the size of generated
+        modules, each side in its own checkout and interleaved. A regression in any row is
+        either fixed or written into the changelog with its number. The changelog also names
+        every silent-accept fix with the versions it affected, so a reader can tell whether they
+        were exposed.
+      </p>
+
+      <h2>Supply chain</h2>
+      <p>
+        The{' '}
+        <a href="https://scorecard.dev/viewer/?uri=github.com/ata-core/ata-validator" target="_blank" rel="noreferrer">
+          OpenSSF Scorecard
+        </a>{' '}
+        for the repository is 8.6 of 10 as of 2026-10-05, with full marks for Security-Policy,
+        Token-Permissions, SAST, Dangerous-Workflow, Binary-Artifacts, Fuzzing, Vulnerabilities
+        and Maintained. Releases are published from CI through npm trusted publishing, so no
+        long-lived token exists, and the native addons are built per platform in that same run.
+        What the score marks down is listed on the scorecard page; it is not hidden here.
       </p>
 
       <h2>Fuzzing</h2>
