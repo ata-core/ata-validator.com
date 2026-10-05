@@ -172,16 +172,16 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.44.0: every export of
+        built with <code>bun build --minify --target=browser</code> on ata 1.45.0: every export of
         the compiled module is <strong>2.1 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>112.8 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        is <strong>113.3 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
         On a server that difference is not worth thinking about, and the runtime API is the
         simpler thing to reach for. In a browser, on an edge runtime, or anywhere a cold start
-        is charged, compile: the same Hono route starts in 3.5 ms compiled against 8.6 ms on
-        the runtime API, and 3.5 ms with no validation at all.
+        is charged, compile: the same Hono route starts in 3.5 ms compiled against 8.5 ms on
+        the runtime API, and 3.7 ms with no validation at all.
       </p>
 
       <h2>Memory per validator</h2>
