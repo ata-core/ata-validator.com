@@ -4,15 +4,15 @@ import { DocsCode } from '../../components/DocsCode'
 type Bar = { label: string; value: string; ratio: number }
 
 const REQUEST: Bar[] = [
-  { label: 'Accepts the body', value: '41 ns', ratio: 0.19 },
-  { label: 'Rejects it, verdict only', value: '28 ns', ratio: 0.13 },
-  { label: 'Rejects it, error list read', value: '214 ns', ratio: 1 },
+  { label: 'Accepts the body', value: '42 ns', ratio: 0.32 },
+  { label: 'Rejects it, verdict only', value: '30 ns', ratio: 0.23 },
+  { label: 'Rejects it, error list read', value: '131 ns', ratio: 1 },
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '41 ns', interpreted: '234 ns' },
-  { what: 'Rejects it, verdict only', compiled: '28 ns', interpreted: '103 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.07 ms', interpreted: '0.32 ms' },
+  { what: 'Accepts the body', compiled: '42 ns', interpreted: '237 ns' },
+  { what: 'Rejects it, verdict only', compiled: '30 ns', interpreted: '104 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.08 ms', interpreted: '0.31 ms' },
 ]
 
 const ZOD = [
@@ -25,9 +25,9 @@ const ZOD = [
 ]
 
 const MEMORY: Bar[] = [
-  { label: 'Constructed, never called', value: '0.58 KB', ratio: 0.07 },
-  { label: 'Constructed with its own schema', value: '1.18 KB', ratio: 0.14 },
-  { label: 'Its own schema, compiled and in use', value: '8.12 KB', ratio: 1 },
+  { label: 'Constructed, never called', value: '0.64 KB', ratio: 0.07 },
+  { label: 'Constructed with its own schema', value: '1.24 KB', ratio: 0.13 },
+  { label: 'Its own schema, compiled and in use', value: '9.47 KB', ratio: 1 },
 ]
 
 const SCHEMA = `{
@@ -117,13 +117,13 @@ export default function Benchmarks() {
       <h2>One request</h2>
       <Bars rows={REQUEST} />
       <p>
-        Accepting a valid body takes 41 ns, so a route handling ten thousand requests a second
+        Accepting a valid body takes 42 ns, so a route handling ten thousand requests a second
         spends less than a millisecond per second on validation. Rejecting is cheaper
         than accepting, because the check stops at the first rule that fails.
       </p>
       <p>
         The third bar is the one worth understanding. Errors are built when you read them. If
-        the route answers a bad body with a 400 and no detail, you never pay the 214 ns; if it
+        the route answers a bad body with a 400 and no detail, you never pay the 131 ns; if it
         returns the list, you do, once.
       </p>
 
@@ -163,7 +163,7 @@ export default function Benchmarks() {
       <h2>In a bundle</h2>
       <p>
         <code>ata compile</code> turns that schema into a module that bundles to{' '}
-        <strong>3.5 KB gzipped</strong> and imports nothing, full error detail included. No
+        <strong>3.1 KB gzipped</strong> and imports nothing, full error detail included. No
         compiler, no interpreter, no
         runtime dependency, so the size of the library stops being part of the conversation for
         front-end and edge builds.
@@ -172,16 +172,16 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.45.0: every export of
-        the compiled module is <strong>2.1 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>113.3 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        built with <code>bun build --minify --target=browser</code> on ata 1.46.0: every export of
+        the compiled module is <strong>2.0 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
+        is <strong>124.4 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
         On a server that difference is not worth thinking about, and the runtime API is the
         simpler thing to reach for. In a browser, on an edge runtime, or anywhere a cold start
-        is charged, compile: the same Hono route starts in 3.5 ms compiled against 8.5 ms on
-        the runtime API, and 3.7 ms with no validation at all.
+        is charged, compile: the same Hono route starts in 3.5 ms compiled against 8.8 ms on
+        the runtime API, and 3.5 ms with no validation at all.
       </p>
 
       <h2>Memory per validator</h2>
@@ -192,11 +192,11 @@ export default function Benchmarks() {
       <Bars rows={MEMORY} />
       <p>
         Methods are built on first use instead of being bound in the constructor, which is why
-        an idle validator sits at 0.58 KB. The last bar gives every instance a schema of its
+        an idle validator sits at 0.64 KB. The last bar gives every instance a schema of its
         own, so each one compiles; validators built from the same schema share one compiled
-        function. Measured on ata 1.36.1 with{' '}
-        <code>node --expose-gc benchmark/bench_memory.cjs</code>; 1.36.0 held 8.33 KB in the last
-        bar, a cache entry per schema that 1.36.1 removed.
+        function. Measured on ata 1.46.0 with{' '}
+        <code>node --expose-gc benchmark/bench_memory.cjs</code>; 1.45.0 held 9.31 KB in the last
+        bar and 1.36.1 held 8.12.
       </p>
 
       <h2>The public harness</h2>
@@ -247,7 +247,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25, ata 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25. The request, blocked, bundle and memory figures are from ata 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:

@@ -53,10 +53,10 @@ const USED_BY: { name: string; href: string; what: string; logo?: string; mono?:
 ]
 
 const COST = [
-  { what: 'Accept a typical route body', value: '41 ns' },
-  { what: 'Reject it, verdict only', value: '28 ns' },
-  { what: 'Ten route schemas ready at startup', value: '0.07 ms' },
-  { what: 'Compiled validator in a bundle, gzipped', value: '3.5 KB' },
+  { what: 'Accept a typical route body', value: '42 ns' },
+  { what: 'Reject it, verdict only', value: '30 ns' },
+  { what: 'Ten route schemas ready at startup', value: '0.08 ms' },
+  { what: 'Compiled validator in a bundle, gzipped', value: '3.1 KB' },
 ]
 
 // Read live from the two OpenSSF services, so the page never states a level or a
