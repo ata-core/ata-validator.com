@@ -172,9 +172,9 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.47.0: every export of
+        built with <code>bun build --minify --target=browser</code> on ata 1.48.0: every export of
         the compiled module is <strong>2.1 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>125.0 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        is <strong>126.1 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
@@ -194,7 +194,7 @@ export default function Benchmarks() {
         Methods are built on first use instead of being bound in the constructor, which is why
         an idle validator sits at 0.64 KB. The last bar gives every instance a schema of its
         own, so each one compiles; validators built from the same schema share one compiled
-        function. Measured on ata 1.47.0 with{' '}
+        function. Measured on ata 1.48.0 with{' '}
         <code>node --expose-gc benchmark/bench_memory.cjs</code>; 1.46.1 held 9.47 KB in the last
         bar, 1.45.0 held 9.31 and 1.36.1 held 8.12. The drop in 1.47.0 is the error and module
         forms compiling on first use instead of with the verdict.
@@ -248,7 +248,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25. The bundle and memory figures are from ata 1.47.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25. The bundle and memory figures are from ata 1.48.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:
