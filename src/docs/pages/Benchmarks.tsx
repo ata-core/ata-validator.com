@@ -24,6 +24,20 @@ const ZOD = [
   { what: 'Rejects, code generation blocked', zod: '1,695 ns', compiled: '1,700 ns', bridge: '113 ns' },
 ]
 
+// validator-benchmarks, results/2026-10-10-mac-node24.json: order body,
+// documents a second, medians of 27.
+const RACE = [
+  { lib: 'ata', valid: '3,295,880', blocked: '607,614' },
+  { lib: 'ata, compiled module', valid: '3,319,594', blocked: '3,344,948' },
+  { lib: 'typebox', valid: '1,638,813', blocked: 'EvalError' },
+  { lib: 'ajv', valid: '1,285,492', blocked: 'EvalError' },
+  { lib: 'typia', valid: '939,572', blocked: '964,507' },
+  { lib: '@exodus/schemasafe', valid: '866,592', blocked: 'EvalError' },
+  { lib: 'valibot', valid: '488,297', blocked: '487,254' },
+  { lib: 'zod', valid: '440,473', blocked: '237,176' },
+  { lib: '@cfworker/json-schema', valid: '55,490', blocked: '54,851' },
+]
+
 const MEMORY: Bar[] = [
   { label: 'Constructed, never called', value: '0.64 KB', ratio: 0.08 },
   { label: 'Constructed with its own schema', value: '1.24 KB', ratio: 0.15 },
@@ -107,6 +121,47 @@ export default function Benchmarks() {
           release.
         </li>
       </ul>
+      <h2>Side by side, on one API body</h2>
+      <p>
+        <a href="https://github.com/ata-core/validator-benchmarks" target="_blank" rel="noreferrer">
+          validator-benchmarks
+        </a>{' '}
+        runs eleven validators on the same realistic bodies, each library in its own process,
+        27 samples per cell. The clip is one cell of it: an order with a customer, line items
+        with a sku pattern, an address and email, uuid and date-time formats, 900 valid
+        documents, how many a second each library confirms.
+      </p>
+      <video
+        className="dx-race"
+        src="/media/validator-race.mp4"
+        poster="/media/validator-race.jpg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{ width: '100%', borderRadius: 10, margin: '8px 0 4px' }}
+      />
+      <div style={{ overflowX: 'auto' }}>
+        <table className="dx-table">
+          <thead>
+            <tr><th>Order body, Node 24</th><th>valid, the verdict</th><th>same, new Function refused</th></tr>
+          </thead>
+          <tbody>
+            {RACE.map((r) => (
+              <tr key={r.lib}><td>{r.lib}</td><td>{r.valid}</td><td>{r.blocked}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Where ata is not ahead is in the same repository: on a four-field body that fails, ajv
+        answers the verdict faster (15.5M against 8.4M a second), and with every error read it
+        does 6.6M against ata's 2.9M with rich errors, 7.6M with <code>richErrors: false</code>.
+        The libraries do not all do the same work either: zod and valibot return a parsed copy,
+        ajv builds its first error. RESULTS.md in the repository says what each one does, and
+        its maintainers are invited to correct their adapters.
+      </p>
+
       <h2>The schema everything here uses</h2>
       <p>
         A signup body, five fields with a nested object and a pattern, closed to unknown keys.
