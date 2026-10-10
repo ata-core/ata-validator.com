@@ -14,8 +14,8 @@ export default function Introduction() {
 
       <h2>What it does</h2>
       <p>
-        One package covers three dialects: Draft 2020-12, draft 7 and the JSON Schema v1
-        dialect. Every case in the official test suite passes for all three, and the same
+        One package covers five dialects: Draft 2020-12, 2019-09, draft 7, draft 6 and the
+        JSON Schema v1 dialect. Every case in the official test suite passes for all five, and the same
         figures hold when code generation is blocked, because schemas that cannot be compiled
         run on an interpreter with identical results.
       </p>

@@ -17,12 +17,14 @@ export default function Compliance() {
         </thead>
         <tbody>
           <tr><td>Draft 2020-12</td><td className="dx-num">1301 / 1301</td></tr>
+          <tr><td>Draft 2019-09</td><td className="dx-num">1261 / 1261</td></tr>
           <tr><td>Draft 7</td><td className="dx-num">929 / 929</td></tr>
+          <tr><td>Draft 6</td><td className="dx-num">841 / 841</td></tr>
           <tr><td>JSON Schema v1</td><td className="dx-num">1135 / 1135</td></tr>
         </tbody>
       </table>
       <p>
-        The same three figures hold with code generation blocked, so a runtime that forbids{' '}
+        The same five figures hold with code generation blocked, so a runtime that forbids{' '}
         <code>new Function</code> gets identical results on the interpreted engine.
       </p>
 
@@ -34,7 +36,7 @@ export default function Compliance() {
         <tbody>
           <tr>
             <td>Buffer path agreement with <code>validate()</code></td>
-            <td className="dx-num">3365 / 3365 suite cases</td>
+            <td className="dx-num">3365 / 3365 cases (2020-12, draft 7, v1)</td>
           </tr>
           <tr>
             <td>Entry point agreement, all generators and the interpreter</td>

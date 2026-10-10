@@ -311,7 +311,7 @@ export default function Benchmarks() {
       <DocsCode lang="shell">{`git clone https://github.com/ata-core/ata-validator
 cd ata-validator && npm install
 
-npm run test:suite                    # correctness, three dialects
+npm run test:suite                    # correctness, five dialects
 node benchmark/bench_docs_site.mjs    # the timing harness behind this page`}</DocsCode>
       <p>
         <Link to="/docs/performance">Performance</Link> explains why the failure path is cheap
