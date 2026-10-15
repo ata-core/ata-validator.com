@@ -227,21 +227,21 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.51.0: every export of
-        the compiled module is <strong>2.1 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>123.9 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        built with <code>bun build --minify --target=browser</code> on ata 1.54.0: every export of
+        the compiled module is <strong>2.2 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
+        is <strong>131.1 KB</strong>. A schema that arrives at run time can use any keyword, so the
         whole engine has to ship with it.
       </p>
       <p>
         An app with many schemas has two more options in <code>ata build</code>. Compact modules
-        share one error runtime: forty SchemaStore schemas, minified with esbuild, go from 513.8 KB
-        to 213.3 KB gzipped and import in 28.4 ms instead of 60.4 with code generation blocked.
+        share one error runtime: forty SchemaStore schemas, minified with esbuild, go from 571.7 KB
+        to 224.9 KB gzipped and import in 29.5 ms instead of 61.5 with code generation blocked.
         With <code>--mode schema</code> each module is its schema and both the verdict and the
-        errors come from that runtime: 102.4 KB, at about five times the cost per check once warm.
+        errors come from that runtime: 104.4 KB, at about five times the cost per check once warm.
         Schemas that reference each other share a registry that keeps only the definitions they
         reach, and <code>--base-uri</code> names files without an <code>$id</code>: eight
         Kubernetes kinds, whose schemas share one 1.1 MB definitions file, come to 32.6 KB
-        gzipped, against 68.6 KB as self-contained modules. All on ata 1.51.0.
+        gzipped, against 68.6 KB as self-contained modules. The Kubernetes figures are from ata 1.51.0, the rest from 1.54.0.
       </p>
       <p>
         On a server that difference is not worth thinking about, and the runtime API is the
@@ -314,7 +314,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25. The bundle and memory figures are from ata 1.51.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25. The bundle figures are from ata 1.54.0, the memory figures from 1.51.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:
