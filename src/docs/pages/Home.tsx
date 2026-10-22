@@ -14,8 +14,15 @@ const SUITE = [
 // framework that lists the plugin. Each line says what the project does with
 // it, checked against the project's own code; nothing here claims an
 // endorsement. Socket lists ata as a devDependency: it runs in their repository
-// tooling, not in the packages they publish, and the line says so.
+// tooling, not in the packages they publish, and the line says so. Trendyol's use
+// is in internal code, so its line rests on the maintainer, who works there.
 const USED_BY: { name: string; href: string; what: string; logo?: string; mono?: string }[] = [
+  {
+    name: 'Trendyol',
+    href: 'https://github.com/Trendyol',
+    logo: '/refs/trendyol.jpg',
+    what: 'Validates configuration with ata in Puzzle, its internal config tooling.',
+  },
   {
     name: 'Socket',
     href: 'https://github.com/SocketDev/socket-cli',
