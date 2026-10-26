@@ -31,9 +31,12 @@ export default { plugins: [ata()] }`}</DocsCode>
 
 export default { plugins: [ata()] }`}</DocsCode>
       <p>
-        A small app bundles to 2.6 KB gzipped when it only calls <code>isValidObject()</code> or{' '}
-        <code>isValidJSON()</code>, which takes a wrapper without the error machinery, and to
-        12.1 KB when it reads errors, against 102.0 KB with the runtime.{' '}
+        A form with two validators, one reading errors and one asking only for a verdict,
+        bundles to 10.7 KB gzipped, or 3.1 KB with <code>richErrors: false</code> on the one that
+        reads errors, against 53.2 KB for the runtime's first load (esbuild, ata-validator 1.61.1,
+        @ata-project/unplugin 0.11.1). A validator only ever called, never handed to other code,
+        takes a wrapper without Standard Schema or the extension hook; one that only answers a
+        verdict carries no error machinery at all.{' '}
         <code>withKeywords(new Validator(schema))</code> from <code>@ata-project/keywords</code> is
         compiled too. Across the 977 schemas of SchemaStore, 395 of those with sample documents
         compile away and answer every sample exactly as the runtime does; a schema with custom

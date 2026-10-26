@@ -218,7 +218,7 @@ export default function Benchmarks() {
       <h2>In a bundle</h2>
       <p>
         <code>ata compile</code> turns that schema into a module that bundles to{' '}
-        <strong>3.1 KB gzipped</strong> and imports nothing, full error detail included. No
+        <strong>3.2 KB gzipped</strong> and imports nothing, full error detail included. No
         compiler, no interpreter, no
         runtime dependency, so the size of the library stops being part of the conversation for
         front-end and edge builds.
@@ -227,10 +227,20 @@ export default function Benchmarks() {
       <p>
         That last sentence only holds if you compile. The runtime API is the other path, and it
         is worth knowing what it costs before measuring the wrong one. A ten-field user schema
-        built with <code>bun build --minify --target=browser</code> on ata 1.54.0: every export of
-        the compiled module is <strong>2.2 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
-        is <strong>131.1 KB</strong>. A schema that arrives at run time can use any keyword, so the
-        whole engine has to ship with it.
+        built with <code>bun build --minify --target=browser</code> on ata 1.61.1: every export of
+        the compiled module is <strong>1.9 KB</strong> gzipped, <code>new Validator(schema)</code>{' '}
+        is <strong>133.3 KB</strong>. A schema that arrives at run time can use any keyword, so the
+        whole engine has to ship with it. That figure includes the code generator, which a page
+        loads in the background only for a validator it calls often; with a bundler that splits
+        chunks, the first load is about 53 KB.
+      </p>
+      <p>
+        Code that already says <code>new Validator(schema)</code> does not have to change to get
+        the compiled size. <code>@ata-project/unplugin</code> compiles each call whose schema it can
+        read at build time and leaves the runtime out of the bundle: a form with two validators,
+        one reading errors and one asking only for a verdict, bundles to <strong>10.7 KB</strong>{' '}
+        gzipped, or <strong>3.1 KB</strong> with <code>richErrors: false</code> on the one that
+        reads errors (esbuild, ata 1.61.1, plugin 0.11.1).
       </p>
       <p>
         An app with many schemas has two more options in <code>ata build</code>. Compact modules
@@ -314,7 +324,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25. The bundle figures are from ata 1.54.0, the memory figures from 1.51.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25. The bundle figures are from ata 1.61.1 except where a paragraph names its version, the memory figures from 1.51.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:
