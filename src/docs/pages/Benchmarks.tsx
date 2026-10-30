@@ -24,18 +24,19 @@ const ZOD = [
   { what: 'Rejects, code generation blocked', zod: '1,695 ns', compiled: '1,700 ns', bridge: '113 ns' },
 ]
 
-// validator-benchmarks, results/2026-10-10-mac-node24.json: order body,
-// documents a second, medians of 27.
+// validator-benchmarks, results/2026-10-30-merts-macbook-pro-node24.json: order
+// body, documents a second, medians of 27. typia 15.2.2, with the pattern and
+// length fixes made after a report from this benchmark.
 const RACE = [
-  { lib: 'ata', valid: '3,295,880', blocked: '607,614' },
-  { lib: 'ata, compiled module', valid: '3,319,594', blocked: '3,344,948' },
-  { lib: 'typebox', valid: '1,638,813', blocked: 'EvalError' },
-  { lib: 'ajv', valid: '1,285,492', blocked: 'EvalError' },
-  { lib: 'typia', valid: '939,572', blocked: '964,507' },
-  { lib: '@exodus/schemasafe', valid: '866,592', blocked: 'EvalError' },
-  { lib: 'valibot', valid: '488,297', blocked: '487,254' },
-  { lib: 'zod', valid: '440,473', blocked: '237,176' },
-  { lib: '@cfworker/json-schema', valid: '55,490', blocked: '54,851' },
+  { lib: 'ata', valid: '3,274,803', blocked: '1,109,881' },
+  { lib: 'ata, compiled module', valid: '3,270,947', blocked: '3,353,351' },
+  { lib: 'typia', valid: '1,957,392', blocked: '1,931,134' },
+  { lib: 'typebox', valid: '1,615,239', blocked: 'EvalError' },
+  { lib: 'ajv', valid: '1,245,508', blocked: 'EvalError' },
+  { lib: '@exodus/schemasafe', valid: '828,299', blocked: 'EvalError' },
+  { lib: 'valibot', valid: '478,599', blocked: '480,800' },
+  { lib: 'zod', valid: '436,632', blocked: '230,808' },
+  { lib: '@cfworker/json-schema', valid: '53,504', blocked: '54,926' },
 ]
 
 const MEMORY: Bar[] = [
@@ -155,8 +156,8 @@ export default function Benchmarks() {
       </div>
       <p>
         Where ata is not ahead is in the same repository: on a four-field body that fails, ajv
-        answers the verdict faster (15.5M against 8.4M a second), and with every error read it
-        does 6.6M against ata's 2.9M with rich errors, 7.6M with <code>richErrors: false</code>.
+        answers the verdict faster (15.5M against 10.4M a second), and with every error read it
+        does 7.1M against ata's 3.6M with rich errors, 5.2M with <code>richErrors: false</code>.
         The libraries do not all do the same work either: zod and valibot return a parsed copy,
         ajv builds its first error. RESULTS.md in the repository says what each one does, and
         its maintainers are invited to correct their adapters.
