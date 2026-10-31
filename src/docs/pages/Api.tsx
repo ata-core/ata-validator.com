@@ -137,6 +137,28 @@ const v = new Validator(schema, { coerceTypes: true })`}</DocsCode>
         <Link to="/docs/errors">Errors</Link>.
       </p>
 
+      <h2>Validation as the body arrives</h2>
+      <p>
+        <code>ata-validator/stream</code> validates a JSON array or NDJSON record by record as the
+        chunks land, and stops reading at the first record that fails, so a large upload with a
+        bad third record is refused after the first chunk rather than after the last byte.
+        Memory does not grow with the body. <code>validateStream(v, source)</code> reads a Node
+        Readable, a Web ReadableStream or any iterable of chunks; on a Node http request it stops
+        reading and drains the rest, so the 400 the handler writes reaches the client.
+      </p>
+      <DocsCode lang="js">{`import { validateStream } from 'ata-validator/stream'
+
+app.post('/orders/import', async (c) => {
+  const r = await validateStream(orders, c.req.raw.body)
+  if (!r.valid) return c.json({ record: r.errors[0].record, errors: r.errors[0].errors }, 400)
+  return c.json({ imported: r.records })
+})`}</DocsCode>
+      <p>
+        On a 100 MB body of 128,419 order documents with the third one invalid: 517 ms and
+        783 MB to read it all, parse and validate, against 13.5 ms and 122 MB, having read 0.1 MB.
+        A body that is valid to the end costs the same time and a third of the memory.
+      </p>
+
       <h2>One-shot validate</h2>
       <p>
         <code>validate(schema, data)</code> compiles and validates in a single call. Convenient
