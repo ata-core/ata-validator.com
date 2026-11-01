@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { DocsCode } from '../../components/DocsCode'
 
 const SUITE = [
-  { dialect: 'Draft 2020-12', score: '1301 / 1301' },
+  { dialect: 'Draft 2020-12', score: '1302 / 1302' },
   { dialect: 'Draft 2019-09', score: '1261 / 1261' },
   { dialect: 'Draft 7', score: '929 / 929' },
   { dialect: 'Draft 6', score: '841 / 841' },

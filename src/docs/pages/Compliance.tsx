@@ -16,7 +16,7 @@ export default function Compliance() {
           <tr><th>Dialect</th><th>Result</th></tr>
         </thead>
         <tbody>
-          <tr><td>Draft 2020-12</td><td className="dx-num">1301 / 1301</td></tr>
+          <tr><td>Draft 2020-12</td><td className="dx-num">1302 / 1302</td></tr>
           <tr><td>Draft 2019-09</td><td className="dx-num">1261 / 1261</td></tr>
           <tr><td>Draft 7</td><td className="dx-num">929 / 929</td></tr>
           <tr><td>Draft 6</td><td className="dx-num">841 / 841</td></tr>
@@ -36,7 +36,7 @@ export default function Compliance() {
         <tbody>
           <tr>
             <td>Buffer path agreement with <code>validate()</code></td>
-            <td className="dx-num">3365 / 3365 cases (2020-12, draft 7, v1)</td>
+            <td className="dx-num">3366 / 3366 cases (2020-12, draft 7, v1)</td>
           </tr>
           <tr>
             <td>Entry point agreement, all generators and the interpreter</td>
@@ -77,7 +77,7 @@ export default function Compliance() {
         That report is the independent version of the table above. The harness lives in its own
         repository, bowtie-json-schema/js-ata, and declares Draft 2020-12 and draft 7. In the
         report published on 2026-10-05 (Bowtie 2026.7.4, ata 1.40.1), both dialects pass with
-        nothing failed, errored or skipped: 1301 tests on Draft 2020-12 and 929 on draft 7. The
+        nothing failed, errored or skipped: 1302 tests on Draft 2020-12 and 929 on draft 7. The
         v1 dialect is declared in a harness change that waits for a Bowtie release which knows
         the dialect.
       </p>
