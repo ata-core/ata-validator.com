@@ -1,0 +1,24 @@
+name: Merge ata releases
+
+# A new ata-validator or @ata-project release reaches the site on its own.
+# Dependabot opens the bump in the ata-releases group (.github/dependabot.yml,
+# minor and patch only), CI builds and tests it, and this turns on auto-merge
+# so the pull request lands once the required `build` check passes. The merge
+# is a push to master, which deploys the site. Every other dependency still
+# waits for a person.
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/npm_and_yarn/ata-releases-')
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

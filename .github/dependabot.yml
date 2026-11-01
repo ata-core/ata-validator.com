@@ -10,6 +10,17 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "chore"
+    # ata's own packages travel together and only within a major version;
+    # .github/workflows/merge-ata.yml merges this group once CI passes, so the
+    # playground and the version the docs show follow each release by a day.
+    groups:
+      ata-releases:
+        patterns:
+          - "ata-validator"
+          - "@ata-project/*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
