@@ -178,4 +178,5 @@ export const docHref = (slug: string) =>
 // Order of the previous/next chain across the whole site.
 export const DOC_CHAIN: DocPage[] = [HOME_PAGE, ...DOC_PAGES]
 
-export const ATA_VERSION = '1.62.0'
+// Set at build time from the installed ata-validator (vite.config.ts).
+export const ATA_VERSION: string = __ATA_VERSION__
