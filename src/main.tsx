@@ -1,9 +1,8 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ErrorCodePage from './ErrorCodePage'
-import Playground from './playground/Playground'
-import Race from './race/Race'
+import { Playground, Race } from './lazyPages'
 import DocsLayout from './docs/DocsLayout'
 import Home from './docs/pages/Home'
 import Introduction from './docs/pages/Introduction'
@@ -36,8 +35,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<DocsLayout />}>
           <Route index element={<Home />} />
         </Route>
-        <Route path="/playground" element={<Playground />} />
-        <Route path="/race" element={<Race />} />
+        <Route path="/playground" element={<Suspense fallback={null}><Playground /></Suspense>} />
+        <Route path="/race" element={<Suspense fallback={null}><Race /></Suspense>} />
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<Introduction />} />
           <Route path="quick-start" element={<QuickStart />} />
