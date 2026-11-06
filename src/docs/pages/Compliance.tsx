@@ -53,7 +53,7 @@ export default function Compliance() {
           </tr>
           <tr>
             <td>Fastify validation suite, as the framework's validator</td>
-            <td className="dx-num">181 / 187</td>
+            <td className="dx-num">178 / 184</td>
           </tr>
           <tr>
             <td>
