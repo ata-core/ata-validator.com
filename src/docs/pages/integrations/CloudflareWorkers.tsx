@@ -44,7 +44,7 @@ export default {
       <p>
         A schema that only exists at request time still works:{' '}
         <code>new Validator(schema)</code> runs on the interpreted engine, which never
-        generates code and passes the official test suite on all three supported dialects
+        generates code and passes the official test suite on all six supported dialects
         under the restriction, with the same counts as anywhere else.
       </p>
 

@@ -27,10 +27,12 @@ export default function Installation() {
       <DocsCode lang="shell">{`npm install --omit=optional ata-validator`}</DocsCode>
       <p>
         Validation results do not change. The whole official test suite passes on the pure-JS
-        setup, with the same counts as the native one. Only the buffer and parallel APIs
-        (<code>isValid</code>, <code>countValid</code>, <code>batchIsValid</code>,{' '}
-        <code>validateAndParse</code>) need the native engine, and they say so with a clear
-        error rather than falling back silently.
+        setup, with the same counts as the native one. The buffer and parallel APIs
+        (<code>isValid</code> on raw buffers, <code>countValid</code>, <code>batchIsValid</code>,{' '}
+        <code>validateAndParse</code>) work without the addon too, answering through the same
+        checks as <code>isValidJSON()</code>, slower than the addon: 177 ns against 92 for a
+        small document on Node 25. In a browser, which has no <code>Buffer</code>, they throw
+        and name the methods to use instead.
       </p>
 
       <h2>Browsers and edge runtimes</h2>

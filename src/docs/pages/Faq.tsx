@@ -40,9 +40,9 @@ export default function Faq() {
 
       <h2>Which JSON Schema drafts are covered?</h2>
       <p>
-        Draft 2020-12, draft 7 and the JSON Schema v1 dialect, all at the full suite counts
-        listed under <Link to="/docs/compliance">Compliance</Link>. Draft 4 and draft 6 are not
-        supported.
+        Six dialects: Draft 2020-12, 2019-09, draft 7, draft 6, draft 4 and the JSON Schema v1
+        dialect, all at the full suite counts listed under{' '}
+        <Link to="/docs/compliance">Compliance</Link>. Draft 3 and earlier are not supported.
       </p>
 
       <h2>Can I skip RE2?</h2>

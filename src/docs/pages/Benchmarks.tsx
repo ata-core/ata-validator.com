@@ -4,22 +4,22 @@ import { DocsCode } from '../../components/DocsCode'
 type Bar = { label: string; value: string; ratio: number }
 
 const REQUEST: Bar[] = [
-  { label: 'Accepts the body', value: '42 ns', ratio: 0.32 },
-  { label: 'Rejects it, verdict only', value: '30 ns', ratio: 0.23 },
-  { label: 'Rejects it, error list read', value: '131 ns', ratio: 1 },
+  { label: 'Accepts the body', value: '42.9 ns', ratio: 0.45 },
+  { label: 'Rejects it, verdict only', value: '28.6 ns', ratio: 0.3 },
+  { label: 'Rejects it, error list read', value: '94.6 ns', ratio: 1 },
 ]
 
 const BLOCKED = [
-  { what: 'Accepts the body', compiled: '42 ns', interpreted: '237 ns' },
-  { what: 'Rejects it, verdict only', compiled: '30 ns', interpreted: '104 ns' },
-  { what: 'Ten route schemas ready', compiled: '0.08 ms', interpreted: '0.31 ms' },
+  { what: 'Accepts the body', compiled: '42.9 ns', interpreted: '135.9 ns' },
+  { what: 'Rejects it, verdict only', compiled: '28.6 ns', interpreted: '60.9 ns' },
+  { what: 'Ten route schemas ready', compiled: '0.08 ms', interpreted: '0.19 ms' },
 ]
 
 const ZOD = [
-  { what: 'Accepts a document, verdict', zod: '527 ns', compiled: '44 ns', bridge: '23 ns' },
-  { what: 'Accepts via safeParse', zod: '527 ns', compiled: '44 ns', bridge: '54.3 ns' },
-  { what: 'Rejects one, verdict', zod: '822 ns', compiled: '851 ns', bridge: '6 ns' },
-  { what: 'Rejects via safeParse', zod: '822 ns', compiled: '851 ns', bridge: '8.3 ns' },
+  { what: 'Accepts a document, verdict', zod: '538 ns', compiled: '48 ns', bridge: '21.4 ns' },
+  { what: 'Accepts via safeParse', zod: '538 ns', compiled: '48 ns', bridge: '46.8 ns' },
+  { what: 'Rejects one, verdict', zod: '838 ns', compiled: '844 ns', bridge: '5.9 ns' },
+  { what: 'Rejects via safeParse', zod: '838 ns', compiled: '844 ns', bridge: '7.6 ns' },
   { what: 'Accepts, code generation blocked', zod: '1,290 ns', compiled: '1,273 ns', bridge: '651 ns' },
   { what: 'Rejects, code generation blocked', zod: '1,695 ns', compiled: '1,700 ns', bridge: '113 ns' },
 ]
@@ -41,8 +41,8 @@ const RACE = [
 
 const MEMORY: Bar[] = [
   { label: 'Constructed, never called', value: '0.65 KB', ratio: 0.08 },
-  { label: 'Constructed with its own schema', value: '1.24 KB', ratio: 0.15 },
-  { label: 'Its own schema, compiled and in use', value: '8.31 KB', ratio: 1 },
+  { label: 'Constructed with its own schema', value: '1.25 KB', ratio: 0.15 },
+  { label: 'Its own schema, compiled and in use', value: '13.07 KB', ratio: 1 },
 ]
 
 const SCHEMA = `{
@@ -173,19 +173,19 @@ export default function Benchmarks() {
       <h2>One request</h2>
       <Bars rows={REQUEST} />
       <p>
-        Accepting a valid body takes 42 ns, so a route handling ten thousand requests a second
+        Accepting a valid body takes 42.9 ns, so a route handling ten thousand requests a second
         spends less than a millisecond per second on validation. Rejecting is cheaper
         than accepting, because the check stops at the first rule that fails.
       </p>
       <p>
         The third bar is the one worth understanding. Errors are built when you read them. If
-        the route answers a bad body with a 400 and no detail, you never pay the 131 ns; if it
+        the route answers a bad body with a 400 and no detail, you never pay the 94.6 ns; if it
         returns the list, you do, once.
       </p>
 
       <h2>Startup</h2>
       <p>
-        Ten route schemas, compiled and ready to serve: <strong>0.07 ms</strong>. A schema is
+        Ten route schemas, compiled and ready to serve: <strong>0.08 ms</strong>. A schema is
         compiled the first time it validates something, so a process that boots and idles
         compiles nothing at all. This matters on platforms that charge for cold starts.
       </p>
@@ -245,10 +245,13 @@ export default function Benchmarks() {
       </p>
       <p>
         An app with many schemas has two more options in <code>ata build</code>. Compact modules
-        share one error runtime: forty SchemaStore schemas, minified with esbuild, go from 571.7 KB
-        to 224.9 KB gzipped and import in 29.5 ms instead of 61.5 with code generation blocked.
+        share one error runtime: forty SchemaStore schemas, minified with esbuild, go from 557.6 KB
+        to 231.5 KB gzipped and import in 30.2 ms instead of 73.9 with code generation blocked.
         With <code>--mode schema</code> each module is its schema and both the verdict and the
-        errors come from that runtime: 104.4 KB, at about five times the cost per check once warm.
+        errors come from that runtime: 119.2 KB, at about five times the cost per check once warm.
+        On 1.63.1 those two were 246.4 and 133.0 KB: from 1.57.0 a module whose schema declares a
+        default carried the runtime's defaults pass as generated code, 108 KB for pantsbuild's
+        schema; the next release has the module ask the runtime it imports for the pass instead.
         Schemas that reference each other share a registry that keeps only the definitions they
         reach, and <code>--base-uri</code> names files without an <code>$id</code>: eight
         Kubernetes kinds, whose schemas share one 1.1 MB definitions file, come to 32.6 KB
@@ -270,11 +273,16 @@ export default function Benchmarks() {
       <p>
         Methods are built on first use instead of being bound in the constructor, which is why
         an idle validator sits at 0.65 KB. The last bar gives every instance a schema of its
-        own, so each one compiles; validators built from the same schema share one compiled
-        function. Measured on ata 1.51.0 with{' '}
-        <code>node --expose-gc benchmark/bench_memory.cjs</code>; 1.48.0 held 8.29 KB in the last
-        bar, 1.46.1 held 9.47, 1.45.0 held 9.31 and 1.36.1 held 8.12. The drop in 1.47.0 is the error and module
-        forms compiling on first use instead of with the verdict.
+        own, so each one compiles. Measured on ata 1.63.1 with{' '}
+        <code>node --expose-gc benchmark/bench_memory.cjs</code>. The harness's 2000 schemas differ
+        only in their title, so they generate the same code, and up to 1.53.0 V8 kept one compiled
+        function for all of them: 8.31 KB on 1.51.0 and 1.53.0, 8.29 on 1.48.0, 9.47 on 1.46.1,
+        9.31 on 1.45.0, 8.12 on 1.36.1; the drop in 1.47.0 is the error and module forms compiling
+        on first use instead of with the verdict. Since 1.54.0 each instance keeps its own compiled
+        function, so two schemas that generate the same code no longer share inline caches and slow
+        each other down, and the last bar is 12.49 KB on 1.54.0 and 13.07 on 1.63.1. Instances whose
+        schemas generate different code, which an application's do, were not moved by that change:
+        14.35 KB each on 1.53.0 and 14.37 on 1.54.0 with distinct property names.
       </p>
 
       <h2>The public harness</h2>
@@ -295,7 +303,7 @@ export default function Benchmarks() {
         <code>@ata-project/zod</code> takes a zod 4 schema and answers its verdicts from the
         ata engine, with the same answers as zod itself, differential-tested on 15,068
         generated values. Three ways to run one nine-field schema, zod 4.6.5,
-        @ata-project/zod 0.3.1 on ata-validator 1.36.0:
+        @ata-project/zod 0.3.1 on ata-validator 1.63.1, the two blocked rows from 1.36.0:
       </p>
       <table className="dx-table">
         <thead>
@@ -315,7 +323,7 @@ export default function Benchmarks() {
       <p>
         The rejection rows are the story: a rejected <code>safeParse</code> builds its{' '}
         <code>ZodError</code> on first read, so a route that answers with a plain 400 pays
-        8.3 ns. An accepted value is built by ata wherever it comes out exactly as zod would
+        7.6 ns. An accepted value is built by ata wherever it comes out exactly as zod would
         build it, key order included: plain objects, arrays, primitives and unions of
         primitives. A default, a transform, a record or a union of objects hands the value to
         zod, at zod speed. The last two rows are the blocked-codegen case from
@@ -325,7 +333,7 @@ export default function Benchmarks() {
 
       <h2>How these were taken</h2>
       <p>
-        One laptop, an Apple M4 Pro, Node 25. The bundle figures are from ata 1.61.1 except where a paragraph names its version, the memory figures from 1.51.0, the request and blocked figures from 1.46.0, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
+        One laptop, an Apple M4 Pro, Node 25. The bundle figures are from ata 1.61.1 except where a paragraph names its version, the memory figures from 1.51.0 except the first two bars, from 1.63.1, the request and blocked figures and the zod rows from 1.63.1, the rest from 1.36.0 unless a section says otherwise. Medians of nine interleaved rounds in a single
         process, after a warmup. Heap figures are deltas across two forced collections over two
         thousand instances. Numbers move with hardware and with the schema, so treat them as
         shape rather than as a contract, and rerun them yourself:
@@ -333,7 +341,7 @@ export default function Benchmarks() {
       <DocsCode lang="shell">{`git clone https://github.com/ata-core/ata-validator
 cd ata-validator && npm install
 
-npm run test:suite                    # correctness, five dialects
+npm run test:suite                    # correctness, six dialects
 node benchmark/bench_docs_site.mjs    # the timing harness behind this page`}</DocsCode>
       <p>
         <Link to="/docs/performance">Performance</Link> explains why the failure path is cheap

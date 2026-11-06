@@ -6,10 +6,11 @@ export default function IntegrationVite() {
       <p className="dx-eyebrow">Integrations</p>
       <h1>Vite</h1>
       <p className="dx-lede">
-        <code>ata-vite</code> compiles schemas during the build and emits standalone validation
-        modules, so the shipped bundle contains validation functions and no schema compiler.
+        <code>ata-vite</code> is the Vite entry of <code>@ata-project/unplugin</code>. It compiles
+        schemas during the build and emits standalone validation modules, so the shipped bundle
+        contains validation functions and no schema compiler.
       </p>
-      <DocsCode lang="js">{`import ata from 'ata-vite'
+      <DocsCode lang="js">{`import ata from 'ata-vite'   // the Vite entry of @ata-project/unplugin
 
 export default { plugins: [ata()] }`}</DocsCode>
       <p>
@@ -44,6 +45,38 @@ export default { plugins: [ata()] }`}</DocsCode>
         at run time stays on the runtime. Needs ata-validator 1.40.0 and ata-vite 0.7.0. The same
         plugin is <code>@ata-project/unplugin</code> for Webpack, Rollup, Rolldown, esbuild and
         Rspack.
+      </p>
+
+      <h2>Schemas written in zod, valibot or TypeBox</h2>
+      <p>
+        Since @ata-project/unplugin 0.13.0, which ata-vite 0.8.2 carries, the <code>zod</code>{' '}
+        option names modules that export zod 4 schemas and compiles them at build time.
+      </p>
+      <DocsCode lang="js">{`import ata from 'ata-vite'
+
+export default { plugins: [ata({ zod: 'src/events/*.ts' })] }`}</DocsCode>
+      <p>
+        The build loads each module, converts every exported schema with zod's own{' '}
+        <code>z.toJSONSchema</code>, and writes <code>&lt;module&gt;.validators.mjs</code> and{' '}
+        <code>.d.mts</code> beside it, one <code>{'{ validate, isValidObject }'}</code> per export,
+        typed as <code>z.input</code> of the schema. The page keeps writing schemas in zod and
+        carries neither zod nor a validator runtime. A <code>.refine(fn)</code> or{' '}
+        <code>.transform(fn)</code> that reads only its own parameter is carried and runs on the
+        page in zod's order; one that closes over an outside name, a <code>superRefine</code>, a{' '}
+        <code>preprocess</code> or a refine inside a union stops the build by export and path, and{' '}
+        <code>dropRefinements: true</code> takes them out knowingly. The <code>from</code> option
+        takes zod, valibot or TypeBox modules the same way, with each library's own types.
+      </p>
+      <DocsCode lang="js">{`export default { plugins: [ata({ from: 'src/schemas/*.ts' })] }`}</DocsCode>
+      <p>
+        Measured with esbuild, minified and gzipped, on ata-validator 1.63.1: three event schemas
+        put 3.9 KB on the page with the compiled validators and 93.0 KB with zod 4.6.7; one schema
+        alone is 1.1 KB, and three carried refines on a signup schema add 0.5 KB. A TypeBox 0.34.52
+        schema is 1.1 KB compiled against 25.5 KB with <code>Value.Check</code> on the page; a
+        valibot 1.5.0 schema is 1.1 KB against 1.7 KB. Converting a module costs the build 4 ms
+        after a one-time 132 ms to load the library. Not covered: zod 3, arktype, effect, and the
+        stripping of unknown keys, which the page leaves in place where <code>z.object</code>{' '}
+        would drop them.
       </p>
     </>
   )

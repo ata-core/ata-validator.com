@@ -6,8 +6,12 @@ export default function Dialects() {
       <p className="dx-eyebrow">Guides</p>
       <h1>Dialects</h1>
       <p className="dx-lede">
-        Draft 2020-12 is the default. Draft 7 is normalized on the way in, and the JSON Schema
-        v1 dialect is selected by its <code>$schema</code>.
+        Draft 2020-12 is the default. Draft 2019-09, draft 7, draft 6 and draft 4 are selected
+        by their <code>$schema</code> and normalized to the 2020-12 spelling on the way in, and
+        the JSON Schema v1 dialect is selected by its <code>$schema</code>. All six pass the
+        official suite in full: 1302 of 1302 on 2020-12, 1261 of 1261 on 2019-09, 929 of 929 on
+        draft 7, 841 of 841 on draft 6, 618 of 618 on draft 4 and 1135 of 1135 on v1, with code
+        generation allowed and blocked. Draft 3 and earlier are not supported.
       </p>
 
       <h2>Choosing one</h2>
@@ -21,8 +25,20 @@ export default function Dialects() {
             <td>Default when no <code>$schema</code> is present</td>
           </tr>
           <tr>
+            <td><strong>Draft 2019-09</strong></td>
+            <td><code>https://json-schema.org/draft/2019-09/schema</code></td>
+          </tr>
+          <tr>
             <td><strong>Draft 7</strong></td>
             <td><code>http://json-schema.org/draft-07/schema#</code></td>
+          </tr>
+          <tr>
+            <td><strong>Draft 6</strong></td>
+            <td><code>http://json-schema.org/draft-06/schema#</code></td>
+          </tr>
+          <tr>
+            <td><strong>Draft 4</strong></td>
+            <td><code>http://json-schema.org/draft-04/schema#</code></td>
           </tr>
           <tr>
             <td><strong>JSON Schema v1</strong></td>

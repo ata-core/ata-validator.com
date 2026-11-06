@@ -77,13 +77,13 @@ check.isValidBytes(bytes)  // verdict straight from a Buffer, no JSON.parse`}</D
       />
       <p>
         Measured on a nine-field object schema, zod 4.6.5 and @ata-project/zod 0.3.1 on
-        ata-validator 1.36.0, interleaved medians: accepting a document takes 23 ns and
-        rejecting one 6 ns, against 527 and 822 ns through <code>safeParse</code> and 44 and
-        851 ns through <code>z.compile</code>. A rejected <code>safeParse</code> builds its{' '}
-        <code>ZodError</code> on first read and costs 8.3 ns until then. With code generation
+        ata-validator 1.63.1, interleaved medians: accepting a document takes 21.4 ns and
+        rejecting one 5.9 ns, against 538 and 838 ns through <code>safeParse</code> and 48 and
+        844 ns through <code>z.compile</code>. A rejected <code>safeParse</code> builds its{' '}
+        <code>ZodError</code> on first read and costs 7.6 ns until then. With code generation
         blocked, the way a strict CSP blocks it, compiled paths lose their advantage; the
         bridge falls back to ata's interpreted engine and keeps answering at 651 ns for
-        accepts and 113 ns for rejects. The full table is on{' '}
+        accepts and 113 ns for rejects, measured on 1.36.0. The full table is on{' '}
         <Link to="/docs/benchmarks">Benchmarks</Link>. Or skip the tables and{' '}
         <Link to="/race">watch the two engines race in your own browser</Link>.
       </p>
@@ -91,6 +91,18 @@ check.isValidBytes(bytes)  // verdict straight from a Buffer, no JSON.parse`}</D
         Accepted values are always produced by zod itself, since plain <code>z.object</code>{' '}
         strips unknown keys, defaults fill and transforms rewrite, so parsing valid input runs
         at zod speed by design. The verdict and the rejection are what the bridge accelerates.
+      </p>
+
+      <h2>At build time, without zod on the page</h2>
+      <p>
+        The bundler plugin, <code>@ata-project/unplugin</code> 0.13.0 and its Vite entry{' '}
+        <code>ata-vite</code>, has a <code>zod</code> option that compiles modules exporting zod 4
+        schemas at build time: <code>ata({'{ zod: \'src/events/*.ts\' }'})</code> writes a
+        validators module beside each one, typed as <code>z.input</code>, and the page carries
+        neither zod nor a validator runtime. Three event schemas put 3.9 KB gzipped on the page
+        compiled, against 93.0 KB with zod (esbuild, ata-validator 1.63.1, zod 4.6.7). See the{' '}
+        <Link to="/docs/integrations/vite">Vite page</Link> for what is carried and what stops the
+        build.
       </p>
 
       <h2>Raw bytes</h2>

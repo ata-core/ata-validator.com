@@ -14,7 +14,7 @@ const TOPICS = [
   {
     to: '/docs/integrations/fastify',
     title: 'Fastify',
-    what: "Listed in Fastify's own docs as an alternative validator; one compiler hook, or the fastify-ata plugin with the framework's defaults.",
+    what: "Listed in Fastify's own docs as an alternative validator; one compiler hook, or the fastify-ata plugin with the framework's defaults, a streaming body parser that stops at the first bad record, and plans served to the page.",
   },
   {
     to: '/docs/integrations/react-forms',
@@ -23,8 +23,8 @@ const TOPICS = [
   },
   {
     to: '/docs/integrations/vite',
-    title: 'Vite',
-    what: 'ata-vite compiles schemas at build time into standalone modules, so no compiler ships to the browser.',
+    title: 'Vite and other bundlers',
+    what: '@ata-project/unplugin, with ata-vite as its Vite entry, compiles schemas at build time into standalone modules for Vite, Webpack, Rollup, Rolldown, esbuild, Rspack and Bun, so no compiler ships to the browser. Its zod and from options compile modules written in zod, valibot or TypeBox the same way.',
   },
   {
     to: '/docs/integrations/cloudflare-workers',

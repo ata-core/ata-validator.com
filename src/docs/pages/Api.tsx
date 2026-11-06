@@ -159,6 +159,41 @@ app.post('/orders/import', async (c) => {
         A body that is valid to the end costs the same time and a third of the memory.
       </p>
 
+      <h2>A plan for the page</h2>
+      <p>
+        <code>tablePlan(schema, options)</code> from <code>ata-validator/ir</code> writes a schema
+        as a plan, plain JSON, or returns <code>null</code> where the table backend does not
+        cover it. <code>fromPlan(plan)</code> from <code>ata-validator/plan</code> reads one
+        back and resolves to a validator with <code>validate(data)</code> and{' '}
+        <code>isValid(data)</code>. The reader is 6.2 KB gzipped, 9.0 KB with rich errors, and
+        gives the same verdicts, errors and filled defaults as <code>new Validator(schema)</code>{' '}
+        on the same ata version, with no code generation, so a server can write each plan once
+        and a page can fetch it. Both entries are experimental within 1.x.
+      </p>
+      <DocsCode lang="js">{`// on the server
+import { tablePlan } from 'ata-validator/ir'
+
+const plan = tablePlan(signupSchema)   // Plan, or null
+
+// on the page
+import { fromPlan } from 'ata-validator/plan'
+
+const v = await fromPlan(await (await fetch('/plans/signup')).json())
+v.isValid(body)
+v.validate(body)   // { valid, errors }`}</DocsCode>
+      <p>
+        The options are <code>richErrors</code>, <code>useDefaults</code> and{' '}
+        <code>assertFormat</code>; any other option returns <code>null</code>. On 1.63.1 a plan
+        carries types, <code>properties</code>, <code>required</code>,{' '}
+        <code>additionalProperties</code>, <code>enum</code>, <code>const</code>, string, number
+        and array bounds, <code>format</code>, <code>pattern</code>, nested objects and arrays,
+        defaults and <code>dependentRequired</code>; <code>tablePlan</code> returns{' '}
+        <code>null</code> for anything else. <code>anyOf</code>, <code>oneOf</code>,{' '}
+        <code>patternProperties</code>, <code>propertyNames</code>, <code>contains</code>,{' '}
+        <code>dependentSchemas</code> and <code>propertyDependencies</code> are carried in the
+        next release.
+      </p>
+
       <h2>One-shot validate</h2>
       <p>
         <code>validate(schema, data)</code> compiles and validates in a single call. Convenient

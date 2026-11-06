@@ -7,6 +7,7 @@ const SUITE = [
   { dialect: 'Draft 2019-09', score: '1261 / 1261' },
   { dialect: 'Draft 7', score: '929 / 929' },
   { dialect: 'Draft 6', score: '841 / 841' },
+  { dialect: 'Draft 4', score: '618 / 618' },
   { dialect: 'JSON Schema v1', score: '1135 / 1135' },
 ]
 
@@ -62,8 +63,8 @@ const USED_BY: { name: string; href: string; what: string; logo?: string; mono?:
 ]
 
 const COST = [
-  { what: 'Accept a typical route body', value: '42 ns' },
-  { what: 'Reject it, verdict only', value: '30 ns' },
+  { what: 'Accept a typical route body', value: '42.9 ns' },
+  { what: 'Reject it, verdict only', value: '28.6 ns' },
   { what: 'Ten route schemas ready at startup', value: '0.08 ms' },
   { what: 'Compiled validator in a bundle, gzipped', value: '3.2 KB' },
 ]
@@ -146,8 +147,9 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
       </ul>
       <p>
         The <code>fastify-ata</code> plugin wires ata into Fastify with the framework's own
-        defaults, and <code>ata-vite</code> compiles schemas during a build so the bundle
-        carries validation functions and no compiler.{' '}
+        defaults, and <code>@ata-project/unplugin</code>, whose Vite entry is{' '}
+        <code>ata-vite</code>, compiles schemas during a build, and zod, valibot and TypeBox
+        modules with them, so the bundle carries validation functions and no compiler.{' '}
         <Link to="/docs/integrations">See the integrations</Link>.
       </p>
 
@@ -187,8 +189,8 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
       <h2>What you get</h2>
       <ul>
         <li>
-          <strong>Three dialects.</strong> Draft 2020-12, draft 7 and the JSON Schema v1
-          dialect, each at the full official suite count.
+          <strong>Six dialects.</strong> Draft 2020-12, 2019-09, draft 7, draft 6, draft 4 and
+          the JSON Schema v1 dialect, each at the full official suite count.
         </li>
         <li>
           <strong>No required binaries.</strong> The default install is pure JavaScript. A
@@ -206,6 +208,22 @@ v.validate({ id: 42, email: 'a@b.co' })   // { valid: true, errors: [] }`}</Docs
         <li>
           <strong>A build step when you want one.</strong> <code>ata compile</code> emits a
           standalone module that imports nothing at all.
+        </li>
+        <li>
+          <strong>Validation as the body arrives.</strong> <code>ata-validator/stream</code>{' '}
+          checks a JSON array or NDJSON record by record and stops at the first bad one, so
+          memory does not grow with the upload.
+        </li>
+        <li>
+          <strong>A plan for the page.</strong> A server writes a schema as a plan once, and
+          the page reads it with <code>fromPlan</code> from <code>ata-validator/plan</code>, a
+          6.2 KB gzipped reader with the same verdicts, errors and filled defaults as{' '}
+          <code>new Validator(schema)</code>.
+        </li>
+        <li>
+          <strong>Schemas written in zod, valibot or TypeBox.</strong> The bundler plugin
+          compiles those modules at build time too, so the page keeps the library it writes
+          schemas in and ships neither it nor a validator runtime.
         </li>
       </ul>
 

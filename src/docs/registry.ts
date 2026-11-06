@@ -67,8 +67,8 @@ export const DOC_PAGES: DocPage[] = [
     slug: 'dialects',
     title: 'Dialects',
     group: 'Guides',
-    summary: 'Draft 2020-12, draft 7 and the JSON Schema v1 dialect',
-    keywords: ['draft-07', '2020-12', 'v1', 'propertyDependencies', '$dynamicRef'],
+    summary: 'Draft 2020-12, 2019-09, draft 7, draft-06, draft-04 and the JSON Schema v1 dialect',
+    keywords: ['draft-07', 'draft-06', 'draft-04', '2019-09', '2020-12', 'v1', 'propertyDependencies', '$dynamicRef'],
   },
   {
     slug: 'api',
@@ -123,8 +123,8 @@ export const DOC_PAGES: DocPage[] = [
     slug: 'integrations/vite',
     title: 'Vite',
     group: 'Integrations',
-    summary: 'Compile schemas at build time into standalone modules',
-    keywords: ['ata-vite', 'bundler', 'build', 'standalone', 'plugin'],
+    summary: 'The Vite entry of @ata-project/unplugin: compile schemas, and zod, valibot and TypeBox modules, at build time into standalone modules',
+    keywords: ['ata-vite', 'unplugin', 'bundler', 'build', 'standalone', 'plugin', 'zod', 'valibot', 'typebox'],
   },
   {
     slug: 'integrations/cloudflare-workers',
